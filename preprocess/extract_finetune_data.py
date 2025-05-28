@@ -1,6 +1,7 @@
 import pandas as pd
 from datasets import load_dataset
 import argparse
+import os
 
 def main():
     parser = argparse.ArgumentParser()
@@ -12,10 +13,13 @@ def main():
     args = parser.parse_args()
 
     # Preload output filename
-    outname = f"data/{args.dataset}_clean_{args.split}_{args.chunked_data}_{args.size}.csv"
+    out_data_name = f"data/{args.dataset}_clean_{args.split}_{args.chunked_data}_{args.size}.csv"
     if args.output_file:
         print("Overriding default naming schema...")
-        outname = args.output_file
+        out_data_name = args.output_file
+    
+    # Set index name as well
+    out_idx_name = f"{os.path.dirname(out_data_name)}/idx_{os.path.basename(out_data_name)}"
 
     # Load CSV as pandas dataframe
     sourcename = f"{args.dataset}_clean_{args.split}_{args.chunked_data}.csv"
@@ -25,11 +29,13 @@ def main():
     doc_chunk_count = pd.read_csv("data/" + doc_chunk_source)
     
     # Use size arg and chunk index
-    target = doc_chunk_count.loc[0:args.size]["idx"].sum()
-    result = df.loc[0:target]
+    target = doc_chunk_count.loc[0:args.size]
+    count = target["idx"].sum()
+    chunks = df.loc[0:count]
 
     # Write output
-    result.to_csv(outname, index=None, escapechar="\\")
+    chunks.to_csv(out_data_name, index=None, escapechar="\\")
+    target.to_csv(out_idx_name,index=None, escapechar="\\")
     
 if __name__ == "__main__":
     main()
