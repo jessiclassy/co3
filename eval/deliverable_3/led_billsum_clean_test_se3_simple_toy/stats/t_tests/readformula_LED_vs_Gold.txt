@@ -1,0 +1,84 @@
+--- Feature = fkre: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 1.8403, df = 15, p-value = 0.0856
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -5.92463 80.81663
+sample estimates:
+mean difference 
+         37.446 
+
+--- Feature = fkgl: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.6828, df = 15, p-value = 0.1131
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -28.185667   3.315292
+sample estimates:
+mean difference 
+      -12.43519 
+
+--- Feature = fogi: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.6452, df = 15, p-value = 0.1207
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -28.456131   3.663631
+sample estimates:
+mean difference 
+      -12.39625 
+
+--- Feature = smog: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.2339, df = 15, p-value = 0.04114
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -7.6553596 -0.1796404
+sample estimates:
+mean difference 
+        -3.9175 
+
+--- Feature = cole: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.1271, df = 15, p-value = 0.05041
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.402457014  0.002457014
+sample estimates:
+mean difference 
+           -1.2 
+
+--- Feature = auto: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.6111, df = 15, p-value = 0.128
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -35.002658   4.866533
+sample estimates:
+mean difference 
+      -15.06806 
+

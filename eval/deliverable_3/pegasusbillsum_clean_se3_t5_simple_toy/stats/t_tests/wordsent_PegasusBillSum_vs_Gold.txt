@@ -1,0 +1,126 @@
+--- Feature = t_word: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 8.4039, df = 15, p-value = 4.67e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 216.8683 364.2567
+sample estimates:
+mean difference 
+       290.5625 
+
+--- Feature = t_stopword: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 8.3093, df = 15, p-value = 5.38e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 107.248 181.252
+sample estimates:
+mean difference 
+         144.25 
+
+--- Feature = t_punct: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.1571, df = 15, p-value = 3.298e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 27.99982 51.75018
+sample estimates:
+mean difference 
+         39.875 
+
+--- Feature = t_syll: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 10.028, df = 15, p-value = 4.818e-08
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 417.0503 642.1997
+sample estimates:
+mean difference 
+        529.625 
+
+--- Feature = t_syll2: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 10.925, df = 15, p-value = 1.542e-08
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 66.50485 98.74515
+sample estimates:
+mean difference 
+         82.625 
+
+--- Feature = t_syll3: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 8.9745, df = 15, p-value = 2.034e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 22.73199 36.89301
+sample estimates:
+mean difference 
+        29.8125 
+
+--- Feature = t_uword: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 9.169, df = 15, p-value = 1.545e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  82.84617 133.02883
+sample estimates:
+mean difference 
+       107.9375 
+
+--- Feature = t_sent: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 6.8155, df = 15, p-value = 5.837e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 4.123598 7.876402
+sample estimates:
+mean difference 
+              6 
+
+--- Feature = t_char: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 9.6393, df = 15, p-value = 8.085e-08
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1252.145 1963.105
+sample estimates:
+mean difference 
+       1607.625 
+

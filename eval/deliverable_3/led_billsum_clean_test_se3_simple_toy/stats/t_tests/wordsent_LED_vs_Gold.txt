@@ -1,0 +1,126 @@
+--- Feature = t_word: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.9129, df = 15, p-value = 9.851e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 380.0227 660.2273
+sample estimates:
+mean difference 
+        520.125 
+
+--- Feature = t_stopword: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.3546, df = 15, p-value = 2.388e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 154.6437 280.8563
+sample estimates:
+mean difference 
+         217.75 
+
+--- Feature = t_punct: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.3509, df = 15, p-value = 2.402e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 120.2634 218.4866
+sample estimates:
+mean difference 
+        169.375 
+
+--- Feature = t_syll: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.1447, df = 15, p-value = 3.366e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  624.1821 1154.9429
+sample estimates:
+mean difference 
+       889.5625 
+
+--- Feature = t_syll2: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.5182, df = 15, p-value = 1.835e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  92.47255 165.65245
+sample estimates:
+mean difference 
+       129.0625 
+
+--- Feature = t_syll3: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 6.7538, df = 15, p-value = 6.482e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 32.80888 63.06612
+sample estimates:
+mean difference 
+        47.9375 
+
+--- Feature = t_uword: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 8.9747, df = 15, p-value = 2.033e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 126.957 206.043
+sample estimates:
+mean difference 
+          166.5 
+
+--- Feature = t_sent: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.1786, df = 15, p-value = 3.183e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 18.8954 34.8546
+sample estimates:
+mean difference 
+         26.875 
+
+--- Feature = t_char: LED vs Gold Summaries
+model_1 = LED | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 7.384, df = 15, p-value = 2.277e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 2009.004 3639.496
+sample estimates:
+mean difference 
+        2824.25 
+

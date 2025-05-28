@@ -1,0 +1,126 @@
+--- Feature = t_word: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.5273, df = 15, p-value = 0.02322
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  14.96689 176.15811
+sample estimates:
+mean difference 
+        95.5625 
+
+--- Feature = t_stopword: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 3.1787, df = 15, p-value = 0.006229
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 18.82069 95.42931
+sample estimates:
+mean difference 
+         57.125 
+
+--- Feature = t_punct: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 4.2648, df = 15, p-value = 0.0006781
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 14.69418 44.05582
+sample estimates:
+mean difference 
+         29.375 
+
+--- Feature = t_syll: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 3.0093, df = 15, p-value = 0.008805
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  51.76028 303.11472
+sample estimates:
+mean difference 
+       177.4375 
+
+--- Feature = t_syll2: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 3.2575, df = 15, p-value = 0.005301
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  9.506391 45.493609
+sample estimates:
+mean difference 
+           27.5 
+
+--- Feature = t_syll3: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.2274, df = 15, p-value = 0.04166
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  0.3203287 14.5546713
+sample estimates:
+mean difference 
+         7.4375 
+
+--- Feature = t_uword: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 3.1688, df = 15, p-value = 0.006358
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 14.09682 72.02818
+sample estimates:
+mean difference 
+        43.0625 
+
+--- Feature = t_sent: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.8297, df = 15, p-value = 0.01268
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.5202951 -0.3547049
+sample estimates:
+mean difference 
+        -1.4375 
+
+--- Feature = t_char: PegasusLarge vs Gold Summaries
+model_1 = PegasusLarge | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.9762, df = 15, p-value = 0.009419
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 159.4748 964.2752
+sample estimates:
+mean difference 
+        561.875 
+

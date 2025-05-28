@@ -1,0 +1,84 @@
+--- Feature = fkre: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 0.25758, df = 15, p-value = 0.8002
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -35.14424  44.80599
+sample estimates:
+mean difference 
+       4.830875 
+
+--- Feature = fkgl: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.22881, df = 15, p-value = 0.8221
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -16.29184  13.13309
+sample estimates:
+mean difference 
+      -1.579375 
+
+--- Feature = fogi: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.17507, df = 15, p-value = 0.8634
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -16.32560  13.84735
+sample estimates:
+mean difference 
+      -1.239125 
+
+--- Feature = smog: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 0.22883, df = 15, p-value = 0.8221
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -3.077986  3.818361
+sample estimates:
+mean difference 
+      0.3701875 
+
+--- Feature = cole: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.33977, df = 15, p-value = 0.7387
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.1059953  0.8018703
+sample estimates:
+mean difference 
+     -0.1520625 
+
+--- Feature = auto: PegasusBillSum vs Gold Summaries
+model_1 = PegasusBillSum | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.23954, df = 15, p-value = 0.8139
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -20.8033  16.5998
+sample estimates:
+mean difference 
+       -2.10175 
+

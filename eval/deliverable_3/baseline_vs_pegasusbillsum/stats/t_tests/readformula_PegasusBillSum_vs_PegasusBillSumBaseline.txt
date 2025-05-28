@@ -1,0 +1,84 @@
+--- Feature = fkre: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 0.6339, df = 15, p-value = 0.5357
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -19.19617  35.44729
+sample estimates:
+mean difference 
+       8.125562 
+
+--- Feature = fkgl: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.5934, df = 15, p-value = 0.5618
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -13.885730   7.837855
+sample estimates:
+mean difference 
+      -3.023938 
+
+--- Feature = fogi: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.51278, df = 15, p-value = 0.6156
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -14.2015   8.6935
+sample estimates:
+mean difference 
+         -2.754 
+
+--- Feature = smog: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.25007, df = 15, p-value = 0.8059
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -3.227279  2.549529
+sample estimates:
+mean difference 
+      -0.338875 
+
+--- Feature = cole: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 1.7358, df = 15, p-value = 0.1031
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.1354612  1.3239612
+sample estimates:
+mean difference 
+        0.59425 
+
+--- Feature = auto: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.53293, df = 15, p-value = 0.6019
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -17.46834  10.48034
+sample estimates:
+mean difference 
+         -3.494 
+

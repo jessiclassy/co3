@@ -1,0 +1,126 @@
+--- Feature = rouge1_precision: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -7.9083, df = 15, p-value = 9.922e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.4578390 -0.2634387
+sample estimates:
+mean difference 
+     -0.3606389 
+
+--- Feature = rouge2_precision: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -5.7282, df = 15, p-value = 3.995e-05
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3690890 -0.1689042
+sample estimates:
+mean difference 
+     -0.2689966 
+
+--- Feature = rougeL_precision: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -6.3895, df = 15, p-value = 1.216e-05
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.4097012 -0.2047335
+sample estimates:
+mean difference 
+     -0.3072174 
+
+--- Feature = rouge1_recall: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 3.728, df = 15, p-value = 0.00202
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.0837486 0.3073633
+sample estimates:
+mean difference 
+      0.1955559 
+
+--- Feature = rouge2_recall: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 0.8224, df = 15, p-value = 0.4237
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.06733085  0.15193060
+sample estimates:
+mean difference 
+     0.04229988 
+
+--- Feature = rougeL_recall: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 1.1479, df = 15, p-value = 0.269
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.0459764  0.1532934
+sample estimates:
+mean difference 
+     0.05365851 
+
+--- Feature = rouge1_fmeasure: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -3.9933, df = 15, p-value = 0.001175
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.26020020 -0.07909777
+sample estimates:
+mean difference 
+      -0.169649 
+
+--- Feature = rouge2_fmeasure: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -3.5783, df = 15, p-value = 0.002745
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.24614506 -0.06237186
+sample estimates:
+mean difference 
+     -0.1542585 
+
+--- Feature = rougeL_fmeasure: PegasusBillSum vs PegasusBillSumBaseline Summaries
+model_1 = PegasusBillSum | model_2 = PegasusBillSumBaseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -4.1878, df = 15, p-value = 0.0007922
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.2669763 -0.0868759
+sample estimates:
+mean difference 
+     -0.1769261 
+
