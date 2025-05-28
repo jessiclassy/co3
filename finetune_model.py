@@ -23,6 +23,16 @@ def load_data(source_name):
         print(f"Could not find {source_name}. Try full pipeline mode.")
     return data, data_idx
 
+def test_predictions(max_input_length, max_output_length, tokenizer, model, device, ds):
+    predict_func = create_prediction(max_input_length, max_output_length, tokenizer, model, device)
+    result = ds.map(
+        predict_func,
+        batched=True,
+        batch_size=args.batch_size,
+        num_proc=8
+    )
+    return result
+
 def prepare_data(process_func, ds, has_global_attn):
     examples = ds.map(
                 process_func,
@@ -156,17 +166,12 @@ if __name__ == "__main__":
 
         print("\nStart Evaluation...\n")
         # Run model predictions
-        predict_func = create_prediction(max_input_length, max_output_length, word_tok, model, device)
+        
 
         if args.concat == "pre": 
             pass # TODO: implement pre concatenation
         else:               
-            result = test_hf.map(
-                predict_func,
-                batched=True,
-                batch_size=args.batch_size,
-                num_proc=8
-            )
+            result = test_predictions(max_input_length, max_output_length, word_tok, model, device, test_hf)
 
             # Reconstruct original lengths
             predictions = reconstruct(result["prediction"], test_idx["idx"].tolist())
