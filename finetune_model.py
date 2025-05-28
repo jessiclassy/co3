@@ -11,6 +11,8 @@ from utils import *
 
 
 def load_data(source_name):
+    data = None
+    data_idx = None
     idx_name = f"{os.path.dirname(source_name)}/idx_{os.path.basename(source_name)}"
     if os.path.isfile(source_name) and os.path.isfile(idx_name):
         print(f"Loading {source_name}...")
@@ -19,7 +21,7 @@ def load_data(source_name):
         return data, data_idx
     else:
         print(f"Could not find {source_name}. Try full pipeline mode.")
-    return
+    return data, data_idx
 
 def prepare_data(process_func, ds, has_global_attn, max_input_length, max_output_length):
     examples = ds.map(
