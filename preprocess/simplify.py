@@ -82,8 +82,9 @@ def main():
     ds = ds.map(
         simplify_bill, 
         batched=True,
-        batch_size=25,
+        batch_size=8,
         with_indices=True,
+        num_proc=8,
         fn_kwargs={
             "max_input_len": args.max_input_len,
             "max_output_len": args.max_output_len
