@@ -52,7 +52,7 @@ case "$PLATFORM" in
         cat > "$output_file" <<EOF
 executable = finetune_model.sh
 getenv = true
-arguments = --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --batch_size $BATCH_SIZE 
+arguments = --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --testfile $TESTFILE --batch_size $BATCH_SIZE 
 transfer_executable = false
 output = finetune_model.\$(Cluster).out
 error = finetune_model.\$(Cluster).err

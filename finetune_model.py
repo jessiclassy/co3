@@ -46,7 +46,6 @@ if __name__ == "__main__":
     parser.add_argument("--trainfile", type=str, help="The dataset to use for training")
     parser.add_argument("--testfile", type=str, help="The dataset to use for test evaluation")
     parser.add_argument("--epochs", type=int, default=5, help="The number of epochs")
-    parser.add_argument("--full", default=False, action="store_true", help="To not use the chunking")
     parser.add_argument("--grad_acc", type=int, default=1, help="The gradient accumulation")
     parser.add_argument("--max_input_len", type=int, default=1024, help="The input max size")
     parser.add_argument("--max_output_len", type=int, default=512, help="The output max size")
