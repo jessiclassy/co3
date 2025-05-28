@@ -23,7 +23,7 @@ def load_data(source_name):
         print(f"Could not find {source_name}. Try full pipeline mode.")
     return data, data_idx
 
-def prepare_data(process_func, ds, has_global_attn, max_input_length, max_output_length):
+def prepare_data(process_func, ds, has_global_attn):
     examples = ds.map(
                 process_func,
                 batched=True,
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         else: # Otherwise, prepare to train the model
             print("\nPrepare the training and evaluation sets...\n")
             process_inputs = create_examples(max_input_length, max_output_length, word_tok)
-            train_dataset_model_input = prepare_data(process_inputs, train_examples, has_global_attn, max_input_length, max_output_length)
+            train_dataset_model_input = prepare_data(process_inputs, train_hf, has_global_attn)
             # eval_dataset_model_input = prepare_data(test_examples, has_global_attn, max_input_length, max_output_length)
 
             training_args = Seq2SeqTrainingArguments(
@@ -159,7 +159,7 @@ if __name__ == "__main__":
         if args.concat == "pre": 
             pass # TODO: implement pre concatenation
         else:               
-            result = test_examples.map(
+            result = test_hf.map(
                 predict_func,
                 batched=True,
                 batch_size=args.batch_size,
