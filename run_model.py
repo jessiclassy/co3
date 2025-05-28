@@ -99,7 +99,7 @@ if __name__ == "__main__":
             # Convert the datasets in Huggingface's Datasets format.
             test_dataset = Dataset.from_pandas(test_dataset)
             # Run model predictions
-            predict_func = create_prediction(max_input_len, max_output_len, word_tok, model)
+            predict_func = create_prediction(max_input_len, max_output_len, word_tok, model, device)
 
             if args.concat == "pre": 
                 pass # TODO: implement pre concatenation

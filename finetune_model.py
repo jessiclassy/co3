@@ -8,7 +8,6 @@ from transformers import set_seed
 from eval.eval_metrics import eval_all
 from tqdm.auto import tqdm
 from utils import *
-from preprocess.se3.se3.train import process_data_to_model_inputs
 
 
 def load_data(source_name):
@@ -22,10 +21,10 @@ def load_data(source_name):
         print(f"Could not find {source_name}. Try full pipeline mode.")
     return
 
-def prepare_data(ds, has_global_attn, max_input_length, max_output_length):
+def prepare_data(process_func, ds, has_global_attn, max_input_length, max_output_length):
     examples = ds.map(
                 lambda x:
-                process_data_to_model_inputs(x, max_input_length, max_output_length),
+                process_func(x, max_input_length, max_output_length),
                 batched=True,
                 batch_size=args.batch,
                 remove_columns=["text", "summary"]
@@ -122,7 +121,8 @@ if __name__ == "__main__":
             model.load_state_dict(torch.load(model_path, map_location=device))
         else: # Otherwise, prepare to train the model
             print("\nPrepare the training and evaluation sets...\n")
-            train_dataset_model_input = prepare_data(train_examples, has_global_attn, max_input_length, max_output_length)
+            process_inputs = create_examples(max_input_length, max_output_length, word_tok, model, device)
+            train_dataset_model_input = prepare_data(process_inputs, train_examples, has_global_attn, max_input_length, max_output_length)
             # eval_dataset_model_input = prepare_data(test_examples, has_global_attn, max_input_length, max_output_length)
 
             training_args = Seq2SeqTrainingArguments(
