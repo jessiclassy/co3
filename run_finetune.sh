@@ -58,6 +58,7 @@ output = finetune_model.\$(Cluster).out
 error = finetune_model.\$(Cluster).err
 log = finetune_model.\$(Cluster).log
 request_GPUs = 1
+Requirements = (Machine == "patas-gn3.ling.washington.edu")
 request_memory = 16000
 queue
 EOF

@@ -66,6 +66,8 @@ if __name__ == "__main__":
         device = torch.device(args.device if torch.cuda.is_available() else "cpu")
     else:
         device = torch.device("cpu")
+    
+    print(f"Running on device: {device}")
 
     # Set max input and output lengths
     max_input_length = args.max_input_len
