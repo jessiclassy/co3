@@ -1,10 +1,15 @@
 # File for generating model analysis plots for ling 573 project
 # File Arguments:
-MODEL_NAME <- "PegasusBillSum" # The name of the Model whose output is being evaluated
+MODEL_NAME <- "wugwATSS" # The name of the Model whose output is being evaluated
+GOLD_NAME <- "PegasusBillSumBaseline"
 MODEL_OUTPUT_PATH <- "../output/deliverable_3/pegasusbillsum_clean_se3_t5_simple_toy.csv" # place to look for model output csv
-GOLD_PATH <- "gold_lftk.csv" # place to look for gold data csv
-ANALYSIS_PATH <- "deliverable_3/pegasusbillsum_clean_se3_t5_simple_toy/" # place to write the plots and tests to. Must end with a "/"
+GOLD_PATH <- "deliverable_2/pegasusbillsum_baseline_lftk.csv" # place to look for gold data csv
+ANALYSIS_PATH <- "deliverable_3/pegasusbillsumbaseline_vs_wugwATSS/" # place to write the plots and tests to. Must end with a "/"
 HISTOGRAM_BINS <- 10
+# Note about these arguments - "GOLD_NAME" and "GOLD_PATH" could be the output of a different
+# model and not necessarily computed from reference data. It's a bad naming convention, but
+# when you want to compare two models, put the second model output in the "GOLD_PATH" var and
+# name it with "GOLD_NAME" accordingly.
 # ----------------------------------------------------------------------- #
 # Do not change these variables. These represent suffixes we expect to read in from csv headers
 GOLD_SUFFIX <- ".GOLD"
@@ -74,13 +79,13 @@ for (feature in colnames(lftk$gen)) {
     }
     plt <- 
     ggplot() + 
-      geom_histogram(aes(x=lftk$gold[[feature]],fill='Gold'),bins=HISTOGRAM_BINS) +
-      geom_histogram(aes(x=lftk$gen[[feature]], fill='Generated'), alpha=0.55,bins=HISTOGRAM_BINS) +
+      geom_histogram(aes(x=lftk$gen[[feature]], fill=MODEL_NAME), alpha=0.95,bins=HISTOGRAM_BINS) +
+      geom_histogram(aes(x=lftk$gold[[feature]],fill=GOLD_NAME),alpha=0.55,bins=HISTOGRAM_BINS) +
       # scale_x_continuous(breaks = seq(0,30,5)) +
-      labs(x = 'Value', y = "Count", title= str_c(feature," for ",MODEL_NAME," and Gold Summaries")) +
-      scale_color_manual(name='Legend',
-                         breaks=c("Gold","Generated"),
-                         values = c("Gold"="gold",'Generated'="black"))
+      labs(x = 'Value', y = "Count", title= str_c(feature," for ",MODEL_NAME," and ",GOLD_NAME," Summaries")) #+
+      # scale_color_manual(name='Legend',
+      #                    breaks=c(GOLD_NAME,MODEL_NAME),
+      #                    values = c(GOLD_NAME="gold",MODEL_NAME="black"))
     
     # Save plots in right place
     path_to_save <- str_c(ANALYSIS_PATH,"lftk_plots/",fam,"/")
@@ -120,7 +125,7 @@ for(feature in family$readformula){
     
     # write to file
     write(
-      c(str_c("--- LFTK feature = ",feature,": ", MODEL_NAME," vs Gold Summaries - Quantile ", q, " of ", num_quantiles, " - Data batched by character count"), result),
+      c(str_c("--- LFTK feature = ",feature,": ", MODEL_NAME," vs ",GOLD_NAME," Summaries - Quantile ", q, " of ", num_quantiles, " - Data batched by character count"), result),
       file = str_c(path_to_write,feature,"_by_groups.txt"),
       append = T
     )
@@ -136,8 +141,8 @@ for(feature in family$wordsent){
   
   # write to file
   write(
-    c(str_c("--- LFTK feature = ",feature,": ",MODEL_NAME," vs Gold Summaries - full data"), result),
-    file = str_c(ANALYSIS_PATH,"lftk_tests/t_tests/wordsent_gen_vs_gold.txt"),
+    c(str_c("--- LFTK feature = ",feature,": ",MODEL_NAME," vs ",GOLD_NAME," Summaries - full data"), result),
+    file = str_c(ANALYSIS_PATH,"lftk_tests/t_tests/wordsent_",MODEL_NAME,"_vs_",GOLD_NAME,".txt"),
     append = T
   )
 }
@@ -150,8 +155,8 @@ for(feature in family$readformula){
   
   # write to file
   write(
-    c(str_c("--- LFTK feature = ",feature,": ",MODEL_NAME," vs Gold Summaries - full data"), result),
-    file = str_c(ANALYSIS_PATH,"lftk_tests/t_tests/readformula_gen_vs_gold.txt"),
+    c(str_c("--- LFTK feature = ",feature,": ",MODEL_NAME," vs ",GOLD_NAME," Summaries - full data"), result),
+    file = str_c(ANALYSIS_PATH,"lftk_tests/t_tests/readformula_",MODEL_NAME,"_vs_",GOLD_NAME,".txt"),
     append = T
   )
 }
@@ -166,6 +171,14 @@ write(
   append = T
 )
 
+# Get gold/alternate model summary
+result2 <- capture.output(lftk$gold %>% stat.desc())
+
+write(
+  c(str_c("--- Model: ",GOLD_NAME," ---"), result2),
+  file = str_c(ANALYSIS_PATH,"lftk_tests/t_tests/",GOLD_NAME,"_output_stats.txt"),
+  append = T
+)
 
 
 # ----------------------------------------------------------------------- #
@@ -189,17 +202,17 @@ for(i in 1:num_quantiles){
 }
 
 t_gold <- gold_quantiles %>% filter(X %in% smps_gold)
-t2_gold <- t_gold %>% left_join(gen_quantiles,by="X",suffix = c(".GOLD",".GEN"))
+t2_gold <- t_gold %>% left_join(gen_quantiles,by="X",suffix = c(str_c(".", GOLD_NAME),str_c(".", MODEL_NAME)))
 
 t_gen <- gen_quantiles %>% filter(X %in% smps_gen)
-t2_gen <- t_gen %>% left_join(gold_quantiles,by="X",suffix = c(".GEN",".GOLD"))
+t2_gen <- t_gen %>% left_join(gold_quantiles,by="X",suffix = c(str_c(".",MODEL_NAME),str_c(".",GOLD_NAME)))
 
 
 # Prep directories for writing analysis to files
 unlink(str_c(ANALYSIS_PATH,"lftk_qa"),recursive = T)
 dir.create(str_c(ANALYSIS_PATH,"lftk_qa"),showWarnings = F)
 
-write.csv(t2_gold,file = str_c(ANALYSIS_PATH,"lftk_qa/fkre_quantiles_gold.csv"),row.names = F)
+write.csv(t2_gold,file = str_c(ANALYSIS_PATH,"lftk_qa/fkre_quantiles_",GOLD_NAME,".csv"),row.names = F)
 write.csv(t2_gen,file = str_c(ANALYSIS_PATH,"lftk_qa/fkre_quantiles_",MODEL_NAME,".csv"),row.names = F)
 
 

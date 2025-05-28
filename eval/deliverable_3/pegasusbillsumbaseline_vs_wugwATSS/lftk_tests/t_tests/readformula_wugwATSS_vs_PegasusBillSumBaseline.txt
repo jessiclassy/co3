@@ -1,0 +1,78 @@
+--- LFTK feature = fkre: wugwATSS vs PegasusBillSumBaseline Summaries - full data
+
+	Welch Two Sample t-test
+
+data:  lftk$gen[[feature]] and lftk$gold[[feature]]
+t = 0.58821, df = 18.452, p-value = 0.5635
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -20.84596  37.09708
+sample estimates:
+mean of x mean of y 
+ 8.363812  0.238250 
+
+--- LFTK feature = fkgl: wugwATSS vs PegasusBillSumBaseline Summaries - full data
+
+	Welch Two Sample t-test
+
+data:  lftk$gen[[feature]] and lftk$gold[[feature]]
+t = -0.58143, df = 17.397, p-value = 0.5684
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -13.977698   7.929823
+sample estimates:
+mean of x mean of y 
+ 24.74569  27.76963 
+
+--- LFTK feature = fogi: wugwATSS vs PegasusBillSumBaseline Summaries - full data
+
+	Welch Two Sample t-test
+
+data:  lftk$gen[[feature]] and lftk$gold[[feature]]
+t = -0.50261, df = 17.397, p-value = 0.6215
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -14.294544   8.786544
+sample estimates:
+mean of x mean of y 
+ 31.12225  33.87625 
+
+--- LFTK feature = smog: wugwATSS vs PegasusBillSumBaseline Summaries - full data
+
+	Welch Two Sample t-test
+
+data:  lftk$gen[[feature]] and lftk$gold[[feature]]
+t = -0.21526, df = 23.253, p-value = 0.8314
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.593463  2.915713
+sample estimates:
+mean of x mean of y 
+ 13.04612  13.38500 
+
+--- LFTK feature = cole: wugwATSS vs PegasusBillSumBaseline Summaries - full data
+
+	Welch Two Sample t-test
+
+data:  lftk$gen[[feature]] and lftk$gold[[feature]]
+t = 0.80939, df = 29.02, p-value = 0.4249
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.9072922  2.0957922
+sample estimates:
+mean of x mean of y 
+ 14.83694  14.24269 
+
+--- LFTK feature = auto: wugwATSS vs PegasusBillSumBaseline Summaries - full data
+
+	Welch Two Sample t-test
+
+data:  lftk$gen[[feature]] and lftk$gold[[feature]]
+t = -0.52601, df = 17.437, p-value = 0.6055
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -17.48153  10.49353
+sample estimates:
+mean of x mean of y 
+ 29.06794  32.56194 
+

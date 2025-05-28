@@ -1,0 +1,65 @@
+--- LFTK feature = smog: wugwATSS vs PegasusBillSumBaseline Summaries - Quantile 1 of 5 - Data batched by character count
+
+	Welch Two Sample t-test
+
+data:  gen_subset[[feature]] and gold_subset[[feature]]
+t = 1.0974, df = 5.7176, p-value = 0.3165
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -4.400652 11.404652
+sample estimates:
+mean of x mean of y 
+  14.5505   11.0485 
+
+--- LFTK feature = smog: wugwATSS vs PegasusBillSumBaseline Summaries - Quantile 2 of 5 - Data batched by character count
+
+	Welch Two Sample t-test
+
+data:  gen_subset[[feature]] and gold_subset[[feature]]
+t = 0.49357, df = 3.9756, p-value = 0.6476
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -4.847674  6.937674
+sample estimates:
+mean of x mean of y 
+ 13.48333  12.43833 
+
+--- LFTK feature = smog: wugwATSS vs PegasusBillSumBaseline Summaries - Quantile 3 of 5 - Data batched by character count
+
+	Welch Two Sample t-test
+
+data:  gen_subset[[feature]] and gold_subset[[feature]]
+t = 0.18295, df = 3.5859, p-value = 0.8647
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -7.500973  8.508306
+sample estimates:
+mean of x mean of y 
+ 12.52800  12.02433 
+
+--- LFTK feature = smog: wugwATSS vs PegasusBillSumBaseline Summaries - Quantile 4 of 5 - Data batched by character count
+
+	Welch Two Sample t-test
+
+data:  gen_subset[[feature]] and gold_subset[[feature]]
+t = -0.091523, df = 3.6535, p-value = 0.9319
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -4.669886  4.382553
+sample estimates:
+mean of x mean of y 
+ 13.59200  13.73567 
+
+--- LFTK feature = smog: wugwATSS vs PegasusBillSumBaseline Summaries - Quantile 5 of 5 - Data batched by character count
+
+	Welch Two Sample t-test
+
+data:  gen_subset[[feature]] and gold_subset[[feature]]
+t = -1.2255, df = 2.1247, p-value = 0.3388
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -34.05277  18.28944
+sample estimates:
+mean of x mean of y 
+ 10.57533  18.45700 
+
