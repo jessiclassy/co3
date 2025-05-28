@@ -147,7 +147,7 @@ if __name__ == "__main__":
                 save_strategy="epoch",
                 save_total_limit=1,
                 seed=args.seed,
-                fp16=True,
+                # fp16=True,
                 run_name=model_name
             )
 
