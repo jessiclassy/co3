@@ -52,7 +52,7 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=1234, help="The seed to use")
     parser.add_argument("--device", default="cuda", help="The device to use")
     parser.add_argument("--test", action="store_true", default=False, help="Specify if only testing")
-    parser.add_argument("--concat", default="pre", help="Specify concatenation strategy")
+    parser.add_argument("--concat", default="post", help="Specify concatenation strategy")
     args = parser.parse_args()
 
     # Set random seed
@@ -156,7 +156,7 @@ if __name__ == "__main__":
 
         print("\nStart Evaluation...\n")
         # Run model predictions
-        predict_func = create_prediction(max_input_length, max_output_length, word_tok, model)
+        predict_func = create_prediction(max_input_length, max_output_length, word_tok, model, device)
 
         if args.concat == "pre": 
             pass # TODO: implement pre concatenation
