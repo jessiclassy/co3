@@ -89,7 +89,7 @@ if __name__ == "__main__":
     train_data = args.trainfile.split(".")[0]
     predictions_path = "predictions/" + model_name + "_" + train_data + "_" + str(max_input_length) + "_" + \
                        str(max_output_length) + "_" + str(args.epochs) + "_epochs_" 
-    model_dir = "models/" + model_name + "/" + args.dataset + "/"
+    model_dir = "models/" + model_name + "/" + train_data + "/"
     model_path = model_dir + str(max_input_length) + "_" + str(max_output_length) + "_" + str(args.epochs) + \
                  "_epochs_" 
     
