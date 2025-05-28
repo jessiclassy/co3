@@ -33,7 +33,7 @@ lftk[['gen']] <- read.csv(MODEL_OUTPUT_PATH)
 
 # Remove the redundant '.GOLD' lftk columns if included in file headers at MODEL_OUTPUT_PATH then
 # set column names properly for processing
-lftk$gold <- lftk$gold %>% slice(1:16)
+# lftk$gold <- lftk$gold %>% slice(1:16)
 lftk$gen <- lftk$gen %>% select(-ends_with(GOLD_SUFFIX))
 colnames(lftk$gold) <- str_replace(colnames(lftk$gold),GOLD_SUFFIX,"")
 colnames(lftk$gen) <- str_replace(colnames(lftk$gen),GEN_SUFFIX,"")
@@ -141,7 +141,7 @@ for(feature in family$readformula){
   }
 }
 
-# 
+# Run t tests for all metrics in every family except for excluded families
 families_to_exclude <- c("entity","worddiff")
 for(fam in names(family)){
   if((fam %in% families_to_exclude)){
@@ -165,58 +165,6 @@ for(fam in names(family)){
     )
   }
 }
-
-# # Get wordsent t tests
-# for(feature in family$wordsent){
-#   
-#   model_1 <- lftk$gen[[feature]]
-#   model_2 <- lftk$gold[[feature]]
-#   
-#   result <- capture.output(t.test(model_1,model_2,paired = T))
-#   
-#   # write to file
-#   write(
-#     c(str_c("--- LFTK feature = ",feature,": ",MODEL_NAME," vs ",GOLD_NAME," Summaries"),
-#       str_c("model_1 = ",MODEL_NAME," | model_2 = ",GOLD_NAME),result),
-#     file = str_c(ANALYSIS_PATH,"stats/t_tests/wordsent_",MODEL_NAME,"_vs_",GOLD_NAME,".txt"),
-#     append = T
-#   )
-# }
-# 
-# # Get full data readformula t tests
-# for(feature in family$readformula){
-#   
-#   model_1 <- lftk$gen[[feature]]
-#   model_2 <- lftk$gold[[feature]]
-#   
-#   result <- capture.output(t.test(model_1,model_2,paired = T))
-# 
-#   # write to file
-#   write(
-#     c(str_c("--- LFTK feature = ",feature,": ",MODEL_NAME," vs ",GOLD_NAME," Summaries"), 
-#       str_c("model_1 = ",MODEL_NAME," | model_2 = ",GOLD_NAME), result),
-#     file = str_c(ANALYSIS_PATH,"stats/t_tests/readformula_",MODEL_NAME,"_vs_",GOLD_NAME,".txt"),
-#     append = T
-#   )
-# }
-# 
-# # Get ROUGE t tests
-# for(feature in family$rouge){
-# 
-#   model_1 <- lftk$gen[[feature]]
-#   model_2 <- lftk$gold[[feature]]
-# 
-#   result <- capture.output(t.test(model_1,model_2,paired = T))
-# 
-#   # write to file
-#   write(
-#     c(str_c("--- Feature = ",feature,": ",MODEL_NAME," vs ",GOLD_NAME," Summaries"), 
-#       str_c("model_1 = ",MODEL_NAME," | model_2 = ",GOLD_NAME), result),
-#     file = str_c(ANALYSIS_PATH,"stats/t_tests/rouge_",MODEL_NAME,"_vs_",GOLD_NAME,".txt"),
-#     append = T
-#   )
-# }
-
 
 # Get model summary
 result <- capture.output(lftk$gen %>% stat.desc())
@@ -270,10 +218,6 @@ dir.create(str_c(ANALYSIS_PATH,"qa"),showWarnings = F)
 
 write.csv(t2_gold,file = str_c(ANALYSIS_PATH,"qa/fkre_quantiles_",GOLD_NAME,".csv"),row.names = F)
 write.csv(t2_gen,file = str_c(ANALYSIS_PATH,"qa/fkre_quantiles_",MODEL_NAME,".csv"),row.names = F)
-
-
-
-
 
 
 # Old plots I may want to use later
