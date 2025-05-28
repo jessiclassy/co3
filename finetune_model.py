@@ -28,7 +28,7 @@ def prepare_data(process_func, ds, has_global_attn, max_input_length, max_output
                 lambda x:
                 process_func(x, max_input_length, max_output_length),
                 batched=True,
-                batch_size=args.batch,
+                batch_size=args.batch_size,
                 remove_columns=["text", "summary"]
             )
     examples.set_format(
@@ -129,7 +129,7 @@ if __name__ == "__main__":
 
             training_args = Seq2SeqTrainingArguments(
                 output_dir=model_path,
-                per_device_train_batch_size=args.batch,
+                per_device_train_batch_size=args.batch_size,
                 gradient_accumulation_steps=args.grad_acc,
                 num_train_epochs=args.epochs,
                 logging_strategy="epoch",
