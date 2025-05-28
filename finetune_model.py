@@ -39,7 +39,7 @@ def prepare_data(process_func, ds, has_global_attn, max_input_length, max_output
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--batch", type=int, default=1, help="The batch size for training")
+    parser.add_argument("--batch_size", type=int, default=1, help="The batch size for training")
     parser.add_argument("--mode", default="train", help="Specify training or pipeline mode")
     parser.add_argument("--checkpoint", default="google/pegasus-billsum", help="The model checkpoint to use")
     parser.add_argument("--trainfile", type=str, help="The dataset to use for training")
