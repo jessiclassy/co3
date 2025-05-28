@@ -36,18 +36,8 @@ def create_prediction(max_input_len, max_output_len, tokenizer, model, device):
     return predict
 
 # TEMPORARY: move this function out of se3 to avoid Python path errors
-def create_examples(max_input_len, max_output_len, tokenizer, model, device):
+def create_examples(max_input_len, max_output_len, tokenizer):
     def process_data_to_model_inputs(examples):
-        """Prepares the dataset to be process by transformer models.
-
-        Args:
-            batch: The batch to process.
-            max_input_len: int. The max input size.
-            max_output_len: int: The max output size.
-
-        Returns:
-            The batch processed.
-        """
         inputs = tokenizer(examples["text"], padding="max_length", max_length=max_input_len, truncation=True)
         outputs = tokenizer(examples["summary"], padding="max_length", max_length=max_output_len, truncation=True)
         examples["input_ids"] = inputs.input_ids

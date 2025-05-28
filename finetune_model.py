@@ -25,8 +25,7 @@ def load_data(source_name):
 
 def prepare_data(process_func, ds, has_global_attn, max_input_length, max_output_length):
     examples = ds.map(
-                lambda x:
-                process_func(x, max_input_length, max_output_length),
+                process_func,
                 batched=True,
                 batch_size=args.batch_size,
                 remove_columns=["text", "summary"]
@@ -123,7 +122,7 @@ if __name__ == "__main__":
             model.load_state_dict(torch.load(model_path, map_location=device))
         else: # Otherwise, prepare to train the model
             print("\nPrepare the training and evaluation sets...\n")
-            process_inputs = create_examples(max_input_length, max_output_length, word_tok, model, device)
+            process_inputs = create_examples(max_input_length, max_output_length, word_tok)
             train_dataset_model_input = prepare_data(process_inputs, train_examples, has_global_attn, max_input_length, max_output_length)
             # eval_dataset_model_input = prepare_data(test_examples, has_global_attn, max_input_length, max_output_length)
 
