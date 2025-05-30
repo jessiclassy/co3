@@ -45,7 +45,10 @@ case "$PLATFORM" in
     patas)
         echo "Preparing to run on Patas..."
         # spacy model download
-        /home2/jcmw614/miniconda3/envs/573-env/bin/python -m spacy download en_core_web_sm
+        if [ ! -f "/home2/jcmw614/miniconda3/envs/573-env/lib/python3.10/site-packages/en_core_web_sm/en_core_web_sm-3.6.0"]; then
+            echo "Downloading spaCy model for evaluation..."
+            /home2/jcmw614/miniconda3/envs/573-env/bin/python -m spacy download en_core_web_sm
+        fi
         # Generate Condor .cmd file
         output_file="run_model.cmd"
         
