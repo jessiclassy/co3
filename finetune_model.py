@@ -159,9 +159,14 @@ if __name__ == "__main__":
             trainer.train()
 
         print("\nStart Evaluation...\n")
-        # Run model predictions=
+        # Run model predictions
         if args.concat == "pre": 
-            pass # TODO: implement pre concatenation
+            # Reconstruct full documents using document chunk index
+            test_source_simple = reconstruct(test_examples["text"], test_idx["idx"].tolist())
+            # Cast these as Huggingface datasets TODO: check that this data structure is what we expect
+            test_docs_simple = Dataset.from_list(test_source_simple)
+            # Generate predictions
+            predictions = test_predictions(max_input_length, max_output_length, word_tok, model, device, test_docs_simple)
         else:               
             result = test_predictions(max_input_length, max_output_length, word_tok, model, device, test_hf)
 
