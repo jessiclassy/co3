@@ -28,8 +28,7 @@ def test_predictions(max_input_length, max_output_length, tokenizer, model, devi
     result = ds.map(
         predict_func,
         batched=True,
-        batch_size=args.batch_size,
-        num_proc=8
+        batch_size=args.batch_size
     )
     return result
 
