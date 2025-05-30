@@ -99,20 +99,15 @@ if __name__ == "__main__":
         os.makedirs("predictions/", exist_ok=True)
 
     train_data = args.trainfile.split(".")[0]
-    predictions_path = "predictions/" + model_name + "_" + train_data + "_" + str(max_input_length) + "_" + \
-                       str(max_output_length) + "_" + str(args.epochs) + "_epochs_" 
-    model_dir = "models/" + model_name + "/" + train_data + "/"
-    model_path = model_dir + str(max_input_length) + "_" + str(max_output_length) + "_" + str(args.epochs) + \
-                 "_epochs_" 
+    predictions_path = f"predictions/{model_name}_{train_data}_{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
+    model_dir = f"models/{model_name}/{train_data}"
+    model_path = f"{model_dir}/{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
     
     # Full pipeline mode
     if args.mode == "pipeline": 
         pass # TODO: implement full pipeline
         # Load dataset, preprocess before training
-    elif args.mode == "train":
-        pass
-        # Load dataset, train
-
+    elif args.mode == "train": # Loads dataset, assumes it's in the correct format
         print(f"\nWe are using the model '{model_name}' for the dataset '{args.trainfile}' with input truncation\n")
         print(f"\nInput size: '{max_input_length}' - Output size '{max_output_length}'\n")
 
@@ -164,9 +159,7 @@ if __name__ == "__main__":
             trainer.train()
 
         print("\nStart Evaluation...\n")
-        # Run model predictions
-        
-
+        # Run model predictions=
         if args.concat == "pre": 
             pass # TODO: implement pre concatenation
         else:               
