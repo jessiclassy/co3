@@ -14,13 +14,17 @@ def load_data(source_name):
     data = None
     data_idx = None
     idx_name = f"{os.path.dirname(source_name)}/idx_{os.path.basename(source_name)}"
-    if os.path.isfile(source_name) and os.path.isfile(idx_name):
+    if os.path.isfile(source_name):
         print(f"Loading {source_name}...")
         data = pd.read_csv(source_name)
-        data_idx = pd.read_csv(idx_name)
-        return data, data_idx
     else:
         print(f"Could not find {source_name}. Try full pipeline mode.")
+
+    if os.path.isfile(idx_name):
+        print(f"Loading {idx_name}...")
+        data_idx = pd.read_csv(idx_name)
+    else:
+        print(f"Could not find {idx_name}. Try full pipeline mode.")
     return data, data_idx
 
 def test_predictions(max_input_length, max_output_length, tokenizer, model, device, ds):
