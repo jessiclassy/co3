@@ -102,7 +102,7 @@ if __name__ == "__main__":
     if not os.path.exists("predictions/"):
         os.makedirs("predictions/", exist_ok=True)
 
-    train_data = args.trainfile.split(".")[0]
+    train_data = os.path.basename(args.trainfile).split(".")[0]
     predictions_path = f"predictions/{model_name}_{train_data}_{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
     model_dir = f"models/{model_name}/{train_data}"
     model_path = f"{model_dir}/{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
@@ -114,6 +114,8 @@ if __name__ == "__main__":
     elif args.mode == "train": # Loads dataset, assumes it's in the correct format
         print(f"\nWe are using the model '{model_name}' for the dataset '{args.trainfile}' with input truncation\n")
         print(f"\nInput size: '{max_input_length}' - Output size '{max_output_length}'\n")
+        print(f"Finetuned model will be saved to {model_path}\n")
+        print(f"Finetuned model predictions will be saved to {predictions_path}\n")
 
         train_examples, train_idx = load_data(args.trainfile)
         test_examples, test_idx = load_data(args.testfile)
