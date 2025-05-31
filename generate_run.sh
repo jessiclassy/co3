@@ -6,11 +6,11 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-CONFIG_FILE=$1
+CONFIG_FILE="configs/run/$1"
 
 # Check if config file exists
 if [ ! -f "$CONFIG_FILE" ]; then
-    echo "Error: Config file $CONFIG_FILE not found"
+    echo "Error: Config file $1 not found under configs/run"
     exit 1
 fi
 
@@ -45,7 +45,10 @@ case "$PLATFORM" in
     patas)
         echo "Preparing to run on Patas..."
         # spacy model download
-        /home2/jcmw614/miniconda3/envs/573-env/bin/python -m spacy download en_core_web_sm
+        if [ ! -d "/home2/jcmw614/miniconda3/envs/573-env/lib/python3.10/site-packages/en_core_web_sm/en_core_web_sm-3.6.0" ]; then
+            echo "Downloading spaCy model for evaluation..."
+            /home2/jcmw614/miniconda3/envs/573-env/bin/python -m spacy download en_core_web_sm
+        fi
         # Generate Condor .cmd file
         output_file="run_model.cmd"
         

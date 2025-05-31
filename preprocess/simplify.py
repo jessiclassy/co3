@@ -47,6 +47,7 @@ def main():
     parser.add_argument("--toy", default=0, type=int, help="specify size of toy dataset to simplify")
     parser.add_argument("--from_toy", default=False, action="store_true", help="use toy chunked dataset")
     parser.add_argument("--output_file",default=None,help="overrides default output naming schema")
+    parser.add_argument("--input_file",default=None, help="Override default input naming schema")
     args = parser.parse_args()
 
     # Preload output name
@@ -56,7 +57,10 @@ def main():
         outname = args.output_file
 
     # Determine source name by arguments
-    sourcename = f"data/{args.dataset}_clean_{args.split}_{args.chunk_type}.csv"
+    if args.input_file != None:
+        sourcename = args.input_file
+    else:
+        sourcename = f"data/{args.dataset}_clean_{args.split}_{args.chunk_type}.csv"
     
     # Specify checkpoint if this is an se3 chunked file
     if args.chunk_type == "se3" and args.checkpoint != None:
