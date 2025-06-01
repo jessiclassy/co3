@@ -4,7 +4,7 @@ Each folder here represents a run/pipeline executed during deliverable 4. An abb
 
 | Pipeline Name        | Long Name     |
 | -------------        | ------------- |
-| wugwATSS-billsum     | pegasusbillsum-100simplified-evaluated-on-unsimplified/simplified-test |
+| wugwATSS-billsum     | pegasusbillsum-100simplified-evaluated-on-test |
 | wugwATSS-led         | led-100simplified-evaluated-on-unsimplified-test            |
 | wugNATSS-billsum     | pegasusbillsum-100chunked-evaluated-on-unsimplified-test    |
 | wugNATSS-large       | pegasuslarge-100chunked-evaluated-on-unsimplified-test      |
