@@ -1,0 +1,126 @@
+--- Feature = t_word: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 52.93, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 185.2598 199.5130
+sample estimates:
+mean difference 
+       192.3864 
+
+--- Feature = t_stopword: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 61.84, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  96.11346 102.40780
+sample estimates:
+mean difference 
+       99.26063 
+
+--- Feature = t_punct: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 53.198, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 30.68418 33.03255
+sample estimates:
+mean difference 
+       31.85837 
+
+--- Feature = t_syll: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 61.057, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 359.5704 383.4299
+sample estimates:
+mean difference 
+       371.5002 
+
+--- Feature = t_syll2: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 59.132, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 53.58122 57.25635
+sample estimates:
+mean difference 
+       55.41878 
+
+--- Feature = t_syll3: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 53.095, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 19.57726 21.07859
+sample estimates:
+mean difference 
+       20.32793 
+
+--- Feature = t_uword: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 56.869, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 56.71624 60.76678
+sample estimates:
+mean difference 
+       58.74151 
+
+--- Feature = t_sent: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 55.13, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 4.549868 4.885434
+sample estimates:
+mean difference 
+       4.717651 
+
+--- Feature = t_char: wugNATSS-billsum(on-unsimp) vs Gold Summaries
+model_1 = wugNATSS-billsum(on-unsimp) | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 59.408, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1076.488 1149.969
+sample estimates:
+mean difference 
+       1113.229 
+

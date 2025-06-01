@@ -1,10 +1,10 @@
 # File for generating model analysis plots for ling 573 project
 # File Arguments:
-MODEL_NAME <- "PegasusBillSum" # The name of the Model whose output is being evaluated
-GOLD_NAME <- "PegasusBillSumBaseline" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
-MODEL_OUTPUT_PATH <- "../output/deliverable_3/pegasusbillsum_clean_se3_t5_simple_toy.csv" # place to look for model output csv
-GOLD_PATH <- "../output/deliverable_2/pegasusbillsum_baseline_ALL_metrics.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "deliverable_3/baseline_vs_pegasusbillsum/" # place to write the plots and tests to. Must end with a "/"
+MODEL_NAME <- "wugNATSS-large(on-unsimp)" # The name of the Model whose output is being evaluated
+GOLD_NAME <- "Gold" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
+MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugNATSS-large/eval_on_unsimp.csv" # place to look for model output csv
+GOLD_PATH <- "gold_lftk.csv" # place to look for gold data/alternate model data csv
+ANALYSIS_PATH <- "deliverable_4/wugNATSS-large(on-unsimp)/" # place to write the plots and tests to. Must end with a "/"
 HISTOGRAM_BINS <- 60
 # Note about these arguments - "GOLD_NAME" and "GOLD_PATH" could be the output of a different
 # model and not necessarily computed from reference data. It's a bad naming convention, but
