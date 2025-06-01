@@ -7,6 +7,19 @@ The format of the directory name is:
 
 {Model}\_{Clean}\_{Chunk}\_{Simplify}\_{Training Instance Count}
 
+
+| Pipeline Name | Long Name     |
+| ------------- | ------------- |
+| wugwATSS-1    | pegasusbillsum-100simplified-evaluated-on-unsimplified-test |
+| wugwATSS-2    | pegasusbillsum-100simplified-evaluated-on-simplified-test   |
+| wugwATSS-3    | led-100simplified-evaluated-on-unsimplified-test            |
+| wugNATSS-billsum     | pegasusbillsum-100chunked-evaluated-on-unsimplified-test    |
+| wugNATSS-large    | pegasuslarge-100chunked-evaluated-on-unsimplified-test      |
+
+
+
+
+
 # Flag Options
 
 {Model} = Model Name
