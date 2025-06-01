@@ -22,6 +22,8 @@ pegasusbillsum : [Pegasus BillSum](https://huggingface.co/google/pegasus-billsum
 
 led : [longformer encoder decoder]()
 
+pegasuslarge: [Pegasus Large](https://huggingface.co/google/pegasus-large)
+
 ---
 {Clean} = Binary flag indicating whether to use clean or unclean billsum data. No flag means "unclean"/original data
 
