@@ -1,23 +1,17 @@
 #  Deliverable 4 Run Details
 
-Each folder here represents a run/pipeline executed during deliverable 3.
-Using BillSum training data, we clean the data, chunk the document, do text simplificiation and finally generate summaries.
+Each folder here represents a run/pipeline executed during deliverable 4. An abbreviated and long name of each is provided, followed by an explanation of each pipeline: 
 
-The format of the directory name is: 
+| Pipeline Name        | Long Name     |
+| -------------        | ------------- |
+| wugwATSS-billsum     | pegasusbillsum-100simplified-evaluated-on-unsimplified/simplified-test |
+| wugwATSS-led         | led-100simplified-evaluated-on-unsimplified-test            |
+| wugNATSS-billsum     | pegasusbillsum-100chunked-evaluated-on-unsimplified-test    |
+| wugNATSS-large       | pegasuslarge-100chunked-evaluated-on-unsimplified-test      |
+
+
 
 {Model}\_{Clean}\_{Chunk}\_{Simplify}\_{Training Instance Count}
-
-
-| Pipeline Name | Long Name     |
-| ------------- | ------------- |
-| wugwATSS-1    | pegasusbillsum-100simplified-evaluated-on-unsimplified-test |
-| wugwATSS-2    | pegasusbillsum-100simplified-evaluated-on-simplified-test   |
-| wugwATSS-3    | led-100simplified-evaluated-on-unsimplified-test            |
-| wugNATSS-billsum     | pegasusbillsum-100chunked-evaluated-on-unsimplified-test    |
-| wugNATSS-large    | pegasuslarge-100chunked-evaluated-on-unsimplified-test      |
-
-
-
 
 
 # Flag Options
