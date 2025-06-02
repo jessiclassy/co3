@@ -194,8 +194,8 @@ if __name__ == "__main__":
         final.to_csv(predictions_path)
 
         if args.strategy != None:
-            print("Compressing model...\n")
-            shutil.make_archive(f"{args.strategy}.zip", 'zip', model_path)
+            print(f"Compressing model to {args.strategy}.zip\n")
+            shutil.make_archive(f"{args.strategy}", 'zip', root_dir=model_dir, base_dir=model_path)
             print("Removing full model files...\n")
             shutil.rmtree(model_path)            
     else:
