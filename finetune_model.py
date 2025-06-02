@@ -18,12 +18,16 @@ def load_data(source_name):
     if os.path.isfile(source_name):
         print(f"Loading {source_name}...")
         data = pd.read_csv(source_name)
+        print("Data has null values in columns")
+        print(data.isnull().any())
     else:
         print(f"Could not find {source_name}. Try full pipeline mode.")
 
     if os.path.isfile(idx_name):
         print(f"Loading {idx_name}...")
         data_idx = pd.read_csv(idx_name)
+        print("Data index has null values in columns")
+        print(data.isnull().any())
     else:
         print(f"Could not find {idx_name}. Try full pipeline mode.")
     return data, data_idx
