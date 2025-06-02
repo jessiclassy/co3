@@ -29,7 +29,7 @@ def load_data(source_name):
     return data, data_idx
 
 def test_predictions(max_input_length, max_output_length, tokenizer, model, device, ds, has_global_attn):
-    predict_func = create_prediction(max_input_length, max_output_length, tokenizer, model, device, has_global_attn)
+    predict_func = create_prediction(max_input_length, max_output_length, tokenizer, model, device, has_global_attn=has_global_attn)
     result = ds.map(
         predict_func,
         batched=True,
