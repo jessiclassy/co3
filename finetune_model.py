@@ -105,8 +105,8 @@ if __name__ == "__main__":
         os.makedirs("predictions/", exist_ok=True)
 
     train_data = os.path.basename(args.trainfile).split(".")[0]
-
-    predictions_path = f"predictions/{model_name}_{train_data}_{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
+    test_data = os.path.basename(args.testfile).split(".")[0]
+    predictions_path = f"predictions/{model_name}_{train_data}_{test_data}_{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
     model_dir = f"models/{model_name}/{train_data}"
     model_path = f"{model_dir}/{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
     
