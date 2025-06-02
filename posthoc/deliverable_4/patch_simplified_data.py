@@ -1,7 +1,7 @@
 import pandas as pd
 
 # INPUT
-sourcename = "../preprocess/data/billsum_clean_test_se3-t5-512-512"
+sourcename = "../../preprocess/data/billsum_clean_test_se3-t5-512-512"
 simplified = sourcename + "_simple"
 outname = simplified + "_patched"
 
