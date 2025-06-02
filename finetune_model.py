@@ -1,5 +1,6 @@
 import argparse
 import os
+import shutil
 import pandas as pd
 import torch
 from datasets import Dataset, load_dataset
@@ -53,6 +54,7 @@ def prepare_data(process_func, ds, has_global_attn):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("--strategy", default=None, help="Specify finetuning strategy")
     parser.add_argument("--batch_size", type=int, default=1, help="The batch size for training")
     parser.add_argument("--mode", default="train", help="Specify training or pipeline mode")
     parser.add_argument("--checkpoint", default="google/pegasus-billsum", help="The model checkpoint to use")
@@ -103,6 +105,7 @@ if __name__ == "__main__":
         os.makedirs("predictions/", exist_ok=True)
 
     train_data = os.path.basename(args.trainfile).split(".")[0]
+
     predictions_path = f"predictions/{model_name}_{train_data}_{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
     model_dir = f"models/{model_name}/{train_data}"
     model_path = f"{model_dir}/{str(max_input_length)}_{str(max_output_length)}_{str(args.epochs)}_epochs"
@@ -188,6 +191,12 @@ if __name__ == "__main__":
         final["predicted_summary"] = predictions
 
         # Write to CSV
-        final.to_csv(predictions_path)            
+        final.to_csv(predictions_path)
+
+        if args.strategy != None:
+            print("Compressing model...\n")
+            shutil.make_archive(f"{args.strategy}.zip", 'zip', model_path)
+            print("Removing full model files...\n")
+            shutil.rmtree(model_path)            
     else:
         print("\nPredictions already saved, exiting...\n")

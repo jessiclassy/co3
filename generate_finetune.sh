@@ -2,11 +2,11 @@
 
 # Check if config file was provided
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 <config_file>"
+    echo "Usage: $0 <finetune_strategy>.config"
     exit 1
 fi
 
-CONFIG_FILE="configs/finetune/$1"
+CONFIG_FILE="configs/finetune/$1.config"
 
 # Check if config file exists
 if [ ! -f "$CONFIG_FILE" ]; then
@@ -40,6 +40,7 @@ else
     echo "Running end-to-end system"
 fi
 
+
 # Generate files based on PLATFORM
 case "$PLATFORM" in
     patas)
@@ -55,7 +56,7 @@ case "$PLATFORM" in
         cat > "$output_file" <<EOF
 executable = finetune_model.sh
 getenv = true
-arguments = --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --testfile $TESTFILE --batch_size $BATCH_SIZE 
+arguments = --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --testfile $TESTFILE --batch_size $BATCH_SIZE --strategy $1
 transfer_executable = false
 output = finetune_model.\$(Cluster).out
 error = finetune_model.\$(Cluster).err
