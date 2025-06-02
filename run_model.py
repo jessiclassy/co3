@@ -56,7 +56,9 @@ if __name__ == "__main__":
 
     # Infer max input length and max output length from data name since it is pre-chunked
     data_attr = dataset_file.split("_")
-    chunk_strategy = data_attr[-1].split("-")
+    chunk_strategy = data_attr[-1]
+    if chunk_strategy == "simple":
+        chunk_strategy = data_attr[-2].split("-")
     max_input_len, max_output_len = (int(chunk_strategy[-2]), int(chunk_strategy[-1]))
     # max_input_len, max_output_len = (512, 512)
 
