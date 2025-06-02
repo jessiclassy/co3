@@ -51,7 +51,7 @@ case "$PLATFORM" in
             /home2/jcmw614/miniconda3/envs/573-env/bin/python -m spacy download en_core_web_sm
         fi
         # Generate Condor .cmd file
-        output_file="finetune_model.cmd"
+        output_file="finetune_model.$1.cmd"
         
         cat > "$output_file" <<EOF
 executable = finetune_model.sh

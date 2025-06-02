@@ -19,11 +19,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--checkpoint", default="google/pegasus-billsum", help="The model checkpoint to use")
     parser.add_argument("--testfile", default="", help="The test filepath to use")
-    # parser.add_argument("--fulltext", default=False, action="store_true", help="To not use the chunking")
+    parser.add_argument("--source", default="hub", help="Specify where model is sourced from")
     parser.add_argument("--concat", default="pre", help="Specify when to concatenate chunks")
     parser.add_argument("--mode", default="predict", help="To specify prediction or pipeline mode")
     parser.add_argument("--batch_size", default=2, type=int, help="Batch size for generating predictions")
-    parser.add_argument("--device", default="cuda", help="The device to use") # TODO: how to add to config file?
+    parser.add_argument("--device", default="cuda", help="The device to use") 
+    parser.add_argument("--model_name", default=None, help="Override checkpoint name if loading model from disk")
     # parser.add_argument("--max_input_len", type=int, default=2048, help="The input max size")
     # parser.add_argument("--max_output_len", type=int, default=512, help="The output max size")    
     args = parser.parse_args()
@@ -55,11 +56,20 @@ if __name__ == "__main__":
 
     # Infer max input length and max output length from data name since it is pre-chunked
     data_attr = dataset_file.split("_")
-    chunk_strategy = data_attr[-1].split("-")
-    # max_input_len, max_output_len = (int(chunk_strategy[1]), int(chunk_strategy[2]))
-    max_input_len, max_output_len = (512, 512)
+    chunk_strategy = data_attr[-1]
+    if "simple" in chunk_strategy:
+        chunk_strategy = data_attr[-2].split("-")
+    max_input_len, max_output_len = (int(chunk_strategy[-2]), int(chunk_strategy[-1]))
+    # max_input_len, max_output_len = (512, 512)
 
     # Configure model and tokenizer
+    model_name = None
+    if args.source == "hub":
+        print("Downloading model from HuggingFace...")
+        model_name = '-'.join(args.checkpoint.split("/")[1].split("-")[0:2])
+    elif args.source == "disk":
+        print("Loading model from disk...")
+        model_name = args.model_name
     model = AutoModelForSeq2SeqLM.from_pretrained(args.checkpoint).to(device)
     model.config.num_beams = 2
     model.config.max_length = max_output_len
@@ -67,14 +77,14 @@ if __name__ == "__main__":
     model.config.early_stopping = True
     model.config.no_repeat_ngram_size = 3
 
-    model_name = '-'.join(args.checkpoint.split("/")[1].split("-")[0:2])
+    
 
     word_tok = AutoTokenizer.from_pretrained(args.checkpoint)
 
     # TODO: expand this to account for unchunked data 
     predictions_path = "predictions/" + f"{model_name}_{dataset_file}"
 
-    test_dataset = pd.read_csv(args.testfile) # TODO: add dropna configuration
+    test_dataset = pd.read_csv(args.testfile) 
     test_index = pd.read_csv(data_index_file)
 
     # Check run mode
@@ -108,7 +118,7 @@ if __name__ == "__main__":
                     predict_func,
                     batched=True,
                     batch_size=args.batch_size,
-                    num_proc=8
+                    # num_proc=8
                 )
 
                 # Reconstruct original lengths

@@ -1,3 +1,4 @@
+import torch
 
 def reconstruct(preds, data_index):
     final_summaries = []
@@ -12,7 +13,7 @@ def reconstruct(preds, data_index):
         rows_seen += chunk_count # update the number of rows seen
     return final_summaries
 
-def create_prediction(max_input_len, max_output_len, tokenizer, model, device):
+def create_prediction(max_input_len, max_output_len, tokenizer, model, device, has_global_attn=False):
     def predict(examples):
         inputs = tokenizer(
             examples["text"], 
@@ -23,13 +24,18 @@ def create_prediction(max_input_len, max_output_len, tokenizer, model, device):
         )
         input_ids = inputs.input_ids.to(device)
         attention_mask = inputs.attention_mask.to(device)
+        outputs = None
 
-        outputs = model.generate(
-            input_ids=input_ids,
-            attention_mask=attention_mask,
-            max_length=max_output_len,
-            num_beams=2
-        )
+        if has_global_attn:
+            global_attention_mask = torch.zeros_like(attention_mask)
+            global_attention_mask[:, 0] = 1
+            outputs = model.generate(input_ids=input_ids, attention_mask=attention_mask,
+                                                global_attention_mask=global_attention_mask,
+                                                max_length=max_output_len, num_beams=2)
+        else:
+            outputs = model.generate(input_ids=input_ids, attention_mask=attention_mask,
+                                                max_length=max_output_len, num_beams=2)
+
         return {
             "prediction": tokenizer.batch_decode(outputs, skip_special_tokens=True)
         }

@@ -2,11 +2,11 @@
 
 # Check if config file was provided
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 <config_file>"
+    echo "Usage: $0 <run strategy>.config"
     exit 1
 fi
 
-CONFIG_FILE="configs/run/$1"
+CONFIG_FILE="configs/run/$1.config"
 
 # Check if config file exists
 if [ ! -f "$CONFIG_FILE" ]; then
@@ -33,6 +33,18 @@ if [ -z "$MODE" ]; then
     exit 1
 fi
 
+if [ -z "$SOURCE" ]; then
+    echo "Error: SOURCE not specified in config file, must be 'hub' or 'disk'"
+    exit 1
+fi
+
+if [ $SOURCE = "disk" ]; then
+    if [ -z "$MODEL_NAME" ]; then
+        echo "Error: MODEL_NAME not specified in config file but SOURCE is disk"
+        exit 1
+    fi
+fi
+
 # Log mode parameter
 if [ $MODE = "predict" ] ; then
     echo "Generating model predictions only"
@@ -50,12 +62,12 @@ case "$PLATFORM" in
             /home2/jcmw614/miniconda3/envs/573-env/bin/python -m spacy download en_core_web_sm
         fi
         # Generate Condor .cmd file
-        output_file="run_model.cmd"
+        output_file="run_model.$1.cmd"
         
         cat > "$output_file" <<EOF
 executable = run_model.sh
 getenv = true
-arguments = --checkpoint $CHECKPOINT --mode $MODE --testfile $TESTFILE  --concat $CONCAT --batch_size $BATCH_SIZE 
+arguments = --checkpoint $CHECKPOINT --mode $MODE --testfile $TESTFILE  --concat $CONCAT --batch_size $BATCH_SIZE --source $SOURCE --model_name $MODEL_NAME
 transfer_executable = false
 output = run_model.\$(Cluster).out
 error = run_model.\$(Cluster).err
