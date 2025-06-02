@@ -28,8 +28,8 @@ def load_data(source_name):
         print(f"Could not find {idx_name}. Try full pipeline mode.")
     return data, data_idx
 
-def test_predictions(max_input_length, max_output_length, tokenizer, model, device, ds):
-    predict_func = create_prediction(max_input_length, max_output_length, tokenizer, model, device)
+def test_predictions(max_input_length, max_output_length, tokenizer, model, device, ds, has_global_attn):
+    predict_func = create_prediction(max_input_length, max_output_length, tokenizer, model, device, has_global_attn)
     result = ds.map(
         predict_func,
         batched=True,
@@ -177,7 +177,7 @@ if __name__ == "__main__":
             # Generate predictions
             predictions = test_predictions(max_input_length, max_output_length, word_tok, model, device, test_docs_simple)
         else:               
-            result = test_predictions(max_input_length, max_output_length, word_tok, model, device, test_hf)
+            result = test_predictions(max_input_length, max_output_length, word_tok, model, device, test_hf, has_global_attn)
 
             # Reconstruct original lengths
             predictions = reconstruct(result["prediction"], test_idx["idx"].tolist())
