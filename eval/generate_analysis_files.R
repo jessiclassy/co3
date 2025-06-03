@@ -1,10 +1,10 @@
 # File for generating model analysis plots for ling 573 project
 # File Arguments:
-MODEL_NAME <- "wugwATSS-led(on-unsimp)" # The name of the Model whose output is being evaluated
-MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugwATSS-led/eval_on_unsimp.csv" # place to look for model output csv
-ALT_NAME <- "wugNATSS-led(on-unsimp)" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
-ALT_PATH <- "../output/deliverable_4/wugNATSS-led/eval_on_unsimp.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "deliverable_4/tmp/" # place to write the plots and stats to. Must end with a "/"
+MODEL_NAME <- "wugwATSS-billsum(on-unsimp)" # The name of the Model whose output is being evaluated
+MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugwATSS-billsum/eval_on_unsimp.csv" # place to look for model output csv
+ALT_NAME <- "wugNATSS-billsum(on-unsimp)" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
+ALT_PATH <- "../output/deliverable_4/wugNATSS-billsum/eval_on_unsimp.csv" # place to look for gold data/alternate model data csv
+ANALYSIS_PATH <- "deliverable_4/ATSS_vs_NATSS/wugwATSS-billsum_VS_wugNATSS-billsum(on-unsimp)/" # place to write the plots and stats to. Must end with a "/"
 HISTOGRAM_BINS <- 60
 # Note about these arguments - "ALT_NAME" and "ALT_PATH" could be the output of a different
 # model and not necessarily computed from reference data. It's a bad naming convention, but
@@ -43,6 +43,7 @@ metrics$gen <- metrics$gen %>% select(-ends_with(ALT_SUFFIX))
 colnames(metrics$alt) <- str_replace(colnames(metrics$alt),ALT_SUFFIX,"")
 colnames(metrics$alt) <- str_replace(colnames(metrics$alt),GEN_SUFFIX,"")
 colnames(metrics$gen) <- str_replace(colnames(metrics$gen),GEN_SUFFIX,"")
+colnames(metrics$gen) <- str_replace(colnames(metrics$gen),ALT_SUFFIX,"")
 
 # Refers to family of metrics. Includes LFTK and ROUGE. See README
 family <- list()
