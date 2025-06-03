@@ -1,0 +1,126 @@
+--- Feature = t_word: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 102.57, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 610.9463 634.7582
+sample estimates:
+mean difference 
+       622.8522 
+
+--- Feature = t_stopword: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 101.91, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 261.9261 272.2024
+sample estimates:
+mean difference 
+       267.0642 
+
+--- Feature = t_punct: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 99.002, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 197.4966 205.4774
+sample estimates:
+mean difference 
+        201.487 
+
+--- Feature = t_syll: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 102.99, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  987.506 1025.834
+sample estimates:
+mean difference 
+        1006.67 
+
+--- Feature = t_syll2: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 97.302, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 140.2950 146.0653
+sample estimates:
+mean difference 
+       143.1802 
+
+--- Feature = t_syll3: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 82.879, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 50.77609 53.23676
+sample estimates:
+mean difference 
+       52.00642 
+
+--- Feature = t_uword: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 115.32, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 170.2581 176.1476
+sample estimates:
+mean difference 
+       173.2028 
+
+--- Feature = t_sent: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 107.46, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 36.79223 38.15974
+sample estimates:
+mean difference 
+       37.47599 
+
+--- Feature = t_char: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 104.35, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 3147.349 3267.893
+sample estimates:
+mean difference 
+       3207.621 
+

@@ -1,0 +1,84 @@
+--- Feature = fkre: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 75.012, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 36.76060 38.73391
+sample estimates:
+mean difference 
+       37.74726 
+
+--- Feature = fkgl: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -61.973, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -11.43764 -10.73612
+sample estimates:
+mean difference 
+      -11.08688 
+
+--- Feature = fogi: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -59.966, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -11.35488 -10.63585
+sample estimates:
+mean difference 
+      -10.99537 
+
+--- Feature = smog: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -66.739, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -4.284178 -4.039637
+sample estimates:
+mean difference 
+      -4.161908 
+
+--- Feature = cole: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -72.691, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.819494 -2.671388
+sample estimates:
+mean difference 
+      -2.745441 
+
+--- Feature = auto: led-baseline vs Gold Summaries
+model_1 = led-baseline | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -58.695, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -13.77960 -12.88875
+sample estimates:
+mean difference 
+      -13.33418 
+
