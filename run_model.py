@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # Set random seed
     set_seed(1234)
     # set_seed(args.seed)
-    # has_global_attn = args.checkpoint == "allenai/led-base-16384"
+    has_global_attn = args.checkpoint == "allenai/led-base-16384"
 
     # Configure device
     if args.device == "cuda":
@@ -109,7 +109,7 @@ if __name__ == "__main__":
             # Convert the datasets in Huggingface's Datasets format.
             test_dataset = Dataset.from_pandas(test_dataset)
             # Run model predictions
-            predict_func = create_prediction(max_input_len, max_output_len, word_tok, model, device)
+            predict_func = create_prediction(max_input_len, max_output_len, word_tok, model, device, has_global_attn=has_global_attn)
 
             if args.concat == "pre": 
                 pass # TODO: implement pre concatenation
