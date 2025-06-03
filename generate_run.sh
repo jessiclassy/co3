@@ -67,7 +67,7 @@ case "$PLATFORM" in
         cat > "$output_file" <<EOF
 executable = run_model.sh
 getenv = true
-arguments = --checkpoint $CHECKPOINT --mode $MODE --testfile $TESTFILE  --concat $CONCAT --batch_size $BATCH_SIZE --source $SOURCE --model_name $MODEL_NAME
+arguments = --checkpoint $CHECKPOINT --mode $MODE --testfile $TESTFILE  --concat $CONCAT --batch_size $BATCH_SIZE --source $SOURCE $( [ -v $MODEL_NAME ] && echo "--model_name $MODEL_NAME" )
 transfer_executable = false
 output = run_model.\$(Cluster).out
 error = run_model.\$(Cluster).err
