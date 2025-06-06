@@ -1,0 +1,54 @@
+--- Feature = fkre: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.664694 (large)
+95 percent confidence interval:
+   lower    upper 
+1.608431 1.720957 
+
+--- Feature = fkgl: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: -1.476508 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.531205 -1.421810 
+
+--- Feature = fogi: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: -1.427066 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.481376 -1.372756 
+
+--- Feature = smog: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: -1.410382 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.464564 -1.356200 
+
+--- Feature = cole: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: -1.336112 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.389738 -1.282486 
+
+--- Feature = auto: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: -1.409837 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.464014 -1.355659 
+

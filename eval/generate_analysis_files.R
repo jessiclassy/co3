@@ -1,10 +1,10 @@
 # File for generating model analysis plots for ling 573 project
 # File Arguments:
-MODEL_NAME <- "wugwATSS-billsum(on-unsimp)" # The name of the Model whose output is being evaluated
-MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugwATSS-billsum/eval_on_unsimp.csv" # place to look for model output csv
-ALT_NAME <- "wugNATSS-billsum(on-unsimp)" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
-ALT_PATH <- "../output/deliverable_4/wugNATSS-billsum/eval_on_unsimp.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "deliverable_4/ATSS_vs_NATSS/wugwATSS-billsum_VS_wugNATSS-billsum(on-unsimp)/" # place to write the plots and stats to. Must end with a "/"
+MODEL_NAME <- "led-baseline" # The name of the Model whose output is being evaluated
+MODEL_OUTPUT_PATH <- "../output/deliverable_4/led-base/led-base_billsum_clean_test_se3-led-2048-512.csv" # place to look for model output csv
+ALT_NAME <- "Gold" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
+ALT_PATH <- "gold_lftk.csv" # place to look for gold data/alternate model data csv
+ANALYSIS_PATH <- "deliverable_4/All_Models_Against_Gold/led-base/" # place to write the plots and stats to. Must end with a "/"
 HISTOGRAM_BINS <- 60
 # Note about these arguments - "ALT_NAME" and "ALT_PATH" could be the output of a different
 # model and not necessarily computed from reference data. It's a bad naming convention, but
@@ -12,6 +12,13 @@ HISTOGRAM_BINS <- 60
 # name it with "ALT_NAME" accordingly.
 # ----------------------------------------------------------------------- #
 # Do not change these variables. These represent suffixes we expect to read in from csv headers
+library(tidyr)
+library(ggplot2)
+library(stringr)
+library(dplyr)
+library(pastecs)
+library(effsize)
+
 ALT_SUFFIX <- ".GOLD"
 GEN_SUFFIX <- ".GEN"
 
@@ -23,12 +30,6 @@ SHORT_ALT_NAME <- ifelse(str_detect(ALT_NAME,long), str_extract(ALT_NAME,long,gr
 # ------------------------- (0) Setup Variables ------------------------- #
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
-library(tidyr)
-library(ggplot2)
-library(stringr)
-library(dplyr)
-library(pastecs)
-library(effsize)
 
 # LFTK readability and other metrics of gold and generated summaries on test partition
 # These two CSVs must have to same columns

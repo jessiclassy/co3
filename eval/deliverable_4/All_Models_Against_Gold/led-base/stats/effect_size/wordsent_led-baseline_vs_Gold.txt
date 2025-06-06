@@ -1,0 +1,81 @@
+--- Feature = t_word: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.315628 (large)
+95 percent confidence interval:
+   lower    upper 
+2.252963 2.378294 
+
+--- Feature = t_stopword: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.356368 (large)
+95 percent confidence interval:
+   lower    upper 
+2.293258 2.419479 
+
+--- Feature = t_punct: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.369807 (large)
+95 percent confidence interval:
+   lower    upper 
+2.306549 2.433065 
+
+--- Feature = t_syll: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.307723 (large)
+95 percent confidence interval:
+   lower    upper 
+2.245143 2.370302 
+
+--- Feature = t_syll2: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.125253 (large)
+95 percent confidence interval:
+   lower    upper 
+2.064602 2.185903 
+
+--- Feature = t_syll3: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.760738 (large)
+95 percent confidence interval:
+   lower    upper 
+1.703622 1.817854 
+
+--- Feature = t_uword: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.51058 (large)
+95 percent confidence interval:
+   lower    upper 
+2.445746 2.575414 
+
+--- Feature = t_sent: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.532141 (large)
+95 percent confidence interval:
+   lower    upper 
+2.467061 2.597221 
+
+--- Feature = t_char: led-baseline vs Gold Summaries
+
+Cohen's d
+
+d estimate: 2.345547 (large)
+95 percent confidence interval:
+   lower    upper 
+2.282556 2.408539 
+
