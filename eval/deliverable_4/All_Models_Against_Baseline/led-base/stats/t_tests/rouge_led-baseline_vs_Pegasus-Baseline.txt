@@ -1,0 +1,126 @@
+--- Feature = rouge1_precision: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -144.23, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.4958009 -0.4825020
+sample estimates:
+mean difference 
+     -0.4891514 
+
+--- Feature = rouge2_precision: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -101.35, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3799619 -0.3655394
+sample estimates:
+mean difference 
+     -0.3727506 
+
+--- Feature = rougeL_precision: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -113.8, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.4252964 -0.4108896
+sample estimates:
+mean difference 
+      -0.418093 
+
+--- Feature = rouge1_recall: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 60.027, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.2293834 0.2448744
+sample estimates:
+mean difference 
+      0.2371289 
+
+--- Feature = rouge2_recall: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 16.091, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.05387971 0.06883218
+sample estimates:
+mean difference 
+     0.06135594 
+
+--- Feature = rougeL_recall: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 27.452, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.09173152 0.10584276
+sample estimates:
+mean difference 
+     0.09878714 
+
+--- Feature = rouge1_fmeasure: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -84.045, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.2926308 -0.2792885
+sample estimates:
+mean difference 
+     -0.2859596 
+
+--- Feature = rouge2_fmeasure: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -74.842, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.2459174 -0.2333613
+sample estimates:
+mean difference 
+     -0.2396393 
+
+--- Feature = rougeL_fmeasure: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -84.334, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.2733827 -0.2609597
+sample estimates:
+mean difference 
+     -0.2671712 
+

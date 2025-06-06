@@ -1,0 +1,126 @@
+--- Feature = t_word: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 105.91, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 658.9777 683.8378
+sample estimates:
+mean difference 
+       671.4078 
+
+--- Feature = t_stopword: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 104.21, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 275.8531 286.4326
+sample estimates:
+mean difference 
+       281.1429 
+
+--- Feature = t_punct: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 100.07, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 203.7233 211.8662
+sample estimates:
+mean difference 
+       207.7947 
+
+--- Feature = t_syll: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 105.59, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1063.434 1103.676
+sample estimates:
+mean difference 
+       1083.555 
+
+--- Feature = t_syll2: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 100.09, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 152.4810 158.5744
+sample estimates:
+mean difference 
+       155.5277 
+
+--- Feature = t_syll3: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 86.478, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 55.52229 58.09839
+sample estimates:
+mean difference 
+       56.81034 
+
+--- Feature = t_uword: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 120.31, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 188.4733 194.7179
+sample estimates:
+mean difference 
+       191.5956 
+
+--- Feature = t_sent: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 108.2, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 38.33231 39.74723
+sample estimates:
+mean difference 
+       39.03977 
+
+--- Feature = t_char: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 106.91, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 3387.646 3514.227
+sample estimates:
+mean difference 
+       3450.936 
+

@@ -2,9 +2,9 @@
 # File Arguments:
 MODEL_NAME <- "led-baseline" # The name of the Model whose output is being evaluated
 MODEL_OUTPUT_PATH <- "../output/deliverable_4/led-base/led-base_billsum_clean_test_se3-led-2048-512.csv" # place to look for model output csv
-ALT_NAME <- "Gold" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
-ALT_PATH <- "gold_lftk.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "deliverable_4/All_Models_Against_Gold/led-base/" # place to write the plots and stats to. Must end with a "/"
+ALT_NAME <- "Pegasus-Baseline" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
+ALT_PATH <- "../output/deliverable_2/pegasusbillsum_baseline_ALL_metrics.csv" # place to look for gold data/alternate model data csv
+ANALYSIS_PATH <- "analysis-tmp/" # place to write the plots and stats to. Must end with a "/"
 HISTOGRAM_BINS <- 60
 # Note about these arguments - "ALT_NAME" and "ALT_PATH" could be the output of a different
 # model and not necessarily computed from reference data. It's a bad naming convention, but

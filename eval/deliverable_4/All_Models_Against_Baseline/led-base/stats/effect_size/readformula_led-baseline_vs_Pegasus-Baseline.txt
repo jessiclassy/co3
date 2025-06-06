@@ -1,0 +1,54 @@
+--- Feature = fkre: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 1.537156 (large)
+95 percent confidence interval:
+   lower    upper 
+1.481970 1.592342 
+
+--- Feature = fkgl: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -1.412177 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.466372 -1.357981 
+
+--- Feature = fogi: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -1.376455 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.430380 -1.322529 
+
+--- Feature = smog: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -1.394153 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.448211 -1.340094 
+
+--- Feature = cole: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -1.091764 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.143740 -1.039789 
+
+--- Feature = auto: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -1.364021 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.417853 -1.310189 
+

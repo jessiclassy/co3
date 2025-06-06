@@ -1,0 +1,81 @@
+--- Feature = rouge1_precision: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -2.841811 (large)
+95 percent confidence interval:
+    lower     upper 
+-2.910546 -2.773076 
+
+--- Feature = rouge2_precision: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -2.255823 (large)
+95 percent confidence interval:
+    lower     upper 
+-2.317844 -2.193802 
+
+--- Feature = rougeL_precision: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -2.561737 (large)
+95 percent confidence interval:
+    lower     upper 
+-2.627157 -2.496317 
+
+--- Feature = rouge1_recall: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 1.404231 (large)
+95 percent confidence interval:
+   lower    upper 
+1.350096 1.458366 
+
+--- Feature = rouge2_recall: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 0.3522777 (small)
+95 percent confidence interval:
+    lower     upper 
+0.3034148 0.4011405 
+
+--- Feature = rougeL_recall: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 0.5559534 (medium)
+95 percent confidence interval:
+    lower     upper 
+0.5065374 0.6053694 
+
+--- Feature = rouge1_fmeasure: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -1.979748 (large)
+95 percent confidence interval:
+    lower     upper 
+-2.038934 -1.920562 
+
+--- Feature = rouge2_fmeasure: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -1.754168 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.811224 -1.697112 
+
+--- Feature = rougeL_fmeasure: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: -2.025754 (large)
+95 percent confidence interval:
+    lower     upper 
+-2.085396 -1.966112 
+

@@ -1,0 +1,84 @@
+--- Feature = fkre: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 68.286, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 44.10183 46.70930
+sample estimates:
+mean difference 
+       45.40557 
+
+--- Feature = fkgl: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -59.628, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -15.02827 -14.07141
+sample estimates:
+mean difference 
+      -14.54984 
+
+--- Feature = fogi: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -58.176, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -15.04026 -14.05952
+sample estimates:
+mean difference 
+      -14.54989 
+
+--- Feature = smog: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -64.609, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -5.132938 -4.830577
+sample estimates:
+mean difference 
+      -4.981758 
+
+--- Feature = cole: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -59.662, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.471186 -2.313933
+sample estimates:
+mean difference 
+      -2.392559 
+
+--- Feature = auto: led-baseline vs Pegasus-Baseline Summaries
+model_1 = led-baseline | model_2 = Pegasus-Baseline
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -57.156, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -18.40949 -17.18833
+sample estimates:
+mean difference 
+      -17.79891 
+

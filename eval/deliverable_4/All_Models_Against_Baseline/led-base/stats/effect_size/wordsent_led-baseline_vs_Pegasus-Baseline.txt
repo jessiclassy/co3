@@ -1,0 +1,81 @@
+--- Feature = t_word: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.614075 (large)
+95 percent confidence interval:
+   lower    upper 
+2.548050 2.680101 
+
+--- Feature = t_stopword: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.558816 (large)
+95 percent confidence interval:
+   lower    upper 
+2.493430 2.624202 
+
+--- Feature = t_punct: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.464935 (large)
+95 percent confidence interval:
+   lower    upper 
+2.400617 2.529252 
+
+--- Feature = t_syll: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.583417 (large)
+95 percent confidence interval:
+   lower    upper 
+2.517747 2.649087 
+
+--- Feature = t_syll2: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.404123 (large)
+95 percent confidence interval:
+   lower    upper 
+2.340485 2.467760 
+
+--- Feature = t_syll3: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 1.990373 (large)
+95 percent confidence interval:
+   lower    upper 
+1.931083 2.049664 
+
+--- Feature = t_uword: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.972164 (large)
+95 percent confidence interval:
+   lower    upper 
+2.901827 3.042500 
+
+--- Feature = t_sent: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.662736 (large)
+95 percent confidence interval:
+   lower    upper 
+2.596142 2.729331 
+
+--- Feature = t_char: led-baseline vs Pegasus-Baseline Summaries
+
+Cohen's d
+
+d estimate: 2.626598 (large)
+95 percent confidence interval:
+   lower    upper 
+2.560426 2.692769 
+
