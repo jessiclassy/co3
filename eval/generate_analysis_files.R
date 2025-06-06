@@ -1,7 +1,7 @@
 # File for generating model analysis plots for ling 573 project
 # File Arguments:
-MODEL_NAME <- "led-baseline" # The name of the Model whose output is being evaluated
-MODEL_OUTPUT_PATH <- "../output/deliverable_4/led-base/led-base_billsum_clean_test_se3-led-2048-512.csv" # place to look for model output csv
+MODEL_NAME <- "wugNATSS-pegasus(on-unsimp)" # The name of the Model whose output is being evaluated
+MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugNATSS-pegasus/eval_on_unsimp.csv" # place to look for model output csv
 ALT_NAME <- "Pegasus-Baseline" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
 ALT_PATH <- "../output/deliverable_2/pegasusbillsum_baseline_ALL_metrics.csv" # place to look for gold data/alternate model data csv
 ANALYSIS_PATH <- "analysis-tmp/" # place to write the plots and stats to. Must end with a "/"
