@@ -1,8 +1,8 @@
 # File for generating tristograms for ling 573 project
 # File Arguments:
-MODEL_NAME <- "wugwATSS-led(on-unsimp)" # The name of the Model whose output is being evaluated
-MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugwATSS-led/eval_on_unsimp.csv" # place to look for model output csv
-ANALYSIS_PATH <- "deliverable_4/yo/" # place to write the plots and stats to. Must end with a "/"
+MODEL_NAME <- "wugwATSS-pegasus(on-unsimp)" # The name of the Model whose output is being evaluated
+MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugwATSS-billsum/eval_on_unsimp.csv" # place to look for model output csv
+ANALYSIS_PATH <- "deliverable_4/Tristograms/wugwATSS-pegasus(on-unsimp)/" # place to write the plots and stats to. Must end with a "/"
 HISTOGRAM_BINS <- 60
 # Note about these arguments - "ALT_NAME" and "ALT_PATH" could be the output of a different
 # model and not necessarily computed from reference data. It's a bad naming convention, but
