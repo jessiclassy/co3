@@ -87,21 +87,31 @@ sbatch
 ```
 On Hyak, this step takes approximately 2 hours to run.
 
-### Generate summaries
+# Zero-shot summary generation
 
 Run the controller script which will generate and submit a Condor job on your behalf:
 ```cmd
 cd ling573
-./generate_run.sh patas.config
+./generate_run.sh patas
 # Attend for successful Condor job submission message
 ```
 If running on Hyak, the controller script will generate a SLURM batch job, build an Apptainer with the Conda environment and submit the job on your behalf:
 ```cmd
 cd /gscratch/scrubbed/jcmw614/ling573
-./generate_run.sh hyak.config
+./generate_run.sh hyak
 # Attend for successful SLURM job submission message
 ```
 Note: this takes approximately 40 min for the first 15 documents of the test set, which were segmented into 130 text chunks.
+
+# Model finetuning
+
+Run the controller script which will generate and submit a Condor job on your behalf:
+```cmd
+cd ling573
+./generate_finetune.sh wugwatts-led_unsimp
+```
+
+This will generate the requisite Condor log, error, and output files with the template `finetune_model.<cluster number>` where you can best monitor runtime and issues with the `.err` file.
 
 # Baseline system
 Note that test data is directly loaded with the `datasets` library so no extra arguments are needed on the command line.
