@@ -154,7 +154,7 @@ def main(args):
         per_device_train_batch_size=args.batch_size,
         per_device_eval_batch_size=args.batch_size,
         # fp16=True,
-        output_dir="led/",
+        output_dir="led_old_impl/",
         logging_steps=5,
         eval_steps=10,
         save_steps=10,
