@@ -142,8 +142,8 @@ def main(args):
 
     # Load rouge for validation signal
     # print("Loading metric...")
-    # rouge = load_metric(args.metric)
-    # eval_pred = eval_func(tokenizer, rouge)
+    rouge = load_metric(args.metric)
+    eval_pred = eval_func(tokenizer, rouge)
 
     # Train model
     # Training arguments
@@ -165,12 +165,12 @@ def main(args):
 
     # Instantiate trainer
     trainer = Seq2SeqTrainer(
-        model=led,
-        tokenizer=tokenizer,
+        model=led, 
         args=training_args,
-        # compute_metrics=eval_pred,
         train_dataset=data_dict["train"],
-        # eval_dataset=data_dict["validation"],
+        eval_dataset=data_dict["validation"],
+        # processing_class=tokenizer,
+        compute_metrics=eval_pred,
     )
 
     # Finetune LED I guess?
