@@ -45,9 +45,10 @@ def main(args):
   minwiki_test = load_dataset("parquet", "cl-nagoya/min-wikisplit", ignore_verifications=True, split="test")
 
   # load BillSum - sample of clean + chunked documents and summaries
-  # TODO: figure out correct filepath
-  chunked_billsum = pd.read_csv("../../preprocess/data/...").sample(n=10)
+  # Using the LED chunked data we already have
+  chunked_billsum = pd.read_csv("../../preprocess/data/billsum_clean_test_se3-led-2048-512.csv").sample(n=100)
   billsum_test_chunks = Dataset.from_pandas(chunked_billsum)
+
   # Full BillSum as well just to isolate gold summaries
   full_billsum = load_dataset("billsum", split="test")
 
@@ -110,14 +111,14 @@ def main(args):
   # Unprocessed BillSum summaries
   sample_result = full_billsum.map(summary_chunk_generate, batched=True, batch_size=4)
   sample_result.to_csv(f"{filename}_full_summary_sample.csv")
-  
+
   return
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument("--metric", type=str, default="rouge", help="Specify Huggingface metric for evaluation signal")
   parser.add_argument("--checkpoint", default="./led", help="Specify local path of finetuned LED model for evaluation")
-  parser.add_argument("--max_input_length", type=int, default=512)
+  parser.add_argument("--max_input_length", type=int, default=2048)
   parser.add_argument("--max_output_length", type=int, default=512)
   parser.add_argument("--device", default="cuda", help="The device to use")
   parser.add_argument("--batch_size", type=int, default=2, help="Set batch size")
