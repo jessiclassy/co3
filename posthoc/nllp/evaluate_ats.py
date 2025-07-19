@@ -5,7 +5,7 @@ from transformers import LEDTokenizer, LEDForConditionalGeneration
 import argparse
 
 # tokenize helper function
-def generate(model, tokenizer, input_field, output_field, device, max_input_length=512, max_output_length=512):
+def generate(model, tokenizer, input_field, output_field, device, max_input_length=2048, max_output_length=512):
   def prepare_predict(batch):
     inputs_dict = tokenizer(
       batch[input_field], 
