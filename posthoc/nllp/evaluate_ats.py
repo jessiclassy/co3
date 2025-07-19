@@ -122,7 +122,7 @@ def main(args):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument("--metric", type=str, default="rouge", help="Specify Huggingface metric for evaluation signal")
-  parser.add_argument("--checkpoint", default="./led", help="Specify local path of finetuned LED model for evaluation")
+  parser.add_argument("--checkpoint", default="./led/", help="Specify local path of finetuned LED model for evaluation")
   parser.add_argument("--max_input_length", type=int, default=2048)
   parser.add_argument("--max_output_length", type=int, default=512)
   parser.add_argument("--device", default="cuda", help="The device to use")

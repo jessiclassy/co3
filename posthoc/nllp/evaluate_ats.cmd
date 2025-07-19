@@ -11,7 +11,7 @@ queue
 
 executable = evaluate_ats.sh
 getenv = true
-arguments = --checkpoint ./led_old_impl
+arguments = --checkpoint ./led_old_impl/
 transfer_executable = false
 output = evaluate_ats_validated.$(Cluster).out
 error = evaluate_ats_validated.$(Cluster).err
