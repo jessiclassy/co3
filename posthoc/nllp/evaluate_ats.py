@@ -42,7 +42,12 @@ def main(args):
   print(f"Running on device: {device}")
 
   # load minwiki - official task
-  minwiki_test = load_dataset("parquet", "cl-nagoya/min-wikisplit", ignore_verifications=True, split="test")
+  minwiki_test = load_dataset(
+            "parquet",
+            data_files={
+                "test": "https://huggingface.co/datasets/cl-nagoya/min-wikisplit/resolve/main/data/test-00000-of-00001.parquet",
+            }
+        )
 
   # load BillSum - sample of clean + chunked documents and summaries
   # Using the LED chunked data we already have
