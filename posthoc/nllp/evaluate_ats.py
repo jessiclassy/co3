@@ -57,8 +57,12 @@ def main(args):
   # Full BillSum as well just to isolate gold summaries
   full_billsum = load_dataset("billsum", split="test")
 
-  # load tokenizer
-  tokenizer = LEDTokenizer.from_pretrained(args.checkpoint)
+  # load tokenizer from local if available
+  try:
+    tokenizer = LEDTokenizer.from_pretrained(args.checkpoint)
+  except OSError:
+     tokenizer = LEDTokenizer.from_pretrained("allenai/led-base-16384")
+
   # load model
   model = LEDForConditionalGeneration.from_pretrained(args.checkpoint).to(device).half()
 
@@ -77,11 +81,17 @@ def main(args):
      )
   
   minwiki_result = minwiki_test.map(minwiki_generate, batched=True, batch_size=4)
-  print("MinWiki SPRP Result:", rouge.compute(
-     predictions=minwiki_result["simple_prediction"], 
-     references=minwiki_result["simple"], 
-     rouge_types=["rougeL"])["rougeL"].mid
-     )
+  try:
+    print("MinWiki SPRP Result:", rouge.compute(
+      predictions=minwiki_result["simple_prediction"], 
+      references=minwiki_result["simple"], 
+      rouge_types=["rougeL"])["rougeL"].mid
+      )
+  except KeyError as e:
+    print("KeyError")
+    print(e)
+    minwiki_result.to_cvs("minwiki_result.csv")
+
   
   # Generate simplified BillSum text function
   bill_chunk_generate = generate(
@@ -110,12 +120,12 @@ def main(args):
   target_result = billsum_test_chunks.map(summary_chunk_generate, batched=True, batch_size=4)
 
   filename = args.checkpoint.split("/")[1]
-  chunk_result.to_csv(f"{filename}_text_sample.csv")
-  target_result.to_csv(f"{filename}_summary_sample.csv")
+  chunk_result.to_csv(f"{filename}_text_simple_toy.csv")
+  target_result.to_csv(f"{filename}_summary_simple_toy.csv")
 
   # Unprocessed BillSum summaries
   sample_result = full_billsum.map(summary_chunk_generate, batched=True, batch_size=4)
-  sample_result.to_csv(f"{filename}_full_summary_sample.csv")
+  sample_result.to_csv(f"{filename}_full_test_simple_summary.csv")
 
   return
 
