@@ -1,6 +1,7 @@
 import torch
 import pandas as pd
-from datasets import load_dataset, load_metric, Dataset
+from datasets import load_dataset, Dataset
+from evaluate import load
 from transformers import LEDTokenizer, LEDForConditionalGeneration
 import argparse
 
@@ -42,16 +43,16 @@ def main(args):
   print(f"Running on device: {device}")
 
   # load minwiki - official task
-  # minwiki_test = load_dataset(
-  #           "parquet",
-  #           data_files={
-  #               "test": "https://huggingface.co/datasets/cl-nagoya/min-wikisplit/resolve/main/data/test-00000-of-00001.parquet",
-  #           }
-  #       )
+  minwiki_test = load_dataset(
+            "parquet",
+            data_files={
+                "test": "https://huggingface.co/datasets/cl-nagoya/min-wikisplit/resolve/main/data/test-00000-of-00001.parquet",
+            }
+        )
 
   # load BillSum - sample of clean + chunked documents and summaries
   # Using the LED chunked data we already have
-  chunked_billsum = pd.read_csv("../../preprocess/data/billsum_clean_test_se3-led-2048-512.csv").sample(n=100)
+  chunked_billsum = pd.read_csv("../../preprocess/data/billsum_clean_test_se3-led-2048-512.csv").dropna() # drop any null values
   billsum_test_chunks = Dataset.from_pandas(chunked_billsum)
 
   # Full BillSum as well just to isolate gold summaries
@@ -66,31 +67,32 @@ def main(args):
   # load model
   model = LEDForConditionalGeneration.from_pretrained(args.checkpoint).to(device).half()
 
-  # load rouge
-  rouge = load_metric("rouge")
+  # load rouge evaluator
+  rouge = load("rouge")
+
 
   # Generate MinWiki results for sanity
-  # minwiki_generate = generate(
-  #    model, 
-  #    tokenizer, 
-  #    "complex", 
-  #    "simple_prediction", 
-  #    device,
-  #    max_input_length=args.max_input_length,
-  #    max_output_length=args.max_output_length
-  #    )
+  minwiki_generate = generate(
+     model, 
+     tokenizer, 
+     "complex", 
+     "simple_prediction", 
+     device,
+     max_input_length=args.max_input_length,
+     max_output_length=args.max_output_length
+     )
   
-  # minwiki_result = minwiki_test.map(minwiki_generate, batched=True, batch_size=4)
-  # try:
-  #   print("MinWiki SPRP Result:", rouge.compute(
-  #     predictions=minwiki_result["simple_prediction"], 
-  #     references=minwiki_result["simple"], 
-  #     rouge_types=["rougeL"])["rougeL"].mid
-  #     )
-  # except KeyError as e:
-  #   print("KeyError")
-  #   print(e)
-  #   minwiki_result.to_cvs("minwiki_result.csv")
+  minwiki_result = minwiki_test.map(minwiki_generate, batched=True, batch_size=4)
+  try:
+    print("MinWiki SPRP Result:", rouge.compute(
+      predictions=minwiki_result["simple_prediction"], 
+      references=minwiki_result["simple"], 
+      rouge_types=["rougeL"])["rougeL"].mid
+      )
+  except KeyError as e:
+    print("KeyError")
+    print(e)
+    minwiki_result.to_csv("minwiki_result.csv")
 
   
   # Generate simplified BillSum text function
