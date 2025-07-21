@@ -42,12 +42,12 @@ def main(args):
   print(f"Running on device: {device}")
 
   # load minwiki - official task
-  minwiki_test = load_dataset(
-            "parquet",
-            data_files={
-                "test": "https://huggingface.co/datasets/cl-nagoya/min-wikisplit/resolve/main/data/test-00000-of-00001.parquet",
-            }
-        )
+  # minwiki_test = load_dataset(
+  #           "parquet",
+  #           data_files={
+  #               "test": "https://huggingface.co/datasets/cl-nagoya/min-wikisplit/resolve/main/data/test-00000-of-00001.parquet",
+  #           }
+  #       )
 
   # load BillSum - sample of clean + chunked documents and summaries
   # Using the LED chunked data we already have
@@ -70,27 +70,27 @@ def main(args):
   rouge = load_metric("rouge")
 
   # Generate MinWiki results for sanity
-  minwiki_generate = generate(
-     model, 
-     tokenizer, 
-     "complex", 
-     "simple_prediction", 
-     device,
-     max_input_length=args.max_input_length,
-     max_output_length=args.max_output_length
-     )
+  # minwiki_generate = generate(
+  #    model, 
+  #    tokenizer, 
+  #    "complex", 
+  #    "simple_prediction", 
+  #    device,
+  #    max_input_length=args.max_input_length,
+  #    max_output_length=args.max_output_length
+  #    )
   
-  minwiki_result = minwiki_test.map(minwiki_generate, batched=True, batch_size=4)
-  try:
-    print("MinWiki SPRP Result:", rouge.compute(
-      predictions=minwiki_result["simple_prediction"], 
-      references=minwiki_result["simple"], 
-      rouge_types=["rougeL"])["rougeL"].mid
-      )
-  except KeyError as e:
-    print("KeyError")
-    print(e)
-    minwiki_result.to_cvs("minwiki_result.csv")
+  # minwiki_result = minwiki_test.map(minwiki_generate, batched=True, batch_size=4)
+  # try:
+  #   print("MinWiki SPRP Result:", rouge.compute(
+  #     predictions=minwiki_result["simple_prediction"], 
+  #     references=minwiki_result["simple"], 
+  #     rouge_types=["rougeL"])["rougeL"].mid
+  #     )
+  # except KeyError as e:
+  #   print("KeyError")
+  #   print(e)
+  #   minwiki_result.to_cvs("minwiki_result.csv")
 
   
   # Generate simplified BillSum text function
