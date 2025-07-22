@@ -56,7 +56,7 @@ def main(args):
   billsum_test_chunks = Dataset.from_pandas(chunked_billsum)
 
   # Full BillSum as well just to isolate gold summaries
-  full_billsum = load_dataset("billsum", split="test")["test"] # Immediately index into test file
+  full_billsum = load_dataset("billsum", split="test")
 
   # load tokenizer from local if available
   try:
