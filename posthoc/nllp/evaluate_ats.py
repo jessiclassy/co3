@@ -48,7 +48,7 @@ def main(args):
             data_files={
                 "test": "https://huggingface.co/datasets/cl-nagoya/min-wikisplit/resolve/main/data/test-00000-of-00001.parquet",
             }
-        )
+        )["test"] # Immediately index into test file
 
   # load BillSum - sample of clean + chunked documents and summaries
   # Using the LED chunked data we already have
@@ -56,7 +56,7 @@ def main(args):
   billsum_test_chunks = Dataset.from_pandas(chunked_billsum)
 
   # Full BillSum as well just to isolate gold summaries
-  full_billsum = load_dataset("billsum", split="test")
+  full_billsum = load_dataset("billsum", split="test")["test"] # Immediately index into test file
 
   # load tokenizer from local if available
   try:

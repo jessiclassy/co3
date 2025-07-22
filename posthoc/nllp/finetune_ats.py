@@ -147,7 +147,7 @@ def main(args):
 
     # Train model
     # Training arguments
-    # enable fp16 apex training ???
+    # enable fp16 apex training, not sure why the authors called it "apex"
     training_args = Seq2SeqTrainingArguments(
         predict_with_generate=True,
         # evaluation_strategy="steps",
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     parser.add_argument("--dataset", type=str, default="cl-nagoya/min-wikisplit", help="specify HuggingFace dataset")
     parser.add_argument("--metric", type=str, default="rouge", help="Specify Huggingface metric for validation signal")
     parser.add_argument("--model", default="allenai/led-base-16384", help="Specify LED model for finetuning")
-    parser.add_argument("--max_input_length", type=int, default=512)
+    parser.add_argument("--max_input_length", type=int, default=2048)
     parser.add_argument("--max_output_length", type=int, default=512)
     parser.add_argument("--device", default="cuda", help="The device to use")
     parser.add_argument("--batch_size", type=int, default=2, help="Set batch size")
