@@ -3,6 +3,7 @@ import pandas as pd
 from datasets import load_dataset, Dataset
 from transformers import LEDTokenizer, LEDForConditionalGeneration
 import argparse
+import os
 
 # tokenize helper function
 def generate(model, tokenizer, input_field, output_field, device, max_input_length=2048, max_output_length=512):
@@ -84,13 +85,16 @@ def main(args):
   chunk_result = billsum_test_chunks.map(bill_chunk_generate, batched=True, batch_size=4)
   target_result = billsum_test_chunks.map(summary_chunk_generate, batched=True, batch_size=4)
 
-  filepath = args.checkpoint.replace(".", "ats_toy_data")
-  chunk_result.to_csv(f"{filepath}text_simple_toy.csv")
-  target_result.to_csv(f"{filepath}summary_simple_toy.csv")
+  outdir = args.checkpoint.replace(".", "ats_toy_data")
+  if not os.path.exists(outdir):
+    os.makedirs(outdir, exist_ok=True) # Output path may be created more than once, it's ok 
+    
+  chunk_result.to_csv(os.path.join(outdir, "text_simple_toy.csv"))
+  target_result.to_csv(os.path.join(outdir, "summary_simple_toy.csv"))
 
   # Unprocessed BillSum summaries
   sample_result = full_billsum.map(summary_chunk_generate, batched=True, batch_size=4)
-  sample_result.to_csv(f"{filepath}full_test_simple_summary.csv")
+  sample_result.to_csv(os.path.join(outdir, "full_test_simple_summary.csv"))
 
   return
 
