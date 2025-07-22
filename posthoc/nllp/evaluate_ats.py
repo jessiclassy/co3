@@ -87,7 +87,7 @@ def main(args):
     print("MinWiki SPRP Result:", rouge.compute(
       predictions=minwiki_result["simple_prediction"], 
       references=minwiki_result["simple"], 
-      rouge_types=["rougeL"])["rougeL"].mid
+      rouge_types=["rougeL"])["rougeL"]
       )
   except KeyError as e:
     print("KeyError")
