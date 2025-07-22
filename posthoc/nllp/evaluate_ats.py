@@ -121,9 +121,9 @@ def main(args):
   chunk_result = billsum_test_chunks.map(bill_chunk_generate, batched=True, batch_size=4)
   target_result = billsum_test_chunks.map(summary_chunk_generate, batched=True, batch_size=4)
 
-  filename = args.checkpoint.split("/")[1]
-  chunk_result.to_csv(f"{filename}_text_simple_toy.csv")
-  target_result.to_csv(f"{filename}_summary_simple_toy.csv")
+  filepath = args.checkpoint.replace(".", "ats_toy_data")
+  chunk_result.to_csv(f"{filepath}text_simple_toy.csv")
+  target_result.to_csv(f"{filepath}summary_simple_toy.csv")
 
   # Unprocessed BillSum summaries
   sample_result = full_billsum.map(summary_chunk_generate, batched=True, batch_size=4)
