@@ -44,11 +44,8 @@ def main(args):
 
   # load BillSum - sample of clean + chunked documents and summaries
   # Using the LED chunked data we already have
-  chunked_billsum = pd.read_csv("../../preprocess/data/billsum_clean_test_se3-led-2048-512.csv").dropna() # drop any null values
+  chunked_billsum = pd.read_csv(f"../../preprocess/data/billsum_clean_{args.split}_se3-led-2048-512.csv").dropna() # drop any null values
   billsum_test_chunks = Dataset.from_pandas(chunked_billsum)
-
-  # Full BillSum as well just to isolate gold summaries
-  full_billsum = load_dataset("billsum", split="test")
 
   # load tokenizer from local if available
   try:
@@ -85,16 +82,12 @@ def main(args):
   chunk_result = billsum_test_chunks.map(bill_chunk_generate, batched=True, batch_size=4)
   target_result = billsum_test_chunks.map(summary_chunk_generate, batched=True, batch_size=4)
 
-  outdir = args.checkpoint.replace(".", "ats_toy_data")
+  outdir = args.checkpoint.replace(".", args.output_dir)
   if not os.path.exists(outdir):
     os.makedirs(outdir, exist_ok=True) # Output path may be created more than once, it's ok 
     
   chunk_result.to_csv(os.path.join(outdir, "text_simple_toy.csv"))
   target_result.to_csv(os.path.join(outdir, "summary_simple_toy.csv"))
-
-  # Unprocessed BillSum summaries
-  sample_result = full_billsum.map(summary_chunk_generate, batched=True, batch_size=4)
-  sample_result.to_csv(os.path.join(outdir, "full_test_simple_summary.csv"))
 
   return
 
@@ -106,6 +99,8 @@ if __name__ == "__main__":
   parser.add_argument("--max_output_length", type=int, default=512)
   parser.add_argument("--device", default="cuda", help="The device to use")
   parser.add_argument("--batch_size", type=int, default=2, help="Set batch size")
+  parser.add_argument("--split", default="train", help="Select partition for ATS generation")
+  parser.add_argument("--output_dir", default="ats_toy_data", help="Specify output directory")
 
   args = parser.parse_args()
 
