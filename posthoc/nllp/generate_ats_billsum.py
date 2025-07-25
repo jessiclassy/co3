@@ -54,7 +54,10 @@ def main(args):
      tokenizer = LEDTokenizer.from_pretrained("allenai/led-base-16384")
 
   # load model
-  model = LEDForConditionalGeneration.from_pretrained(args.checkpoint).to(device).half()
+  if device == "cuda":
+    model = LEDForConditionalGeneration.from_pretrained(args.checkpoint).to(device).half()
+  else:
+     model = LEDForConditionalGeneration.from_pretrained(args.checkpoint)
   
   # Generate simplified BillSum text function
   bill_chunk_generate = generate(
