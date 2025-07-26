@@ -154,7 +154,7 @@ def main(args):
         per_device_train_batch_size=args.batch_size,
         per_device_eval_batch_size=args.batch_size,
         # fp16=True,
-        output_dir="led_old_impl/",
+        output_dir=args.output_dir,
         logging_steps=5,
         eval_steps=10,
         save_steps=10,
@@ -173,11 +173,8 @@ def main(args):
         compute_metrics=eval_pred,
     )
 
-    # Finetune LED I guess?
     print("Finetuning...")
     trainer.train()
-
-    # Evaluate ??
     return 
 
 if __name__ == "__main__":
@@ -189,6 +186,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_output_length", type=int, default=512)
     parser.add_argument("--device", default="cuda", help="The device to use")
     parser.add_argument("--batch_size", type=int, default=2, help="Set batch size")
+    parser.add_argument("--output_dir", default="led", help="Output finetuned model directory")
 
     args = parser.parse_args()
 
