@@ -57,7 +57,7 @@ def main(args):
   if device == "cuda":
     model = LEDForConditionalGeneration.from_pretrained(args.checkpoint).to(device).half()
   else:
-     model = LEDForConditionalGeneration.from_pretrained(args.checkpoint)
+     model = LEDForConditionalGeneration.from_pretrained(args.checkpoint).to(device)
   
   # Generate simplified BillSum text function
   bill_chunk_generate = generate(
