@@ -89,8 +89,8 @@ def main(args):
   if not os.path.exists(outdir):
     os.makedirs(outdir, exist_ok=True) # Output path may be created more than once, it's ok 
     
-  chunk_result.to_csv(os.path.join(outdir, "text_simple_toy.csv"))
-  target_result.to_csv(os.path.join(outdir, "summary_simple_toy.csv"))
+  chunk_result.to_csv(os.path.join(outdir, "text_simple_toy.csv"), escapechar="//")
+  target_result.to_csv(os.path.join(outdir, "summary_simple_toy.csv"), escapechar="//")
 
   return
 
