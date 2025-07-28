@@ -14,7 +14,7 @@ queue
 executable = generate_ats.sh
 getenv = true
 environment = "CLUSTER_ID=$(Cluster) PROCESS_ID=$(Process)"
-arguments = --checkpoint ./led_1024/checkpoint-19322/ --output_dir 1024_max_input
+arguments = --checkpoint ./led_1024/checkpoint-19322/ --max_input_length 1024 --output_dir 1024_max_input
 transfer_executable = false
 output = generate_ats_1024.out
 error = generate_ats_1024.err
