@@ -1,5 +1,9 @@
 # ling573
-Repository for CLMS LING 573 group project. Evaluated on the [BillSum corpus](https://huggingface.co/datasets/FiscalNote/billsum), taking in a plaintext legislative bill document and generating a summary of its contents.
+Repository for our CLMS LING 573 group project. Evaluated on the [BillSum corpus](https://huggingface.co/datasets/FiscalNote/billsum), our system:
+- takes in a plaintext legislative bill document
+- segments it into semantically coherent chunks
+- applies neural syntactic simplification to each chunk
+-  generates a summary of the document with improved readability metrics than human-written summaries and SOTA baseline models.
 
 # Conda first-time setup
 1. Clone repository if it does not already exist
