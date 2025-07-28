@@ -44,7 +44,7 @@ def main(args):
 
   # load BillSum - sample of clean + chunked documents and summaries
   # Using the LED chunked data we already have
-  chunked_billsum = pd.read_csv(f"../../preprocess/data/billsum_clean_{args.split}_se3-led-2048-512.csv").dropna() # drop any null values
+  chunked_billsum = pd.read_csv(f"../../preprocess/data/billsum_clean_{args.split}_se3-led-{args.max_input_length}-512.csv").dropna() # drop any null values
   billsum_test_chunks = Dataset.from_pandas(chunked_billsum)
 
   # load tokenizer from local if available
@@ -89,8 +89,8 @@ def main(args):
   if not os.path.exists(outdir):
     os.makedirs(outdir, exist_ok=True) # Output path may be created more than once, it's ok 
     
-  chunk_result.to_csv(os.path.join(outdir, "text_simple_toy.csv"), escapechar="//")
-  target_result.to_csv(os.path.join(outdir, "summary_simple_toy.csv"), escapechar="//")
+  chunk_result.to_csv(os.path.join(outdir, f"billsum_clean_{args.split}_se3-led-{args.max_input_length}-512_text_simple.csv"), escapechar="\\")
+  target_result.to_csv(os.path.join(outdir, f"billsum_clean_{args.split}_se3-led-{args.max_input_length}-512_summary_simple.csv"), escapechar="\\")
 
   return
 
