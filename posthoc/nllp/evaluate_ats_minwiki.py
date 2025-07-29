@@ -1,0 +1,101 @@
+import torch
+import pandas as pd
+from datasets import load_dataset
+from evaluate import load
+from transformers import LEDTokenizer, LEDForConditionalGeneration
+import argparse
+
+# tokenize helper function
+def generate(model, tokenizer, input_field, output_field, device, max_input_length=2048, max_output_length=512):
+  def prepare_predict(batch):
+    inputs_dict = tokenizer(
+      batch[input_field], 
+      padding="max_length", 
+      max_length=max_input_length, 
+      return_tensors="pt", 
+      truncation=True
+    )
+    input_ids = inputs_dict.input_ids.to(device)
+    attention_mask = inputs_dict.attention_mask.to(device)
+    global_attention_mask = torch.zeros_like(attention_mask)
+
+    # put global attention on <s> token
+    global_attention_mask[:, 0] = 1 
+
+    prediction = model.generate(
+      input_ids,
+      attention_mask=attention_mask,
+      global_attention_mask=global_attention_mask,
+      max_length=max_output_length
+    )
+    batch[output_field] = tokenizer.batch_decode(prediction, skip_special_tokens=True)
+    return batch
+  # Return factory function for easy mapping
+  return prepare_predict
+
+def main(args):
+  # Set device name
+  if args.device == "cuda":
+      device = torch.device(args.device if torch.cuda.is_available() else "cpu")
+  else:
+      device = torch.device("cpu")
+  
+  print(f"Running on device: {device}")
+
+  # load minwiki - official task
+  minwiki_test = load_dataset(
+            "parquet",
+            data_files={
+                "test": "https://huggingface.co/datasets/cl-nagoya/min-wikisplit/resolve/main/data/test-00000-of-00001.parquet",
+            }
+        )["test"] # Immediately index into test file
+
+  # load tokenizer from local if available
+  try:
+    tokenizer = LEDTokenizer.from_pretrained(args.checkpoint)
+  except OSError:
+     tokenizer = LEDTokenizer.from_pretrained("allenai/led-base-16384")
+
+  # load model
+  model = LEDForConditionalGeneration.from_pretrained(args.checkpoint).to(device).half()
+
+  # load rouge evaluator
+  rouge = load("rouge")
+
+
+  # Generate MinWiki results for sanity
+  minwiki_generate = generate(
+     model, 
+     tokenizer, 
+     "complex", 
+     "simple_prediction", 
+     device,
+     max_input_length=args.max_input_length,
+     max_output_length=args.max_output_length
+     )
+  
+  minwiki_result = minwiki_test.map(minwiki_generate, batched=True, batch_size=4)
+  try:
+    print(f"MinWiki SPRP Result ({args.checkpoint}):", rouge.compute(
+      predictions=minwiki_result["simple_prediction"], 
+      references=minwiki_result["simple"], 
+      rouge_types=["rougeL"])["rougeL"]
+      )
+  except KeyError as e:
+    print("KeyError")
+    print(e)
+    minwiki_result.to_csv(f"{args.checkpoint}minwiki_result.csv")
+
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--metric", type=str, default="rouge", help="Specify Huggingface metric for evaluation signal")
+  parser.add_argument("--checkpoint", default="./led/", help="Specify local path of finetuned LED model for evaluation")
+  parser.add_argument("--max_input_length", type=int, default=2048)
+  parser.add_argument("--max_output_length", type=int, default=512)
+  parser.add_argument("--device", default="cuda", help="The device to use")
+  parser.add_argument("--batch_size", type=int, default=2, help="Set batch size")
+
+  args = parser.parse_args()
+
+  main(args)
+
