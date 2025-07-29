@@ -1,7 +1,7 @@
 executable = generate_ats.sh
 getenv = true
 environment = "CLUSTER_ID=$(Cluster) PROCESS_ID=$(Process)"
-arguments = --checkpoint ./led_old_impl/checkpoint-19322/ --output_dir 2048_max_input
+arguments = --checkpoint ./led_2048/checkpoint-19322/ --output_dir 2048_max_input
 transfer_executable = false
 output = generate_ats_2048.out
 error = generate_ats_2048.err
