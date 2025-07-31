@@ -63,6 +63,7 @@ log = finetune_model.\$(Cluster).log
 request_GPUs = 1
 Requirements = (Machine == "patas-gn3.ling.washington.edu")
 request_memory = 3000
+notification = error
 queue
 EOF
         
