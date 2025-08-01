@@ -191,12 +191,14 @@ def load_data(sourcefile: str):
         data = pd.read_csv(sourcefile)
     else:
         print(f"Could not find {sourcefile}. Try again.")
+        sys.exit(1)
 
     if os.path.isfile(idx_name):
         print(f"Loading {idx_name}...")
         data_idx = pd.read_csv(idx_name)
     else:
         print(f"Could not find {idx_name}. Try again.")
+        sys.exit(1)
     
     # Merge index file on data to create relative index values
     # Rename columns
