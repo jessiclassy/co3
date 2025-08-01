@@ -33,9 +33,17 @@ def main():
         # Concatenate on axis=1
         result = pd.concat([ats_df, se3_df], axis=1)
 
+        # Restore original column name
+        result = result.rename(
+            columns={
+                f"simple_{target_col}": target_col
+            }
+        )
         # Write to preprocess/data folder
-        result.to_csv(f"data/{identifier}_simple.csv", escapechar="\\")
+        print(f"############# PATCHED DATA FOR FINETUNING #############")
         print(result)
+        result.to_csv(f"data/{identifier}_simple.csv", escapechar="\\")
+        
         print(f"Patched {identifier}")
 
 if __name__ == "__main__":
