@@ -20,8 +20,21 @@ def finetune(
         train_data: Dataset,
         dev_data: Dataset
     ):
-    """
-    TODO
+    """Starts with a model checkpoint and finetunes it on the training data.
+    The resulting model is saved in the specified output directory.
+
+    Arguments:
+        model: Model object
+        model_path: The output directory to save the finetuned model to
+        model_name: The name of the model
+        batch_size: size of training data batches
+        grad_acc: adaptive gradient hyperparameter
+        num_epochs: number of training rounds/batches to finetune on
+        random_seed: random seed for replicability
+        train_data: the training data as a hugging face Dataset object
+        dev_data: development data partition for selecting the best model during training
+    Returns:
+        None
     """
     # Instantiate training arguments
     training_args = Seq2SeqTrainingArguments(
@@ -54,8 +67,16 @@ def update_data(
         blank_target_setting: str, 
         control_token_id: int
     ):
-    """
-    TODO
+    """Takes a pandas dataframe object, and converts it to a huggingface Dataset object.
+    Modifies empty targets to be the custom token. Handles exclusion of the custom token.
+
+    Arguments:
+        train_data: The training data as a pandas.DataFrame
+        blank_target_setting: "keep" or "drop" for inclusion/exclusion of the custom token
+        control_token_id: The integer value of the custom token
+    
+    Returns:
+        the training data and development data as HF Dataset
     """
     # TODO: use train_test_split function from datasets
     train_hf = None
@@ -65,16 +86,31 @@ def update_data(
 def update_model_tokenizer(
         model: AutoModelForSeq2SeqLM,
         tokenizer: AutoTokenizer,
-        blank_target_setting: str
-):
-    """
-    TODO
+        blank_target_setting: str # wondering if we need this arg here?
+    ):
+    """Modifies the model vocabulary to include the custom 
+    [NO_SUMMARY] token
+
+    Arguments:
+        model: Model object
+        tokenizer: Associated tokenizer for model
+        blank_target_setting: "keep" or "drop" for inclusion/exclusion in training data
+
+    Returns:
+        the model and tokenizer
     """
     return model, tokenizer
 
 def load_data(sourcefile: str):
-    """
-    TODO
+    """Returns the training data as a pandas.Dataframe and the 
+    max input and max output length as determined from the sourcefile name
+
+    Arguments:
+        sourcefile: file path of training data which includes info about 
+        max input and max output length
+
+    Returns:
+        max input, max output, training data
     """
     # Parse input and output lengths
     pattern = re.compile("se3-\w+-(\d+)-(\d+)")
@@ -127,7 +163,8 @@ def prepare_output_dirs(
         max_input_length: int, 
         max_output_length:int 
     ):
-    """
+    """Prepares output directories for various finetuned models
+
     Arguments:
         model_name: simple model name for output directory creation
         trainfile: full filepath for train file
@@ -161,8 +198,9 @@ def load_model_tokenizer(
         checkpoint: str, 
         device: torch.device, 
         max_output_length: int
-    ):
-    """
+    ): # could this function include the device assignment ~line 251
+    """Loads the model tokenizer and handles torch device assignment
+
     Arguments:
         checkpoint: name of HuggingFace model
         device: specified device to allocate Tensors
