@@ -37,3 +37,6 @@ def main():
         result.to_csv(f"data/{identifier}_simple.csv", escapechar="\\")
         print(result)
         print(f"Patched {identifier}")
+
+if __name__ == "__main__":
+    main()
