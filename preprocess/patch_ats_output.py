@@ -16,7 +16,7 @@ def main():
 
         # Load ATS faulty file
         ats_df = pd.read_csv(ats_file)
-        print(f"{"#" * 10} ORIGINAL ATS OUTPUT {"#" * 10}")
+        print(f"############# ORIGINAL ATS OUTPUT #############")
         print(ats_df)
         # Keep only the simple_text column
         ats_df = ats_df[[f"simple_{target_col}"]]
@@ -27,7 +27,7 @@ def main():
         # Drop old text column
         se3_df = se3_df.drop(columns=["text"])
 
-        print(f"{"#" * 10} SE3 CONTENT {"#" * 10}")
+        print(f"############# SE3 CONTENT #############")
         print(se3_df)
 
         # Concatenate on axis=1
