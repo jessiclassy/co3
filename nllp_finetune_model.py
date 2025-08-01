@@ -300,7 +300,6 @@ def load_args():
     parser.add_argument("--checkpoint", default="google/pegasus-billsum", help="The model checkpoint to use")
     parser.add_argument("--mode", default="train", help="Specify training or pipeline mode")
     parser.add_argument("--trainfile", type=str, help="The dataset to use for training")
-    parser.add_argument("--testfile", type=str, help="The dataset to use for test evaluation")
     parser.add_argument("--batch_size", type=int, default=1, help="The batch size for training")
     parser.add_argument("--blank_targets", type=str, help="Specify how to use blank targets (drop or keep for control token usage)")
     parser.add_argument("--epochs", type=int, default=5, help="The number of epochs")
