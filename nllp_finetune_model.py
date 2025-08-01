@@ -225,7 +225,6 @@ def load_data(sourcefile: str):
 def prepare_output_dirs(
         model_name: str, 
         trainfile: str, 
-        testfile: str, 
         num_epochs: int, 
         max_input_length: int, 
         max_output_length:int 
@@ -235,31 +234,21 @@ def prepare_output_dirs(
     Arguments:
         model_name: simple model name for output directory creation
         trainfile: full filepath for train file
-        testfile: full filepath for test file
         num_epochs: number of training epochs
         max_input_length: maximum number of input tokens
         max_output_length: maximum number of output tokens
     Returns:
         None
     """
-    # Set up predictions and model filepaths
-    if not os.path.exists("predictions/"):
-        os.makedirs("predictions/", exist_ok=True)
-
     # example: billsum_clean_train_se3-led-2048-512_simple
     train_name = os.path.basename(trainfile).split(".")[0]
-    # example: billsum_clean_test_se3-led-2048-512
-    test_name = os.path.basename(testfile).split(".")[0]
-
-    predictions_path = f"predictions/{model_name}_{train_name}_{test_name}_{str(max_input_length)}_{str(max_output_length)}_{str(num_epochs)}_epochs"
     model_dir = f"models/{model_name}/{train_name}"
     model_path = f"{model_dir}/{str(max_input_length)}_{str(max_output_length)}_{str(num_epochs)}_epochs"
     
     # Log all paths to output file
-    print(f"Finetuned model predictions will be saved to {predictions_path}")
     print(f"Finetuned model will be saved to {model_path}")
 
-    return model_path, predictions_path
+    return model_path
 
 def load_model_tokenizer(
         checkpoint: str, 
@@ -354,10 +343,9 @@ def main():
     )
 
     # prepare output directories
-    model_path, predictions_path = prepare_output_dirs(
+    model_path = prepare_output_dirs(
         model_name=model_name,
         trainfile=args.trainfile,
-        testfile=args.testfile,
         num_epochs=args.epochs,
         max_input_length=max_input_len,
         max_output_length=max_output_len
