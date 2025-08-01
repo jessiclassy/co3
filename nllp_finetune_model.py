@@ -62,24 +62,15 @@ def finetune(
 
     return
 
-def update_data(
-        train_data: pd.DataFrame,
-        updated_tokenizer: AutoTokenizer, 
-        blank_target_setting: str,
-        random_seed: int,
-        max_input_length: int,
-        max_output_length: int
-    ):
+def convert_data(train_data:pd.DataFrame, blank_target_setting:str):
     """Takes a pandas dataframe object, and converts it to a huggingface Dataset object.
     Modifies empty targets to be the custom token. Handles exclusion of the custom token.
 
     Arguments:
         train_data: The training data as a pandas.DataFrame
-        updated_tokenizer: AutoTokenizer object (with special token added) for final data processing step
         blank_target_setting: "keep" or "drop" for inclusion/exclusion of the custom token
-        random_seed: Random seed value to ensure consistent train/dev partitioning
     Returns:
-        the training data and development data as HF Dataset
+        the full training data as HF Dataset
     """
     # Fill null summary examples according to blank_target_setting
     if blank_target_setting == "keep":
@@ -93,18 +84,61 @@ def update_data(
     # convert to HF Dataset type
     data_hf = Dataset.from_pandas(train_data)
 
+    return data_hf
+
+def tokenize_split_data(
+        data_hf: Dataset,
+        updated_tokenizer: AutoTokenizer,
+        batch_size: int,
+        random_seed: int,
+        max_input_length: int,
+        max_output_length: int,
+        has_global_attn: bool,
+    ):
+    """Tokenizes the data and splits data into train and dev sets
+
+    Arguments:
+        train_data: The training data as a HF Dataset
+        updated_tokenizer: AutoTokenizer object (with special token added) for final data processing step
+        batch_size: size of mapping batches
+        random_seed: Random seed value to ensure consistent train/dev partitioning
+        max_input_length: max input length
+        max_output_length: max output length
+        has_global_attn: boolean switch for global attention
+    Returns:
+        the training data and development data as HF Dataset
+    """
+
     # tokenize data
     prepare_examples = utils.create_examples(
         max_input_len=max_input_length, 
         max_output_len=max_output_length,
         tokenizer=updated_tokenizer
-        )
+    )
     
-    examples = data_hf.map(prepare_examples, batched=True)
-    # TODO: use train_test_split function to create a development partition
-    train_hf = None
-    dev_hf = None
-    return train_hf, dev_hf
+    # remove the original 'text' and 'summary' columns after mapping them to tokens
+    examples = data_hf.map(
+        prepare_examples,
+        batch_size=batch_size,
+        remove_columns=["text","summary"],
+        batched=True
+    )
+
+    # Handles formatting for PyTorch
+    examples.set_format(
+        type="torch",
+        columns=["input_ids", "attention_mask", "global_attention_mask", "labels"] if has_global_attn else
+        ["input_ids", "attention_mask", "labels"]
+    )
+    # use train_test_split function to create a development partition
+    data_dict = examples.train_test_split(
+        train_size = 0.9,
+        test_size = 0.1,
+        seed= random_seed
+    )
+    data_dict["dev"] = data_dict["test"]
+    del data_dict["test"]
+    return data_dict["train"], data_dict["dev"]
 
 def update_model_tokenizer(
         model: AutoModelForSeq2SeqLM,
@@ -287,26 +321,30 @@ def main():
 
     # load TRAINFILE and TESTFILE, set max input/output length values
     # initialize in global scope
-    max_input_len = None
-    max_output_len = None
     
+    # Parse input lengths from train data
     train_max_input_len, train_max_output_len, train_data = load_data(
         sourcefile=args.trainfile
     )
 
-    test_max_input_len, test_max_output_len, test_data = load_data(
-        sourcefile=args.testfile
-    )
+    max_input_len = train_max_input_len
+    max_output_len = train_max_output_len
+    print(f"Detected input length:{max_input_len} and output length:{max_output_len}")
 
-    input_mismatch = train_max_input_len != test_max_input_len
-    output_mismatch = train_max_output_len != test_max_output_len
+    # test_max_input_len, test_max_output_len, test_data = load_data(
+    #     sourcefile=args.testfile
+    # )
 
-    if input_mismatch or output_mismatch:
-        print("Train and test file do NOT have compatible input and/or output lengths. Try again.")
-        sys.exit(1)
-    else:
-        max_input_len = train_max_input_len
-        max_output_len = train_max_output_len
+    # input_mismatch = train_max_input_len != test_max_input_len
+    # output_mismatch = train_max_output_len != test_max_output_len
+
+    # # Here we set input & output lengths
+    # if input_mismatch or output_mismatch:
+    #     print("Train and test file do NOT have compatible input and/or output lengths. Try again.")
+    #     sys.exit(1)
+    # else:
+    #     max_input_len = train_max_input_len
+    #     max_output_len = train_max_output_len
 
     # load model, tokenizer 
     model_name, model, tokenizer, device, has_global_attn = load_model_tokenizer(
@@ -324,15 +362,25 @@ def main():
         max_output_length=max_output_len
     )
 
-    # TODO: update model + tokenizer vocab
+    # update model + tokenizer vocab
     model, tokenizer = update_model_tokenizer(model, tokenizer)
     
-    # TODO: update training data with blank-target setting
-    # TODO: convert both to HF Dataset
-    train_hf, dev_hf = update_data(
+    # update training data with blank-target setting
+    # convert to HF Dataset
+    train_hf = convert_data(
         train_data=train_data,
-        blank_target_setting=args.blank_targets,
-        updated_tokenizer=tokenizer
+        blank_target_setting=args.blank_targets
+    )
+
+    # Tokenize and split the original train data into new train and dev sets
+    train_hf, dev_hf = tokenize_split_data(
+        data_hf=train_hf,
+        updated_tokenizer=tokenizer,
+        batch_size=args.batch_size,
+        random_seed=args.seed,
+        max_input_length=max_input_len,
+        max_output_length=max_output_len,
+        has_global_attn=has_global_attn
     )
 
     # train model
@@ -346,7 +394,7 @@ def main():
         random_seed=args.seed,
         train_data=train_hf,
         dev_data=dev_hf
-        )
+    )
     
     return
 
