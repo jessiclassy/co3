@@ -155,7 +155,9 @@ def update_model_tokenizer(
     Returns:
         the model, tokenizer
     """
-    special_tokens_dict = {"no_summary_token": "[NO_SUMMARY]"}
+    print("Pretrained model special tokens")
+    print(tokenizer.all_special_tokens)
+    special_tokens_dict = {'additional_special_tokens': ["[NO_SUMMARY]"]}
 
     num_added_toks = tokenizer.add_special_tokens(special_tokens_dict)
     print("We have added", num_added_toks, "special tokens")
@@ -163,7 +165,8 @@ def update_model_tokenizer(
     # Notice: resize_token_embeddings expect to receive the full size of the new vocabulary, i.e., the length of the tokenizer.
     model.resize_token_embeddings(len(tokenizer))
 
-    assert tokenizer.no_summary_token == "[NO_SUMMARY]"
+    print("Updated special tokens")
+    print(tokenizer.all_special_tokens)
     return model, tokenizer
 
 def load_data(sourcefile: str):
@@ -334,7 +337,6 @@ def main():
     #     sys.exit(1)
     # else:
     #     max_input_len = train_max_input_len
-    #     max_output_len = train_max_output_len
 
     # load model, tokenizer 
     model_name, model, tokenizer, device, has_global_attn = load_model_tokenizer(
