@@ -33,7 +33,7 @@ if [ -z "$MODE" ]; then
     exit 1
 fi
 
-if [ -z "$BLANKTARGETS"]; then
+if [ -z "$BLANKTARGETS" ]; then
     echo "Error: BLANKTARGETS not specified in config file"
     exit 1
 fi
