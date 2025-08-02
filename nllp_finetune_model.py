@@ -60,6 +60,10 @@ def finetune(
     # Finetune!
     trainer.train()
 
+    # Log dev loss
+    eval_results = trainer.evaluate()
+    dev_loss = eval_results["eval_loss"]
+    print(f"Development Loss: {dev_loss}")
     return
 
 def convert_data(train_data:pd.DataFrame, blank_target_setting:str):
