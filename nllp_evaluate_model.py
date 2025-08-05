@@ -12,6 +12,7 @@ def evaluate_loss(
         model_name: str, 
         batch_size: int, 
         random_seed: int,
+        train_data: Dataset,
         dev_data: Dataset
 ):
     # Instantiate "training" arguments
@@ -34,6 +35,16 @@ def evaluate_loss(
     eval_results = trainer.evaluate()
     dev_loss = eval_results["eval_loss"]
     print(f"Development Loss: {dev_loss}")
+
+    trainer = Seq2SeqTrainer(
+        model=model,
+        args=training_args,
+        eval_dataset=train_data,
+    )
+    # Log train loss
+    eval_results = trainer.evaluate()
+    train_loss = eval_results["eval_loss"]
+    print(f"Training Loss: {train_loss}")
     return
 
 def load_args():
@@ -133,6 +144,7 @@ def main():
             model_name=model_name,
             batch_size=args.batch_size,
             random_seed=args.seed,
+            train_data=train_hf,
             dev_data=dev_hf
         )
     else:
