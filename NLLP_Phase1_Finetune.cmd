@@ -1,9 +1,6 @@
 ############
-#
 # LED-base, 1024 input (+ATS)
-#
 ############
-
 executable = nllp_finetune_model.sh
 getenv = true
 arguments = --checkpoint allenai/led-base-16384 --mode train --trainfile preprocess/nllp_data/billsum_clean_train_se3-led-1024-512_simple.csv --batch_size 4 --blank_targets drop
@@ -17,7 +14,9 @@ request_memory = 3000
 notification = error
 queue
 
-@REM LED-base, 2048 input (+ATS)
+############
+# LED-base, 2048 input (+ATS)
+############
 executable = nllp_finetune_model.sh
 getenv = true
 arguments = --checkpoint allenai/led-base-16384 --mode train --trainfile preprocess/nllp_data/billsum_clean_train_se3-led-2048-512_simple.csv --batch_size 4 --blank_targets drop
@@ -31,7 +30,9 @@ request_memory = 3000
 notification = error
 queue
 
-@REM LED-base, 1024 input (-ATS)
+############
+# LED-base, 1024 input (-ATS)
+############
 executable = nllp_finetune_model.sh
 getenv = true
 arguments = --checkpoint allenai/led-base-16384 --mode train --trainfile preprocess/nllp_data/billsum_clean_train_se3-led-1024-512.csv --batch_size 4 --blank_targets drop
@@ -45,7 +46,9 @@ request_memory = 3000
 notification = error
 queue
 
-@REM LED-base, 2048 input (-ATS)
+############
+# LED-base, 2048 input (-ATS)
+############
 executable = nllp_finetune_model.sh
 getenv = true
 arguments = --checkpoint allenai/led-base-16384 --mode train --trainfile preprocess/nllp_data/billsum_clean_train_se3-led-2048-512.csv --batch_size 4 --blank_targets drop
