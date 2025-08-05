@@ -80,10 +80,6 @@ def main():
         sourcefile=args.trainfile
     )
 
-    max_input_len = train_max_input_len
-    max_output_len = train_max_output_len
-    print(f"Detected input length:{max_input_len} and output length:{max_output_len}")
-
     test_max_input_len, test_max_output_len, test_data = utils.load_data(
         sourcefile=args.testfile
     )
@@ -97,6 +93,8 @@ def main():
         sys.exit(1)
     else:
         max_input_len = train_max_input_len
+        max_output_len = train_max_output_len
+        print(f"Detected input length:{max_input_len} and output length:{max_output_len}")
 
     # load model, tokenizer 
     model_name, model, tokenizer, device, has_global_attn = utils.load_model_tokenizer(
