@@ -43,7 +43,12 @@ def finetune(
         gradient_accumulation_steps=grad_acc,
         num_train_epochs=num_epochs,
         logging_strategy="epoch",
-        save_strategy="epoch",
+        save_strategy="best",
+        eval_strategy="epoch",
+        do_train=True,
+        do_eval=True,
+        load_best_model_at_end=True,
+        metric_for_best_model="eval_loss",
         save_total_limit=1,
         seed=random_seed,
         run_name=model_name
@@ -62,8 +67,7 @@ def finetune(
 
     # Log dev loss
     eval_results = trainer.evaluate()
-    dev_loss = eval_results["eval_loss"]
-    print(f"Development Loss: {dev_loss}")
+    print(f"Final evaluation: {eval_results}")
     return
 
 def convert_data(train_data:pd.DataFrame, blank_target_setting:str):
@@ -232,6 +236,7 @@ def load_data(sourcefile: str):
 def prepare_output_dirs(
         model_name: str, 
         trainfile: str, 
+        blank_target_setting: str,
         num_epochs: int, 
         max_input_length: int, 
         max_output_length:int 
@@ -249,7 +254,7 @@ def prepare_output_dirs(
     """
     # example: billsum_clean_train_se3-led-2048-512_simple
     train_name = os.path.basename(trainfile).split(".")[0]
-    model_dir = f"models/{model_name}/{train_name}"
+    model_dir = f"models/{model_name}/{train_name}/{blank_target_setting}_blank_targets"
     model_path = f"{model_dir}/{str(max_input_length)}_{str(max_output_length)}_{str(num_epochs)}_epochs"
     
     # Log all paths to output file
@@ -352,6 +357,7 @@ def main():
     model_path = prepare_output_dirs(
         model_name=model_name,
         trainfile=args.trainfile,
+        blank_target_setting=args.blank_targets,
         num_epochs=args.epochs,
         max_input_length=max_input_len,
         max_output_length=max_output_len
