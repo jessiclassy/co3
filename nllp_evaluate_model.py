@@ -97,6 +97,7 @@ def main():
     model_path, predictions_path = utils.prepare_output_dirs(
         model_name=model_name,
         trainfile=args.trainfile,
+        blank_targets=args.blank_targets,
         num_epochs=args.epochs,
         max_input_length=max_input_len,
         max_output_length=max_output_len
