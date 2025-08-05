@@ -151,13 +151,15 @@ def update_model_tokenizer(
 
 def load_model_tokenizer(
         checkpoint: str, 
-        max_output_length: int
+        max_output_length: int,
+        base_model: str = None
     ): # could this function include the device assignment ~line 251
     """Loads the model tokenizer and handles torch device assignment
 
     Arguments:
-        checkpoint: name of HuggingFace model
+        checkpoint: name of finetuned checkpoint
         max_output_length: maximum number of output tokens
+        base_model: name of base HuggingFace model for tokenizer loading
     Returns:
         model_name: simplified model name as a string for output directory
         model: AutoModelForSeq2SeqLM object
@@ -180,8 +182,11 @@ def load_model_tokenizer(
     model.config.early_stopping = True
     model.config.no_repeat_ngram_size = 3
 
-    # Instantiate tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+    # Instantiate tokenizer for base model if specified
+    if base_model:
+        tokenizer = AutoTokenizer.from_pretrained(base_model)
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(checkpoint)
     return model_name, model, tokenizer, device, has_global_attn
 
 def load_data(sourcefile: str):

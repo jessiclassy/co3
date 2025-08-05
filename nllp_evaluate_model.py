@@ -38,8 +38,8 @@ def evaluate_loss(
 
 def load_args():
     parser = argparse.ArgumentParser()
-    
-    parser.add_argument("--checkpoint", default="google/pegasus-billsum", help="The model checkpoint to use")
+    parser.add_argument("--base_model", type=str, help="The base model tokenizer to reference")
+    parser.add_argument("--checkpoint", default="google/pegasus-billsum", help="The finetuned model checkpoint to evaluate")
     parser.add_argument("--mode", default="dev", help="Specify dev or test mode")
     parser.add_argument("--trainfile", type=str, help="The dataset used for training")
     parser.add_argument("--testfile", type=str, help="The dataset to use for testing")
@@ -90,7 +90,8 @@ def main():
     # load model, tokenizer 
     model_name, model, tokenizer, device, has_global_attn = utils.load_model_tokenizer(
         checkpoint=args.checkpoint,
-        max_output_length=max_output_len
+        max_output_length=max_output_len,
+        base_model=args.base_model
     )
 
     # prepare output directories

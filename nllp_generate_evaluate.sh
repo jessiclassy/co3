@@ -23,6 +23,11 @@ if [ -z "$PLATFORM" ]; then
     exit 1
 fi
 
+if [ -z "$BASE_MODEL" ]; then
+    echo "Error: BASE_MODEL not specified in config file"
+    exit 1
+fi
+
 if [ -z "$CHECKPOINT" ]; then
     echo "Error: CHECKPOINT not specified in config file"
     exit 1
@@ -55,7 +60,7 @@ case "$PLATFORM" in
         cat > "$output_file" <<EOF
 executable = nllp_evaluate_model.sh
 getenv = true
-arguments = --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --testfile $TESTFILE --batch_size $BATCH_SIZE --blank_targets $BLANKTARGETS
+arguments = --base_model $BASE_MODEL --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --testfile $TESTFILE --batch_size $BATCH_SIZE --blank_targets $BLANKTARGETS
 transfer_executable = false
 output = nllp_evaluate_model.\$(Cluster).out
 error = nllp_evaluate_model.\$(Cluster).err
