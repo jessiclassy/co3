@@ -13,52 +13,16 @@ import utils
 def generate_prediction():
     predict_func = utils.create_prediction()
 
-def tokenize_data(
-        data_hf: Dataset,
-        updated_tokenizer: AutoTokenizer,
-        batch_size: int,
-        random_seed: int,
-        max_input_length: int,
-        max_output_length: int,
-        has_global_attn: bool,
-    ):
-    """Tokenizes the test data
+def evaluate_prediction():
+    """TODO"""
+    ...
 
-    Arguments:
-        data_hf: The training data as a HF Dataset
-        updated_tokenizer: AutoTokenizer object (with special token added) for final data processing step
-        batch_size: size of mapping batches
-        random_seed: Random seed value to ensure consistent train/dev partitioning
-        max_input_length: max input length
-        max_output_length: max output length
-        has_global_attn: boolean switch for global attention
-    Returns:
-        the training data and development data as HF Dataset
-    """
+def reconstruct() -> pd.DataFrame:
+    """TODO"""
 
-    # tokenize data
-    prepare_examples = utils.create_examples(
-        max_input_len=max_input_length, 
-        max_output_len=max_output_length,
-        tokenizer=updated_tokenizer
-    )
-    
-    # remove the original 'text' and 'summary' columns after mapping them to tokens
-    examples = data_hf.map(
-        prepare_examples,
-        batch_size=batch_size,
-        remove_columns=["summary"],
-        batched=True
-    )
+    #TODO: p-value selection to be handled in this function
 
-    # Handles formatting for PyTorch
-    examples.set_format(
-        type="torch",
-        columns=["input_ids", "attention_mask", "global_attention_mask", "labels"] if has_global_attn else
-        ["input_ids", "attention_mask", "labels"]
-    )
-
-    return examples
+    ...
 
 def convert_data(test_data:pd.DataFrame):
     """Takes a pandas dataframe object, and converts it to a huggingface Dataset object.
@@ -137,7 +101,7 @@ def prepare_output_dir(
 def load_model_tokenizer(
         checkpoint: str, 
         max_output_length: int,
-        base_model: str = None
+        base_tokenizer: str = None
     ): # could this function include the device assignment ~line 251
     """Loads the model tokenizer and handles torch device assignment
 
@@ -168,8 +132,8 @@ def load_model_tokenizer(
     model.config.no_repeat_ngram_size = 3
 
     # Instantiate tokenizer for base model if specified
-    if base_model:
-        tokenizer = AutoTokenizer.from_pretrained(base_model)
+    if base_tokenizer:
+        tokenizer = AutoTokenizer.from_pretrained(base_tokenizer)
     else:
         tokenizer = AutoTokenizer.from_pretrained(checkpoint)
     return model_name, model, tokenizer, device, has_global_attn
@@ -285,17 +249,13 @@ def main():
     model_name, model, tokenizer, device, has_global_attn = load_model_tokenizer(
         checkpoint=args.checkpoint,
         max_output_length=max_output_len,
-        base_model=args.base_model
+        base_model=args.base_tokenizer
     )
 
     # prepare output directories
     predictions_path = prepare_output_dir(
-        model_name=model_name,
-        trainfile=args.trainfile,
-        blank_targets=args.blank_targets,
-        num_epochs=args.epochs,
-        max_input_length=max_input_len,
-        max_output_length=max_output_len
+        checkpoint_filepath=args.checkpoint,
+        config_id=args.config_id
     )
 
     # update model + tokenizer vocab
@@ -307,18 +267,13 @@ def main():
         test_data=test_data
     )
 
-    # Tokenize and split the original train data into new train and dev sets
-    test_hf = tokenize_data(
-        data_hf=test_hf,
-        updated_tokenizer=tokenizer,
-        batch_size=args.batch_size,
-        random_seed=args.seed,
-        max_input_length=max_input_len,
-        max_output_length=max_output_len,
-        has_global_attn=has_global_attn
-    )
+    #TODO: tokenize input + generate predictions using utils fn
 
-    # evaluate model
+    #TODO: convert to pd.DataFrame and reconstruct full summaries using doc ID column
+    
+    #TODO: k-selection with model confidence should go here
+
+    #TODO: evaluate final summaries against gold
 
     return
 
