@@ -1,13 +1,22 @@
-# File for generating model analysis plots for ling 573 project
 # File Arguments:
 MODEL_NAME <- "wugNATSS-pegasus(on-unsimp)" # The name of the Model whose output is being evaluated
 MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugNATSS-pegasus/eval_on_unsimp.csv" # place to look for model output csv
 ALT_NAME <- "Pegasus-Baseline" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
 ALT_PATH <- "../output/deliverable_2/pegasusbillsum_baseline_ALL_metrics.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "analysis-tmp/" # place to write the plots and stats to. Must end with a "/"
-HISTOGRAM_BINS <- 60
-# Note about these arguments - "ALT_NAME" and "ALT_PATH" could be the output of a different
-# model and not necessarily computed from reference data. It's a bad naming convention, but
+ANALYSIS_PATH <- "analysis-temporary/" # place to write the plots and stats to. Must end with a "/"
+HISTOGRAM_BINS <- 60 # number of bins to display in the histograms
+# How to use this script:
+# --- 1. Adjust the File Arguments for the desired comparison between models (or between model and gold summaries)
+# ------ 1a. Make sure to give descriptive names for MODEL_NAME and ALT_NAME as these will show up throughout all the analysis files
+# --- 2. Give a name to ANALYSIS_PATH where everything should go. Make sure to include the final "/"
+# --- 3. Adjust the number of histogram bins that you want
+# --- 4. Ensure your working directory is correct and hit 'source' in Rstudio
+# ---------- Some Notes ---------- #
+# - This is a file for generating model analysis plots for ling 573 project
+# - All Analysis files will be placed neatly in their proper folder (stats, plots, qa) at the
+# path specified by ANALYSIS_PATH 
+# - About these arguments - "ALT_NAME" and "ALT_PATH" could be the output of a different
+# model and not necessarily computed from gold/reference data. It's a bad naming convention, but
 # when you want to compare two models, put the second model output in the "ALT_PATH" var and
 # name it with "ALT_NAME" accordingly.
 # ----------------------------------------------------------------------- #
@@ -25,28 +34,28 @@ GEN_SUFFIX <- ".GEN"
 long <- "(.+)\\(.+\\)"
 SHORT_MODEL_NAME <- ifelse(str_detect(MODEL_NAME,long), str_extract(MODEL_NAME,long,group=1),MODEL_NAME)
 SHORT_ALT_NAME <- ifelse(str_detect(ALT_NAME,long), str_extract(ALT_NAME,long,group=1),ALT_NAME)
+
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 # ------------------------- (0) Setup Variables ------------------------- #
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
-# LFTK readability and other metrics of gold and generated summaries on test partition
-# These two CSVs must have to same columns
-metrics <- list() #store metrics for generated summaries and alternate summaries
+# This list will store 2 dataframes of metrics for 'gen' and 'alt' model output
+metrics <- list()
 metrics[["alt"]] <- read.csv(ALT_PATH)
 metrics[['gen']] <- read.csv(MODEL_OUTPUT_PATH)
 
 # Remove the redundant '.GOLD' lftk columns if included in file headers at MODEL_OUTPUT_PATH then
 # set column names properly for processing
-# metrics$alt <- metrics$alt %>% slice(1:16)
+# metrics$alt <- metrics$alt %>% slice(1:16) # bit of code commented out in case we want a toy dataset
 metrics$gen <- metrics$gen %>% select(-ends_with(ALT_SUFFIX))
 colnames(metrics$alt) <- str_replace(colnames(metrics$alt),ALT_SUFFIX,"")
 colnames(metrics$alt) <- str_replace(colnames(metrics$alt),GEN_SUFFIX,"")
 colnames(metrics$gen) <- str_replace(colnames(metrics$gen),GEN_SUFFIX,"")
 colnames(metrics$gen) <- str_replace(colnames(metrics$gen),ALT_SUFFIX,"")
 
-# Refers to family of metrics. Includes LFTK and ROUGE. See README
+# Refers to family of metrics. Includes Readability, Relevance, Factuality, etc. See README
 family <- list()
 family$wordsent <- c(
   "t_word",           
@@ -59,7 +68,7 @@ family$wordsent <- c(
   "t_sent",
   "t_char"
 )
-family$readformula <- c(
+family$readformula <- c( # Readability Metrics
   "fkre",
   "fkgl",
   "fogi",
@@ -75,7 +84,7 @@ family$worddiff <- c(
 family$entity <- c(
   "t_n_ent_law"
 )
-family$rouge <- c(
+family$relevance <- c( # Relevance Metrics
   "rouge1_precision",
   "rouge2_precision",
   "rougeL_precision",
@@ -84,7 +93,12 @@ family$rouge <- c(
   "rougeL_recall",
   "rouge1_fmeasure",
   "rouge2_fmeasure",  
-  "rougeL_fmeasure"
+  "rougeL_fmeasure",
+  "bert_score"
+)
+family$factuality <- c( # Factuality Metrics
+  "align_score",
+  "summac"
 )
 
 # ------------------------------------------------------------ #
@@ -116,8 +130,9 @@ for (feature in colnames(metrics$gen)) {
 
 
 # -------------------------------------------------------------------------- #
-# ---------------- (2) Run t.tests for ROUGE & LFTK metrics ---------------- #
+# ------ (2) Run Statistical Tests for all metrics and write to file ------- #
 # -------------------------------------------------------------------------- #
+
 # Prep directories for populating analysis
 unlink(str_c(ANALYSIS_PATH,"stats/t_tests"),recursive = T)
 unlink(str_c(ANALYSIS_PATH,"stats/effect_size"),recursive = T)
@@ -125,7 +140,7 @@ dir.create(str_c(ANALYSIS_PATH,"stats/"),showWarnings = F)
 dir.create(str_c(ANALYSIS_PATH,"stats/t_tests"),showWarnings = F)
 dir.create(str_c(ANALYSIS_PATH,"stats/effect_size"),showWarnings = F)
 
-# Run t tests for all metrics in every family except for excluded families
+# Run statistical tests for all non-excluded metric families
 families_to_exclude <- c("entity","worddiff")
 for(fam in names(family)){
   if((fam %in% families_to_exclude)){
@@ -158,7 +173,7 @@ for(fam in names(family)){
   }
 }
 
-# Get model summary
+# Write descriptive statistics of 'gen' model output to file
 result <- capture.output(metrics$gen %>% stat.desc())
 
 write(
@@ -167,7 +182,7 @@ write(
   append = T
 )
 
-# Get gold/alternate model summary
+# Write descriptive statistics of gold data/'alt' model output to file
 result2 <- capture.output(metrics$alt %>% stat.desc())
 
 write(
@@ -212,46 +227,3 @@ write.csv(t2_gold,file = str_c(ANALYSIS_PATH,"qa/fkre_quantiles_",ALT_NAME,".csv
 write.csv(t2_gen,file = str_c(ANALYSIS_PATH,"qa/fkre_quantiles_",MODEL_NAME,".csv"),row.names = F)
 
 
-# Old plots and analysis I may want to use later
-
-# Generate bar charts for readability metrics
-# j <- metrics$alt %>% left_join(metrics$gen,by="X",suffix=c(".GOLD",".GEN"))
-# bar <- j %>% pivot_longer(cols = colnames(j)[str_detect(colnames(j),"[(GOLD)(GEN)]")])
-# bar <- bar %>% mutate(metric = str_extract(name,"([^.]*)\\.",group=1),
-#                       summary_type = str_extract(name,"\\.(.*)",group=1))
-# 
-# bar %>% filter(metric %in% family$readformula) %>%
-#   ggplot(aes(x = summary_type,y=value)) +
-#   geom_boxplot() +
-#   facet_wrap(~metric) +
-#   coord_cartesian(ylim = c(-50, 100)) +
-#   labs(x = "Summary Type",
-#        y = "Value",
-#        title = "Generated vs Gold Summaries")
-
-# # Get quantile-batched readformula t tests
-# batching_path = str_c(ANALYSIS_PATH,"stats/t_tests/readability_t_tests_grouped_by=t_char/")
-# dir.create(batching_path,showWarnings = F)
-# 
-# num_quantiles = 5
-# gen_quantiles <- metrics$gen %>% mutate(quantile = ntile(t_char,num_quantiles))
-# gold_quantiles <- metrics$alt %>% mutate(quantile = ntile(t_char,num_quantiles))
-# 
-# for(feature in family$readformula){
-#   # Do t tests for each quantile
-#   for(q in 1:num_quantiles){
-#     model_1 <- (gen_quantiles %>% filter(quantile == q))[[feature]]
-#     model_2 <- (gold_quantiles %>% filter(quantile == q))[[feature]]
-# 
-#     result <- capture.output(t.test(model_1,model_2)) # cannot be paired because pairing is lost in quantile batching
-# 
-#     # write to file
-#     write(
-#       c(str_c("--- LFTK feature = ",feature,": ", MODEL_NAME," vs ",ALT_NAME," Summaries - Quantile ", q, " of ", num_quantiles, " - Data batched by character count"),
-#         str_c("model_1 = ",MODEL_NAME," | model_2 = ",ALT_NAME), result),
-#       file = str_c(batching_path,feature,"_by_groups.txt"),
-#       append = T
-#     )
-# 
-#   }
-# }
