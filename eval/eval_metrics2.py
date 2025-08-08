@@ -1,4 +1,3 @@
-import time
 import spacy
 import lftk
 from rouge_score import rouge_scorer
@@ -10,14 +9,56 @@ from evaluate import load
 from summac.model_summac import SummaCZS
 from summac.model_summac import SummaCConv
 import argparse
+import torch
+from alignscore import AlignScore
+from summac.model_summac import SummaCConv
 
 # globals
+
+# load device
+curr_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 # load a trained pipeline of your choice from spacy
 nlp = spacy.load("en_core_web_sm")
+
 # LFTK feature families of interest
 READFORMULA = lftk.search_features(family="readformula", return_format = "list_key")
 WORDSENT = lftk.search_features(family="wordsent", return_format = "list_key")
 WORDDIFF = lftk.search_features(family="worddiff", return_format = "list_key")
+ALL_FEATURES = READFORMULA + WORDSENT + WORDDIFF
+
+# load scoring objects
+align_scorer = AlignScore(model='roberta-base', batch_size=32, device=curr_device, ckpt_path='AlignScore-base.ckpt', evaluation_mode='nli_sp')
+summac_conv = SummaCConv(models=["vitc"], bins='percentile', granularity="sentence", nli_labels="e", device=curr_device, agg="mean")
+bertscore = load("bertscore")
+rouge_types = ["rouge1","rouge2","rougeL","rougeLsum"]
+rouge = rouge_scorer.RougeScorer(rouge_types=rouge_types,use_stemmer=True)
+
+def eval_alignscore_batch(batch):
+  """
+  Get AlignScore for a Dataset batch
+
+  Arguments: 
+    batch: dict with keys 'text' and 'predicted_summary'
+  Returns:
+    dict with 'align_score' list aligned with batch
+  """
+  return {
+    "align_score": align_scorer.score(contexts=batch["text"], claims=batch["predicted_summary"])
+  }
+
+def eval_summac_batch(batch):
+  """
+  Get SummaC score for a Dataset batch
+
+  Arguments: 
+    batch: dict with keys 'text' and 'predicted_summary'
+  Returns:
+    dict with 'summac_score' list aligned with batch
+  """
+  return {
+    "summac": summac_conv.score(batch['text'], batch['predicted_summary'])["scores"]
+  }
 
 def eval_summac(bill_text:str,gen_text:str) -> dict[str, float|int]:
   """Gets the precision, recall, and fmeasure scores for summac
@@ -27,12 +68,26 @@ def eval_summac(bill_text:str,gen_text:str) -> dict[str, float|int]:
     gen_text: the model generated summary for the same bill
   
   Returns:
-    a dictionary where key = ? and value = the score
+    a dictionary where key = summac and value = the score
   """
-  for i in range(len(gold_doc)):
-    #gold document and gen summary summac score
-    gen_score = model_conv.score([bill_text], [gen_text])
-    return {"summac_score": gen_score[0]} 
+  summac = model_conv.score([bill_text], [gen_text])
+
+# TODO: apparently BERTScore needs each sentence to be split? not sure what granularity
+def eval_bertscore_batch(batch):
+  """
+  Get BERTScore P/R/F for a Dataset batch
+
+  Arguments: 
+    batch: dict with keys 'summary' and 'predicted_summary'
+  Returns:
+    dict with 'summac_score' list aligned with batch
+  """
+  results = bertscore.compute(
+    predictions=batch['predicted_summary'], 
+    references=batch['summary'],
+    model_type="distilbert-base-uncased")
+  
+  return {f"bert_score_{evaltype}": score.mean() for evaltype, score in results.items()}
 
 def eval_bert(gold_text:str,gen_text:str) -> dict[str, float|int]:
   """Gets the precision, recall, and fmeasure scores for bert
@@ -44,12 +99,30 @@ def eval_bert(gold_text:str,gen_text:str) -> dict[str, float|int]:
   Returns:
     a dictionary where key = bert metric type and value = the score
   """
-  bertscore = load("bertscore")
+  
   prediction = [gen_text]
   reference = [gold_text]
   results = bertscore.compute(predictions=prediction, references=reference, model_type="distilbert-base-uncased")
   return {evaltype: score[0] for evaltype, score in results.items()}
 
+def eval_rouge_batch(batch):
+  """
+  Return a list of ROUGE score dicts corresponding to each example in a batch
+  """
+  # Store ROUGE scores in a dict of lists
+  results = {}
+  for rt in rouge_types:
+    results[f"{rt}_precision"] = []
+    results[f"{rt}_recall"] = []
+    results[f"{rt}_fmeasure"] = []
+
+  for ref, pred in zip(batch["summary"], batch["predicted_summary"]):
+    scores = rouge.score(ref, pred)
+    for rt in rouge_types:
+      results[f"{rt}_precision"].append(scores[rt].precision)
+      results[f"{rt}_recall"].append(scores[rt].recall)
+      results[f"{rt}_fmeasure"].append(scores[rt].fmeasure)
+  return results
 
 def eval_rouge(gold_text:str,gen_text:str) -> dict[str,float|int]:
   """Gets the precision, recall, and fmeasure scores for rouge1,rouge2,rougeL, 
@@ -80,8 +153,7 @@ def eval_rouge(gold_text:str,gen_text:str) -> dict[str,float|int]:
     "rougeLsum_fmeasure": results['rougeLsum'].fmeasure
   }
 
-
-def eval_lftk(text:str, lftk_features:list[str] = READFORMULA, suffix:str = "") -> dict[str,float]:
+def eval_lftk(text:str, lftk_features:list[str] = ALL_FEATURES, suffix:str = "") -> dict[str,float]:
   """Gets the specified lftk features for a given text input.
 
   Arguments:
@@ -101,7 +173,7 @@ def eval_lftk(text:str, lftk_features:list[str] = READFORMULA, suffix:str = "") 
 def eval_all(
   gold_text: str, 
   gen_text: str,
-  sum_text: str
+  bill_text: str,
   include_rouge:bool = True,
   include_bert:bool = True,
   include_summac:bool = True,
@@ -158,12 +230,6 @@ def eval_all(
 
   print("BERT, Rouge, and LFTK evaluated")
   return results
-
-def get_factuality_scores(text: str) -> dict:
-    """
-    Gets a dictionary of factuality scores for a summary.
-    """
-    return None
 
 
 if __name__ == "__main__":
