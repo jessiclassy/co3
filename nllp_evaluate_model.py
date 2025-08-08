@@ -247,8 +247,6 @@ def update_model_tokenizer(
     Arguments:
         model: Model object
         tokenizer: Associated tokenizer for model
-        blank_target_setting: "keep" or "drop" for inclusion/exclusion in training data
-
     Returns:
         the model, tokenizer
     """
@@ -273,12 +271,8 @@ def prepare_output_dir(
     """Prepares output directories for various finetuned models
 
     Arguments:
-        model_name: simple model name for output directory creation
-        trainfile: full filepath for train file
-        blank_targets: blank target setting, either "keep" or "drop"
-        num_epochs: number of training epochs
-        max_input_length: maximum number of input tokens
-        max_output_length: maximum number of output tokens
+        checkpoint_filepath: TODO
+        config_id: TODO
     Returns:
         None
     """
@@ -407,13 +401,10 @@ def load_args():
     parser.add_argument("--base_tokenizer", type=str, help="The base model tokenizer to reference")
     parser.add_argument("--checkpoint", default="google/pegasus-billsum", help="The local finetuned model checkpoint to evaluate")
     parser.add_argument("--mode", default="test", help="Specify dev or test mode")
-    parser.add_argument("--trainfile", type=str, help="The dataset used for training")
     parser.add_argument("--testfile", type=str, help="The dataset to use for testing")
     parser.add_argument("--p_limit", type=float, help="Specify p-threshold for NO_SUMMARY control")
     parser.add_argument("--k_limit", type=int, help="Specify k value for final target selection")
-    parser.add_argument("--selection_method", type=str, default="confidence", help="Specify metric for k-selection")
     parser.add_argument("--batch_size", type=int, default=1, help="The batch size for training")
-    parser.add_argument("--blank_targets", type=str, help="Specify how to use blank targets (drop or keep for control token usage)")
     parser.add_argument("--seed", type=int, default=1234, help="The seed to use")
     args = parser.parse_args()
 
