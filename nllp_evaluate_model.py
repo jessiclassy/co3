@@ -4,35 +4,233 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingAr
 from transformers import set_seed
 import torch
 import pandas as pd
+from tqdm.auto import tqdm as _tqdm
 import argparse
 import re
 import sys
 import os
+from collections import defaultdict
 import utils
+from eval import eval_metrics2 as metrics
 
-def generate_prediction():
-    predict_func = utils.create_prediction()
+# Set up module-level tqdm to write to STDERR like Dataset.map()
+tqdm = lambda *args, **kwargs: _tqdm(*args, file=sys.stderr, **kwargs)
 
-def evaluate_prediction():
-    """TODO"""
-    ...
+def reconstruct_by_doc_id(
+        data_hf,
+        k_limit: int=None,
+        expect_confidence=False
+):
+    """
+    Loop over a Dataset and reconstruct the final documents + generated summaries
+    using the doc ID, ordered by the chunk index, as a Dataset
+    """
+    # Prepare defaultdict for grouped storage
+    grouped_chunks = defaultdict(lambda: {
+        "texts": [],
+        "references": [],
+        "generated": [],
+        "confidences": []
+    })
 
-def reconstruct() -> pd.DataFrame:
-    """TODO"""
+    # Loop over dataset to group tuples of info by doc ID
+    for row in data_hf:
+        doc = grouped_chunks[row["doc_id"]]
+        idx = row["chunk_idx"]
+        # Append tuples (idx, content) to sort later
+        doc["texts"].append((idx, row["text"]))
+        doc["references"].append((idx, row["summary"]))
 
-    #TODO: p-value selection to be handled in this function
+        # Get model confidence if it exists
+        conf = row.get("model_confidence", None)
+        doc["generated"].append((idx, row["prediction"], conf))
+    
+    final_data = []
+    # Sort and reconstruct final documents
+    for doc_id, chunks in grouped_chunks.items():
+        # Always sort text and reference summary by index
+        texts = [t for _, t in sorted(chunks["texts"], key=lambda x: x[0])]
+        references = [t for _, t in sorted(chunks["references"], key=lambda x: x[0])]
 
-    ...
+        # Prepare generated chunks for reconstruction
+        generated_chunks = chunks["generated"]
+
+        if k_limit is not None and expect_confidence:
+            # Sort by confidence
+            generated_chunks = sorted(generated_chunks, key=lambda x: x[2], reverse=True)
+            # Apply top-k cutoff
+            generated_chunks = generated_chunks[:k_limit]
+        
+        # Always sort by original index in-place
+        generated = [g for _, g, _ in sorted(generated_chunks, key=lambda x: x[0])]
+        
+        # Reconstruct with whitespace between
+        final_data.append({
+            "doc_id": doc_id,
+            "text": " ".join(texts),
+            "summary": " ".join(references),
+            "predicted_summary": " ".join(generated)
+        })
+
+    return Dataset.from_list(final_data)
+
+def generate_blank_targets(
+        data_skipped: Dataset,
+        return_confidence=False
+):
+    """
+    Receives skipped Dataset and generates blank target predictions.
+    Optionally returns a model_confidence column (value 1.0) if requested
+    """
+    # Generate empty string predictions
+    no_summary_preds = [""] * len(data_skipped)
+    data_skipped = data_skipped.add_column("prediction", no_summary_preds)
+    
+    # Add confidence as needed
+    if return_confidence:
+        no_summary_conf = [1.0] * len(data_skipped)
+        data_skipped = data_skipped.add_column("model_confidence", no_summary_conf)
+
+    return data_skipped
+
+def generate_predictions(
+        model,
+        tokenizer,
+        max_output_length,
+        data_hf,
+        batch_size,
+        device,
+        return_confidence=False
+):
+    """
+    Loop over a pre-tokenized Dataset to generate predictions, with scores if requested
+    """
+    # Store predictions and confidences as lists
+    predictions = []
+    confidences = []
+
+    for start in tqdm(range(0, len(data_hf), batch_size), total=len(data_hf)//batch_size + 1):
+        batch = data_hf[start:start+batch_size]
+
+        # Prepare inputs batch with tokenized tensors on device
+        inputs = {
+            "input_ids": torch.tensor(batch["input_ids"]).to(device),
+            "attention_mask": torch.tensor(batch["attention_mask"]).to(device),
+        }
+
+        # Add global attention mask if it exists
+        if "global_attention_mask" in batch.keys():
+            inputs.update({
+                "global_attention_mask": torch.tensor(batch["global_attention_mask"]).to(device)
+            })
+        
+        # Ensure no gradients are computed
+        with torch.no_grad():
+            outputs = model.generate(
+                **inputs,
+                output_scores=return_confidence,
+                return_dict_in_generate=return_confidence,
+                max_length=max_output_length,
+                num_beams=2 # Hard-coded beam search
+            )
+        # Store confidences for each batch
+        if return_confidence:
+            confidences.extend(outputs.sequences_scores.cpu().tolist())
+
+        # Decode output tokens to text for each batch
+        decoded = tokenizer.batch_decode(outputs.sequences, skip_special_tokens=True)
+        predictions.extend(decoded)
+
+    # Finally add columns to the Dataset
+    data_hf = data_hf.add_column("generated_summary", predictions)
+    if return_confidence:
+        data_hf = data_hf.add_column("model_confidence", confidences)
+    return data_hf
+
+def compute_control_token_probability(
+        model,
+        data_hf,
+        control_token_id,
+        batch_size,
+        device,
+        p_limit: float=None
+):
+    """
+    Loop over a pre-tokenized Dataset to compute logits for [NO_SUMMARY] control token
+    and split data into normal vs. skipped partitions
+    """
+    # Return early if no p limit is provided
+    if p_limit is None:
+        return None, data_hf
+    # store prob([NO_SUMMARY])
+    no_summary_probs = []
+
+    # Manually loop over data
+    for start in tqdm(range(0, len(data_hf), batch_size), total=len(data_hf)//batch_size + 1):
+        batch = data_hf[start:start+batch_size]
+
+        # Prepare inputs batch with tokenized tensors on device
+        inputs = {
+            "input_ids": torch.tensor(batch["input_ids"]).to(device),
+            "attention_mask": torch.tensor(batch["attention_mask"]).to(device),
+        }
+
+        # Add global attention mask if it exists
+        if "global_attention_mask" in batch.keys():
+            inputs.update({
+                "global_attention_mask": torch.tensor(batch["global_attention_mask"]).to(device)
+            })
+
+        # Ensure gradient is not calculated
+        with torch.no_grad():
+            logits = model(**inputs).logits[:, 0, :]
+            probs = torch.softmax(logits, dim=-1)[:, control_token_id]
+        
+        # Place probabilities on CPU to store for filtering
+        no_summary_probs.extend(probs.cpu().tolist())
+
+    # After loop finishes, add new column
+    data_hf = data_hf.add_column("no_summary_prob", no_summary_probs)
+
+    # Make mask for splitting
+    skip_mask = [p > p_limit for p in no_summary_probs]
+    data_skipped = data_hf.filter(lambda i: skip_mask[i])
+    data_normal = data_hf.filter(lambda i: not skip_mask[i])
+
+    return data_skipped, data_normal
+
+def tokenize_data(
+        test_data: Dataset,
+        updated_tokenizer: AutoTokenizer,
+        batch_size: int,
+        max_input_length: int,
+        has_global_attn: bool = False
+        ):
+    """
+    Map a Dataset of test examples with a text-tokenizing function, preserving 
+    all original columns for downstream evaluation
+    """
+    
+    tokenize_fn = utils.tokenize_text_factory(
+        max_input_len=max_input_length,
+        tokenizer=updated_tokenizer,
+        has_global_attn=has_global_attn
+        )
+    test_data = test_data.map(
+        tokenize_fn,
+        batch_size=batch_size,
+        batched=True
+    )
+    return test_data
 
 def convert_data(test_data:pd.DataFrame):
     """Takes a pandas dataframe object, and converts it to a huggingface Dataset object.
     Modifies empty targets to be the custom token. Handles exclusion of the custom token.
 
     Arguments:
-        train_data: The training data as a pandas.DataFrame
-        blank_target_setting: "keep" or "drop" for inclusion/exclusion of the custom token
+        test_data: The training data as a pandas.DataFrame
     Returns:
-        the full training data as HF Dataset
+        the full test data as HF Dataset
     """
     # convert to HF Dataset type
     data_hf = Dataset.from_pandas(test_data)
@@ -66,7 +264,7 @@ def update_model_tokenizer(
 
     print("Updated special tokens")
     print(tokenizer.all_special_tokens)
-    return model, tokenizer
+    return model, tokenizer, tokenizer.convert_tokens_to_ids("[NO_SUMMARY]")
 
 def prepare_output_dir(
         checkpoint_filepath: str,
@@ -102,7 +300,7 @@ def load_model_tokenizer(
         checkpoint: str, 
         max_output_length: int,
         base_tokenizer: str = None
-    ): # could this function include the device assignment ~line 251
+    ): 
     """Loads the model tokenizer and handles torch device assignment
 
     Arguments:
@@ -125,18 +323,27 @@ def load_model_tokenizer(
     # Model name and settings
     model_name = '-'.join(checkpoint.split("/")[1].split("-")[0:2])
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint).to(device)
-    model.config.num_beams = 2
-    model.config.max_length = max_output_length
-    model.config.length_penalty = 2.0
-    model.config.early_stopping = True
-    model.config.no_repeat_ngram_size = 3
+    model.generation_config.num_beams = 2
+    model.generation_config.max_length = max_output_length
+    model.generation_config.length_penalty = 2.0
+    model.generation_config.early_stopping = True
+    model.generation_config.no_repeat_ngram_size = 3
+
+    # Ensure model is in evaluation mode
+    model.eval()
 
     # Instantiate tokenizer for base model if specified
     if base_tokenizer:
         tokenizer = AutoTokenizer.from_pretrained(base_tokenizer)
     else:
         tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-    return model_name, model, tokenizer, device, has_global_attn
+
+    # Parse training input and output lengths from model checkpoint
+    pattern = re.compile("se3-\w+-(\d+)-(\d+)")
+    max_input_len = int(pattern.search(checkpoint).group(1))
+    max_output_len = int(pattern.search(checkpoint).group(2))
+
+    return model_name, max_input_len, max_output_len, model, tokenizer, device, has_global_attn
 
 def load_data(sourcefile: str):
     """Returns the training data as a pandas.Dataframe and the 
@@ -202,8 +409,8 @@ def load_args():
     parser.add_argument("--mode", default="test", help="Specify dev or test mode")
     parser.add_argument("--trainfile", type=str, help="The dataset used for training")
     parser.add_argument("--testfile", type=str, help="The dataset to use for testing")
-    parser.add_argument("--pvalue", type=float, help="Specify p-threshold for NO_SUMMARY control")
-    parser.add_argument("--kvalue", type=int, help="Specify k value for final target selection")
+    parser.add_argument("--p_limit", type=float, help="Specify p-threshold for NO_SUMMARY control")
+    parser.add_argument("--k_limit", type=int, help="Specify k value for final target selection")
     parser.add_argument("--selection_method", type=str, default="confidence", help="Specify metric for k-selection")
     parser.add_argument("--batch_size", type=int, default=1, help="The batch size for training")
     parser.add_argument("--blank_targets", type=str, help="Specify how to use blank targets (drop or keep for control token usage)")
@@ -219,24 +426,30 @@ def main():
     # Set random seed
     set_seed(args.seed)
 
+    # generate controlled summaries with model confidence scores for k_limit if provided
+    return_confidence_scores = args.k_limit is not None
+
     ############################################
 
-    # load TRAINFILE and TESTFILE, set max input/output length values
+    # load TESTFILE, set max input/output length values
     # initialize in global scope
     
-    # Parse input lengths from train data
-    train_max_input_len, train_max_output_len, train_data = load_data(
-        sourcefile=args.trainfile
-    )
-
     test_max_input_len, test_max_output_len, test_data = load_data(
         sourcefile=args.testfile
+    )
+
+    # load model, validate train and test length values
+    # load model, tokenizer 
+    model_name, train_max_input_len, train_max_output_len, model, tokenizer, device, has_global_attn = load_model_tokenizer(
+        checkpoint=args.checkpoint,
+        max_output_length=max_output_len,
+        base_model=args.base_tokenizer
     )
 
     input_mismatch = train_max_input_len != test_max_input_len
     output_mismatch = train_max_output_len != test_max_output_len
 
-    # Here we set input & output lengths
+    # Here we set input & output lengths after validating that test and training data were compatible
     if input_mismatch or output_mismatch:
         print("Train and test file do NOT have compatible input and/or output lengths. Try again.")
         sys.exit(1)
@@ -245,13 +458,6 @@ def main():
         max_output_len = train_max_output_len
         print(f"Detected input length:{max_input_len} and output length:{max_output_len}")
 
-    # load model, tokenizer 
-    model_name, model, tokenizer, device, has_global_attn = load_model_tokenizer(
-        checkpoint=args.checkpoint,
-        max_output_length=max_output_len,
-        base_model=args.base_tokenizer
-    )
-
     # prepare output directories
     predictions_path = prepare_output_dir(
         checkpoint_filepath=args.checkpoint,
@@ -259,21 +465,104 @@ def main():
     )
 
     # update model + tokenizer vocab
-    model, tokenizer = update_model_tokenizer(model, tokenizer)
+    model, tokenizer, control_token_id = update_model_tokenizer(model, tokenizer)
     
-    # update training data with blank-target setting
-    # convert to HF Dataset
+    print("Converting CSV to HuggingFace dataset...")
+    # convert to HF Dataset - no manipulation of blank targets in test setting
     test_hf = convert_data(
         test_data=test_data
     )
 
-    #TODO: tokenize input + generate predictions using utils fn
-
-    #TODO: convert to pd.DataFrame and reconstruct full summaries using doc ID column
+    print("Tokenizing data...")
+    # tokenize input text column, keep other columns as-is
+    test_hf = tokenize_data(
+        test_data=test_hf, 
+        tokenizer=tokenizer, 
+        max_input_length=max_input_len,
+        has_global_attn=has_global_attn
+        )
     
-    #TODO: k-selection with model confidence should go here
+    # if p_limit is provided, compute [NO_SUMMARY] probability and split data
+    print("Computing logits for [NO_SUMMARY] control token...")
+    test_skipped, test_hf = compute_control_token_probability(
+        model=model,
+        data_hf=test_hf,
+        control_token_id=control_token_id,
+        batch_size=args.batch_size,
+        device=device,
+        p_limit=args.p_limit
+    )
 
-    #TODO: evaluate final summaries against gold
+    # Generate predictions as normal for rows where p_limit was not met
+    print("Generating predictions...")
+    test_hf = generate_predictions(
+        model=model,
+        tokenizer=tokenizer,
+        max_output_length=max_output_len,
+        data_hf=test_hf,
+        batch_size=args.batch_size,
+        device=device,
+        return_confidence=return_confidence_scores
+    )
+
+    # For remaining "skipped" rows, generate blank targets
+    if len(test_skipped):
+        print("Generating [NO_SUMMARY] targets...")
+    test_skipped = generate_blank_targets(test_skipped, return_confidence_scores)
+    
+    # Minimal validation that we didn't mess up earlier
+    if set(test_skipped.column_names) != set(test_hf.column_names):
+        raise ValueError("Partitions with normal targets vs. blank targets do not have the same columns")
+    
+    # Then we concatenate datasets of the same shape
+    print("Concatenating all targets...")
+    test_hf = test_hf.concatenate(test_skipped)
+    
+    # Remove LED token tensors because we don't need them anymore!
+    unwanted_columns = ["input_ids", "attention_mask", "global_attention_mask"]
+    existing_columns = set(test_hf.columns_names)
+    columns_to_remove = [col for col in unwanted_columns if col in existing_columns]
+    
+    print(f"Removing columns {str(columns_to_remove)} that are not needed downstream...")
+    test_hf = test_hf.remove_columns(columns_to_remove)
+    
+    print("Reconstructing full summaries from generated predictions...")
+    test_hf = reconstruct_by_doc_id(
+        data_hf=test_hf, 
+        k_limit=args.k_limit, 
+        expect_confidence=return_confidence_scores
+    )
+    
+    print("Computing metrics in batches...")
+    # Evaluate ROUGE, AlignScore, SummaC
+    print("AlignScore...")
+    test_hf = test_hf.map(
+        metrics.eval_alignscore_batch,
+        batched=True,
+        batch_size=args.batch_size
+    )
+    print("ROUGE...")
+    test_hf = test_hf.map(
+        metrics.eval_rouge_batch,
+        batched=True,
+        batch_size=args.batch_size
+    )
+    print("SummaC...")
+    test_hf = test_hf.map(
+        metrics.eval_summac_batch,
+        batched=True,
+        batch_size=args.batch_size
+    )
+
+    print("Computing metrics one at a time...")
+    # Evaluate LFTK
+    print("LFTK...")
+    test_hf = test_hf.map(
+        lambda ex: metrics.eval_lftk(ex["summary"], suffix=".GEN"),
+        batched=False
+    )
+
+    #TODO: Evaluate BERTScore
 
     return
 
