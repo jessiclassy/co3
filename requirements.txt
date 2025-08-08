@@ -200,7 +200,7 @@ tf-keras==2.15.0
 thinc==8.3.4
 threadpoolctl==3.6.0
 tinycss2==1.4.0
-tokenizers==0.13.3
+tokenizers==0.15.2
 toml==0.10.2
 tomli==2.2.1
 torch==1.12.1
@@ -208,7 +208,7 @@ torchmetrics==1.5.2
 tornado==6.5.1
 tqdm==4.67.1
 traitlets==5.14.3
-transformers==4.24.0
+transformers==4.35.2
 typer==0.16.0
 types-python-dateutil==2.9.0.20250708
 typing-inspection==0.4.1
