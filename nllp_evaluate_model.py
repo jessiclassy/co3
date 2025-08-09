@@ -50,7 +50,7 @@ def reconstruct_by_doc_id(
     for doc_id, chunks in grouped_chunks.items():
         # Always sort text and reference summary by index
         texts = [t for _, t in sorted(chunks["texts"], key=lambda x: x[0])]
-        references = [t for _, t in sorted(chunks["references"], key=lambda x: x[0])]
+        references = [r for _, r in sorted(chunks["references"], key=lambda x: x[0]) if len(r)]
 
         # Prepare generated chunks for reconstruction
         generated_chunks = chunks["generated"]
@@ -393,6 +393,9 @@ def load_data(sourcefile: str):
             "Unnamed: 0": "global_index"
         }
     )
+    # Normalize empty reference summary rows with empty strings
+    data.loc[data["summary"].isna(), "summary"] = ""
+    
     return max_input_len, max_output_len, data
 
 def load_args():
