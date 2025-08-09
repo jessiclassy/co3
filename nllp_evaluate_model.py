@@ -562,6 +562,7 @@ def main():
         batched=False
     )
 
+    print("Saving predictions...")
     test_hf.to_csv(prediction_path)
     return
 
