@@ -50,6 +50,7 @@ def reconstruct_by_doc_id(
     for doc_id, chunks in grouped_chunks.items():
         # Always sort text and reference summary by index
         texts = [t for _, t in sorted(chunks["texts"], key=lambda x: x[0])]
+        # Only include contentful strings for reconstruction with whitespace
         references = [r for _, r in sorted(chunks["references"], key=lambda x: x[0]) if len(r)]
 
         # Prepare generated chunks for reconstruction
@@ -62,7 +63,8 @@ def reconstruct_by_doc_id(
             generated_chunks = generated_chunks[:k_limit]
         
         # Always sort by original index in-place
-        generated = [g for _, g, _ in sorted(generated_chunks, key=lambda x: x[0])]
+        # Only include contentful strings for reconstruction with whitespace
+        generated = [g for _, g, _ in sorted(generated_chunks, key=lambda x: x[0]) if len (g)]
         
         # Reconstruct with whitespace between
         final_data.append({
@@ -395,7 +397,7 @@ def load_data(sourcefile: str):
     )
     # Normalize empty reference summary rows with empty strings
     data.loc[data["summary"].isna(), "summary"] = ""
-    
+
     return max_input_len, max_output_len, data
 
 def load_args():
