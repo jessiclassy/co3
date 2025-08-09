@@ -471,6 +471,7 @@ def main():
     test_hf = tokenize_data(
         test_data=test_hf, 
         updated_tokenizer=tokenizer, 
+        batch_size=args.batch_size,
         max_input_length=max_input_len,
         has_global_attn=has_global_attn
         )
