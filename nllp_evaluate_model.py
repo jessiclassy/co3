@@ -133,12 +133,14 @@ def generate_predictions(
                 max_length=max_output_length,
                 num_beams=2 # Hard-coded beam search
             )
-        # Store confidences for each batch
+        # Store confidences for each batch 
         if return_confidence:
             confidences.extend(outputs.sequences_scores.cpu().tolist())
-
-        # Decode output tokens to text for each batch
-        decoded = tokenizer.batch_decode(outputs.sequences, skip_special_tokens=True)
+            # Decode output tokens to text for each batch
+            decoded = tokenizer.batch_decode(outputs.sequences, skip_special_tokens=True)
+        else:
+            decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+        # Store decoded predictions
         predictions.extend(decoded)
 
     # Finally add columns to the Dataset
@@ -506,7 +508,7 @@ def main():
     # Step 7: generate blank targets for filtered rows
     ###########################################################################
     # If there are skippable rows, override prediction with blank targets
-    if len(test_skipped):
+    if test_skipped is not None and len(test_skipped):
         print("Generating [NO_SUMMARY] targets...")
         test_skipped = generate_blank_targets(test_skipped, return_confidence_scores)
     
