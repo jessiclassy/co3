@@ -30,7 +30,7 @@ ALL_FEATURES = READFORMULA + WORDSENT + WORDDIFF
 # load scoring objects
 align_scorer = AlignScore(model='roberta-base', batch_size=32, device=curr_device, ckpt_path='AlignScore-base.ckpt', evaluation_mode='nli_sp')
 summac_conv = SummaCConv(models=["vitc"], bins='percentile', granularity="sentence", nli_labels="e", device=curr_device, agg="mean")
-bertscore = load("bertscore")
+
 rouge_types = ["rouge1","rouge2","rougeL","rougeLsum"]
 rouge = rouge_scorer.RougeScorer(rouge_types=rouge_types,use_stemmer=True)
 
@@ -99,7 +99,7 @@ def eval_bert(gold_text:str,gen_text:str) -> dict[str, float|int]:
   Returns:
     a dictionary where key = bert metric type and value = the score
   """
-  
+  bertscore = load("bertscore")
   prediction = [gen_text]
   reference = [gold_text]
   results = bertscore.compute(predictions=prediction, references=reference, model_type="distilbert-base-uncased")
