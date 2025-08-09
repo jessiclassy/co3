@@ -30,8 +30,9 @@ ALL_FEATURES = READFORMULA + WORDSENT + WORDDIFF
 # load scoring objects
 align_scorer = AlignScore(model='roberta-base', batch_size=32, device=curr_device, ckpt_path='AlignScore-base.ckpt', evaluation_mode='nli_sp')
 summac_conv = SummaCConv(models=["vitc"], bins='percentile', granularity="sentence", nli_labels="e", device=curr_device, agg="mean")
-
+bertscore = load("bertscore")
 rouge_types = ["rouge1","rouge2","rougeL","rougeLsum"]
+score_types = ["precision", "recall", "f1"]
 rouge = rouge_scorer.RougeScorer(rouge_types=rouge_types,use_stemmer=True)
 
 def eval_alignscore_batch(batch):
@@ -60,34 +61,17 @@ def eval_summac_batch(batch):
     "summac": summac_conv.score(batch['text'], batch['predicted_summary'])["scores"]
   }
 
-def eval_summac(bill_text:str,gen_text:str) -> dict[str, float|int]:
-  """Gets the precision, recall, and fmeasure scores for summac
+# def eval_summac(bill_text:str,gen_text:str) -> dict[str, float|int]:
+#   """Gets the precision, recall, and fmeasure scores for summac
 
-  Arguments:
-    sum_text: the gold summary for a bill
-    gen_text: the model generated summary for the same bill
+#   Arguments:
+#     sum_text: the gold summary for a bill
+#     gen_text: the model generated summary for the same bill
   
-  Returns:
-    a dictionary where key = summac and value = the score
-  """
-  summac = model_conv.score([bill_text], [gen_text])
-
-# TODO: apparently BERTScore needs each sentence to be split? not sure what granularity
-def eval_bertscore_batch(batch):
-  """
-  Get BERTScore P/R/F for a Dataset batch
-
-  Arguments: 
-    batch: dict with keys 'summary' and 'predicted_summary'
-  Returns:
-    dict with 'summac_score' list aligned with batch
-  """
-  results = bertscore.compute(
-    predictions=batch['predicted_summary'], 
-    references=batch['summary'],
-    model_type="distilbert-base-uncased")
-  
-  return {f"bert_score_{evaltype}": score.mean() for evaltype, score in results.items()}
+#   Returns:
+#     a dictionary where key = summac and value = the score
+#   """
+#   summac = summac_conv.score([bill_text], [gen_text])
 
 def eval_bert(gold_text:str,gen_text:str) -> dict[str, float|int]:
   """Gets the precision, recall, and fmeasure scores for bert
@@ -99,11 +83,15 @@ def eval_bert(gold_text:str,gen_text:str) -> dict[str, float|int]:
   Returns:
     a dictionary where key = bert metric type and value = the score
   """
-  bertscore = load("bertscore")
+  
   prediction = [gen_text]
   reference = [gold_text]
-  results = bertscore.compute(predictions=prediction, references=reference, model_type="distilbert-base-uncased")
-  return {evaltype: score[0] for evaltype, score in results.items()}
+  bert_results = bertscore.compute(predictions=prediction, references=reference, model_type="distilbert-base-uncased")
+  results = dict()
+  for s in score_types:
+    curr = bert_results[s]
+    results[f"bert_score_{s}"] = sum(curr)/len(curr)
+  return results
 
 def eval_rouge_batch(batch):
   """
