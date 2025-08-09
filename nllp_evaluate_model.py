@@ -1,6 +1,6 @@
 import eval
 from datasets import Dataset, load_dataset
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer
+from transformers import LEDForConditionalGeneration, LEDTokenizer
 from transformers import set_seed
 import torch
 import pandas as pd
@@ -201,7 +201,7 @@ def compute_control_token_probability(
 
 def tokenize_data(
         test_data: Dataset,
-        updated_tokenizer: AutoTokenizer,
+        updated_tokenizer: LEDTokenizer,
         batch_size: int,
         max_input_length: int,
         has_global_attn: bool = False
@@ -238,8 +238,8 @@ def convert_data(test_data:pd.DataFrame):
     return data_hf
 
 def update_model_tokenizer(
-        model: AutoModelForSeq2SeqLM,
-        tokenizer: AutoTokenizer
+        model: LEDForConditionalGeneration,
+        tokenizer: LEDTokenizer
     ):
     """Modifies the model vocabulary to include the custom 
     [NO_SUMMARY] token
@@ -302,8 +302,8 @@ def load_model_tokenizer(
         base_model: name of base HuggingFace model for tokenizer loading
     Returns:
         model_name: simplified model name as a string for output directory
-        model: AutoModelForSeq2SeqLM object
-        tokenizer: AutoTokenizer object
+        model: LEDForConditionalGeneration object
+        tokenizer: LEDTokenizer object
         device: torch.device object for saving Tensors
         has_global_attn: boolean for data preprocessing
     """
@@ -320,7 +320,7 @@ def load_model_tokenizer(
 
     # Model name and settings
     model_name = '-'.join(checkpoint.split("/")[1].split("-")[0:2])
-    model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint).to(device)
+    model = LEDForConditionalGeneration.from_pretrained(checkpoint).to(device)
     model.config.num_beams = 2
     model.config.max_length = max_output_len
     model.config.length_penalty = 2.0
@@ -332,9 +332,9 @@ def load_model_tokenizer(
 
     # Instantiate tokenizer for base model if specified
     if base_tokenizer:
-        tokenizer = AutoTokenizer.from_pretrained(base_tokenizer)
+        tokenizer = LEDTokenizer.from_pretrained(base_tokenizer)
     else:
-        tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+        tokenizer = LEDTokenizer.from_pretrained(checkpoint)
 
     return model_name, max_input_len, max_output_len, model, tokenizer, device, has_global_attn
 
