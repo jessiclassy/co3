@@ -314,7 +314,7 @@ def load_model_tokenizer(
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Argument for Longformer usage
-    has_global_attn = "allenai/led" in checkpoint
+    has_global_attn = "led-base" in checkpoint
 
     # Parse training input and output lengths from model checkpoint
     pattern = re.compile("se3-\w+-(\d+)-(\d+)")
