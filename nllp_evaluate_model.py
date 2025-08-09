@@ -321,11 +321,11 @@ def load_model_tokenizer(
     # Model name and settings
     model_name = '-'.join(checkpoint.split("/")[1].split("-")[0:2])
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint).to(device)
-    model.generation_config.num_beams = 2
-    model.generation_config.max_length = max_output_len
-    model.generation_config.length_penalty = 2.0
-    model.generation_config.early_stopping = True
-    model.generation_config.no_repeat_ngram_size = 3
+    model.config.num_beams = 2
+    model.config.max_length = max_output_len
+    model.config.length_penalty = 2.0
+    model.config.early_stopping = True
+    model.config.no_repeat_ngram_size = 3
 
     # Ensure model is in evaluation mode
     model.eval()
