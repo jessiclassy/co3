@@ -16,12 +16,6 @@ from eval import eval_metrics2 as metrics
 # Set up module-level tqdm to write to STDERR like Dataset.map()
 tqdm = lambda *args, **kwargs: _tqdm(*args, file=sys.stderr, **kwargs)
 
-def generate_metrics(
-        test_hf: Dataset
-):
-    
-    return
-
 def reconstruct_by_doc_id(
         data_hf,
         k_limit: int=None,
@@ -423,12 +417,12 @@ def main():
 
     # generate controlled summaries with model confidence scores for k_limit if provided
     return_confidence_scores = args.k_limit is not None
-
+    print(f"Inference will use model confidence? {str(return_confidence_scores).upper()}")
     ############################################
 
-    # load TESTFILE, set max input/output length values
-    # initialize in global scope
-    
+    ###########################################################################
+    # Step 1: load data, model and inferred properties (input/output length)
+    ###########################################################################
     test_max_input_len, test_max_output_len, test_data = load_data(
         sourcefile=args.testfile
     )
@@ -439,7 +433,14 @@ def main():
         checkpoint=args.checkpoint,
         base_tokenizer=args.base_tokenizer
     )
-
+    # prepare output directories
+    prediction_path = prepare_output_dir(
+        checkpoint_filepath=args.checkpoint,
+        config_id=args.config_id
+    )
+    ###########################################################################
+    # Step 2: validate that test data and model have compatible I/O length
+    ###########################################################################
     input_mismatch = train_max_input_len != test_max_input_len
     output_mismatch = train_max_output_len != test_max_output_len
 
@@ -451,16 +452,14 @@ def main():
         max_input_len = train_max_input_len
         max_output_len = train_max_output_len
         print(f"Detected input length:{max_input_len} and output length:{max_output_len}")
-
-    # prepare output directories
-    prediction_path = prepare_output_dir(
-        checkpoint_filepath=args.checkpoint,
-        config_id=args.config_id
-    )
-
+    ###########################################################################
+    # Step 3: Add special token to pretrained tokenizer
+    ###########################################################################
     # update model + tokenizer vocab
     model, tokenizer, control_token_id = update_model_tokenizer(model, tokenizer)
-    
+    ###########################################################################
+    # Step 4: Prepare Se3-ed test data for ingestion
+    ###########################################################################
     print("Converting CSV to HuggingFace dataset...")
     # convert to HF Dataset - no manipulation of blank targets in test setting
     test_hf = convert_data(
@@ -471,11 +470,13 @@ def main():
     # tokenize input text column, keep other columns as-is
     test_hf = tokenize_data(
         test_data=test_hf, 
-        tokenizer=tokenizer, 
+        updated_tokenizer=tokenizer, 
         max_input_length=max_input_len,
         has_global_attn=has_global_attn
         )
-    
+    ###########################################################################
+    # Step 5: use p-threshold as a filter
+    ###########################################################################
     # if p_limit is provided, compute [NO_SUMMARY] probability and split data
     print("Computing logits for [NO_SUMMARY] control token...")
     test_skipped, test_hf = compute_control_token_probability(
@@ -486,7 +487,9 @@ def main():
         device=device,
         p_limit=args.p_limit
     )
-
+    ###########################################################################
+    # Step 6: generate predictions for "normal rows"
+    ###########################################################################
     # Generate predictions as normal for rows where p_limit was not met
     print("Generating predictions...")
     test_hf = generate_predictions(
@@ -498,8 +501,10 @@ def main():
         device=device,
         return_confidence=return_confidence_scores
     )
-
-    # For remaining "skipped" rows, generate blank targets
+    ###########################################################################
+    # Step 7: generate blank targets for filtered rows
+    ###########################################################################
+    # If there are skippable rows, override prediction with blank targets
     if len(test_skipped):
         print("Generating [NO_SUMMARY] targets...")
         test_skipped = generate_blank_targets(test_skipped, return_confidence_scores)
@@ -511,7 +516,9 @@ def main():
         # Then we concatenate datasets of the same shape
         print("Concatenating all targets...")
         test_hf = test_hf.concatenate(test_skipped)
-    
+    ###########################################################################
+    # Step 8: Prune columns before moving on
+    ###########################################################################
     # Remove LED token tensors because we don't need them anymore!
     unwanted_columns = ["input_ids", "attention_mask", "global_attention_mask"]
     existing_columns = set(test_hf.column_names)
@@ -519,7 +526,9 @@ def main():
     
     print(f"Removing columns {str(columns_to_remove)} that are not needed downstream...")
     test_hf = test_hf.remove_columns(columns_to_remove)
-    
+    ###########################################################################
+    # Step 9: Reconstruct full summaries
+    ###########################################################################
     print("Reconstructing full summaries from generated predictions...")
     test_hf = reconstruct_by_doc_id(
         data_hf=test_hf, 
@@ -527,6 +536,9 @@ def main():
         expect_confidence=return_confidence_scores
     )
     
+    ###########################################################################
+    # Step 10: Compute metrics and save output
+    ###########################################################################
     print("Computing metrics in batches...")
     # Evaluate ROUGE, AlignScore, SummaC
     print("AlignScore...")
@@ -556,11 +568,11 @@ def main():
         batched=False
     )
 
-    print("BERTScore...")
-    test_hf = test_hf.map(
-        lambda ex: metrics.eval_bert(ex["summary"], ex["predicted_summary"]),
-        batched=False
-    )
+    # print("BERTScore...")
+    # test_hf = test_hf.map(
+    #     lambda ex: metrics.eval_bert(ex["summary"], ex["predicted_summary"]),
+    #     batched=False
+    # )
 
     print("Saving predictions...")
     test_hf.to_csv(prediction_path)
