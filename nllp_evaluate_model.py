@@ -16,6 +16,12 @@ from eval import eval_metrics2 as metrics
 # Set up module-level tqdm to write to STDERR like Dataset.map()
 tqdm = lambda *args, **kwargs: _tqdm(*args, file=sys.stderr, **kwargs)
 
+def generate_metrics(
+        test_hf: Dataset
+):
+    
+    return
+
 def reconstruct_by_doc_id(
         data_hf,
         k_limit: int=None,
@@ -447,7 +453,7 @@ def main():
         print(f"Detected input length:{max_input_len} and output length:{max_output_len}")
 
     # prepare output directories
-    predictions_path = prepare_output_dir(
+    prediction_path = prepare_output_dir(
         checkpoint_filepath=args.checkpoint,
         config_id=args.config_id
     )
@@ -546,12 +552,17 @@ def main():
     # Evaluate LFTK
     print("LFTK...")
     test_hf = test_hf.map(
-        lambda ex: metrics.eval_lftk(ex["summary"], suffix=".GEN"),
+        lambda ex: metrics.eval_lftk(ex["predicted_summary"], suffix=".GEN"),
         batched=False
     )
 
-    #TODO: Evaluate BERTScore
+    print("BERTScore...")
+    test_hf = test_hf.map(
+        lambda ex: metrics.eval_bert(ex["summary"], ex["predicted_summary"]),
+        batched=False
+    )
 
+    test_hf.to_csv(prediction_path)
     return
 
 if __name__ == "__main__":
