@@ -292,7 +292,6 @@ def prepare_output_dir(
 
 def load_model_tokenizer(
         checkpoint: str, 
-        max_output_length: int,
         base_tokenizer: str = None
     ): 
     """Loads the model tokenizer and handles torch device assignment
@@ -314,11 +313,16 @@ def load_model_tokenizer(
     # Argument for Longformer usage
     has_global_attn = "allenai/led" in checkpoint
 
+    # Parse training input and output lengths from model checkpoint
+    pattern = re.compile("se3-\w+-(\d+)-(\d+)")
+    max_input_len = int(pattern.search(checkpoint).group(1))
+    max_output_len = int(pattern.search(checkpoint).group(2))
+
     # Model name and settings
     model_name = '-'.join(checkpoint.split("/")[1].split("-")[0:2])
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint).to(device)
     model.generation_config.num_beams = 2
-    model.generation_config.max_length = max_output_length
+    model.generation_config.max_length = max_output_len
     model.generation_config.length_penalty = 2.0
     model.generation_config.early_stopping = True
     model.generation_config.no_repeat_ngram_size = 3
@@ -331,11 +335,6 @@ def load_model_tokenizer(
         tokenizer = AutoTokenizer.from_pretrained(base_tokenizer)
     else:
         tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-
-    # Parse training input and output lengths from model checkpoint
-    pattern = re.compile("se3-\w+-(\d+)-(\d+)")
-    max_input_len = int(pattern.search(checkpoint).group(1))
-    max_output_len = int(pattern.search(checkpoint).group(2))
 
     return model_name, max_input_len, max_output_len, model, tokenizer, device, has_global_attn
 
@@ -433,7 +432,6 @@ def main():
     # load model, tokenizer 
     model_name, train_max_input_len, train_max_output_len, model, tokenizer, device, has_global_attn = load_model_tokenizer(
         checkpoint=args.checkpoint,
-        max_output_length=max_output_len,
         base_model=args.base_tokenizer
     )
 
