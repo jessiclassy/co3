@@ -142,7 +142,7 @@ def generate_predictions(
         predictions.extend(decoded)
 
     # Finally add columns to the Dataset
-    data_hf = data_hf.add_column("generated_summary", predictions)
+    data_hf = data_hf.add_column("prediction", predictions)
     if return_confidence:
         data_hf = data_hf.add_column("model_confidence", confidences)
     return data_hf
@@ -193,9 +193,8 @@ def compute_control_token_probability(
     data_hf = data_hf.add_column("no_summary_prob", no_summary_probs)
 
     # Make mask for splitting
-    skip_mask = [p > p_limit for p in no_summary_probs]
-    data_skipped = data_hf.filter(lambda i: skip_mask[i])
-    data_normal = data_hf.filter(lambda i: not skip_mask[i])
+    data_skipped = data_hf.filter(lambda ex: ex["no_summary_prob"] > p_limit)
+    data_normal = data_hf.filter(lambda ex: ex["no_summary_prob"] <= p_limit)
 
     return data_skipped, data_normal
 
@@ -497,19 +496,19 @@ def main():
     # For remaining "skipped" rows, generate blank targets
     if len(test_skipped):
         print("Generating [NO_SUMMARY] targets...")
-    test_skipped = generate_blank_targets(test_skipped, return_confidence_scores)
+        test_skipped = generate_blank_targets(test_skipped, return_confidence_scores)
     
-    # Minimal validation that we didn't mess up earlier
-    if set(test_skipped.column_names) != set(test_hf.column_names):
-        raise ValueError("Partitions with normal targets vs. blank targets do not have the same columns")
-    
-    # Then we concatenate datasets of the same shape
-    print("Concatenating all targets...")
-    test_hf = test_hf.concatenate(test_skipped)
+        # Minimal validation that we didn't mess up earlier
+        if set(test_skipped.column_names) != set(test_hf.column_names):
+            raise ValueError("Partitions with normal targets vs. blank targets do not have the same columns")
+        
+        # Then we concatenate datasets of the same shape
+        print("Concatenating all targets...")
+        test_hf = test_hf.concatenate(test_skipped)
     
     # Remove LED token tensors because we don't need them anymore!
     unwanted_columns = ["input_ids", "attention_mask", "global_attention_mask"]
-    existing_columns = set(test_hf.columns_names)
+    existing_columns = set(test_hf.column_names)
     columns_to_remove = [col for col in unwanted_columns if col in existing_columns]
     
     print(f"Removing columns {str(columns_to_remove)} that are not needed downstream...")
