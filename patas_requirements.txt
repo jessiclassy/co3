@@ -215,7 +215,7 @@ tf-keras==2.15.0
 thinc==8.3.4
 threadpoolctl==3.6.0
 tinycss2==1.4.0
-tokenizers==0.13.3
+tokenizers==0.15.2
 toml==0.10.2
 tomli==2.2.1
 torch==1.12.1
