@@ -432,7 +432,7 @@ def main():
     # load model, tokenizer 
     model_name, train_max_input_len, train_max_output_len, model, tokenizer, device, has_global_attn = load_model_tokenizer(
         checkpoint=args.checkpoint,
-        base_model=args.base_tokenizer
+        base_tokenizer=args.base_tokenizer
     )
 
     input_mismatch = train_max_input_len != test_max_input_len
