@@ -1,0 +1,126 @@
+--- Feature = t_word: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 46.977, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 133.8048 145.4604
+sample estimates:
+mean difference 
+       139.6326 
+
+--- Feature = t_stopword: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 57.878, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 69.64899 74.53333
+sample estimates:
+mean difference 
+       72.09116 
+
+--- Feature = t_punct: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 43.301, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 21.88583 23.96183
+sample estimates:
+mean difference 
+       22.92383 
+
+--- Feature = t_syll: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 56.336, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 261.6376 280.5062
+sample estimates:
+mean difference 
+       271.0719 
+
+--- Feature = t_syll2: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 53.904, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 38.91145 41.84902
+sample estimates:
+mean difference 
+       40.38024 
+
+--- Feature = t_syll3: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 48.714, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 14.68663 15.91845
+sample estimates:
+mean difference 
+       15.30254 
+
+--- Feature = t_uword: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 54.224, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 47.28099 50.82853
+sample estimates:
+mean difference 
+       49.05476 
+
+--- Feature = t_sent: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 59.911, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 3.974135 4.243057
+sample estimates:
+mean difference 
+       4.108596 
+
+--- Feature = t_char: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 54.068, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 775.9813 834.3785
+sample estimates:
+mean difference 
+       805.1799 
+

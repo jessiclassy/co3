@@ -1,0 +1,81 @@
+--- Feature = t_word: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.9409976 (large)
+95 percent confidence interval:
+    lower     upper 
+0.8898963 0.9920988 
+
+--- Feature = t_stopword: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.189349 (large)
+95 percent confidence interval:
+   lower    upper 
+1.136749 1.241950 
+
+--- Feature = t_punct: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.913429 (large)
+95 percent confidence interval:
+    lower     upper 
+0.8624749 0.9643830 
+
+--- Feature = t_syll: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.114404 (large)
+95 percent confidence interval:
+   lower    upper 
+1.062288 1.166521 
+
+--- Feature = t_syll2: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.033844 (large)
+95 percent confidence interval:
+    lower     upper 
+0.9822185 1.0854701 
+
+--- Feature = t_syll3: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.8914225 (large)
+95 percent confidence interval:
+    lower     upper 
+0.8405832 0.9422619 
+
+--- Feature = t_uword: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.03279 (large)
+95 percent confidence interval:
+   lower    upper 
+0.981170 1.084409 
+
+--- Feature = t_sent: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.162525 (large)
+95 percent confidence interval:
+   lower    upper 
+1.110101 1.214949 
+
+--- Feature = t_char: 41832 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 1.071972 (large)
+95 percent confidence interval:
+   lower    upper 
+1.020119 1.123826 
+

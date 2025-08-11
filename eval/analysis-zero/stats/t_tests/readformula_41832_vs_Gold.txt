@@ -1,0 +1,84 @@
+--- Feature = fkre: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 21.355, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  9.239201 11.107337
+sample estimates:
+mean difference 
+       10.17327 
+
+--- Feature = fkgl: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -14.513, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.870759 -2.187424
+sample estimates:
+mean difference 
+      -2.529092 
+
+--- Feature = fogi: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -13.481, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.759626 -2.058846
+sample estimates:
+mean difference 
+      -2.409236 
+
+--- Feature = smog: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -10.308, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.7099207 -0.4830098
+sample estimates:
+mean difference 
+     -0.5964653 
+
+--- Feature = cole: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -38.036, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.293113 -1.166334
+sample estimates:
+mean difference 
+      -1.229723 
+
+--- Feature = auto: 41832 vs Gold Summaries
+model_1 = 41832 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -14.555, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -3.670141 -2.798730
+sample estimates:
+mean difference 
+      -3.234435 
+
