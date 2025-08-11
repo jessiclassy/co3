@@ -1,0 +1,54 @@
+--- Feature = fkre: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.1642066 (negligible)
+95 percent confidence interval:
+    lower     upper 
+0.1156368 0.2127765 
+
+--- Feature = fkgl: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1193274 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.16785869 -0.07079602 
+
+--- Feature = fogi: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.06673989 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.1152416 -0.0182382 
+
+--- Feature = smog: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.1075465 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.05902327 0.15606975 
+
+--- Feature = cole: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.3910405 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.4399899 -0.3420911 
+
+--- Feature = auto: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1481056 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.19666020 -0.09955094 
+

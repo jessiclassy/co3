@@ -1,0 +1,126 @@
+--- Feature = t_word: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -32.908, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -82.54487 -73.26180
+sample estimates:
+mean difference 
+      -77.90333 
+
+--- Feature = t_stopword: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -21.463, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -21.01748 -17.49889
+sample estimates:
+mean difference 
+      -19.25818 
+
+--- Feature = t_punct: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.69435, df = 3268, p-value = 0.4875
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.9509747  0.4535749
+sample estimates:
+mean difference 
+     -0.2486999 
+
+--- Feature = t_syll: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -25.422, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -98.80311 -84.65361
+sample estimates:
+mean difference 
+      -91.72836 
+
+--- Feature = t_syll2: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -22.157, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -13.94228 -11.67534
+sample estimates:
+mean difference 
+      -12.80881 
+
+--- Feature = t_syll3: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -19.138, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -5.222551 -4.251906
+sample estimates:
+mean difference 
+      -4.737229 
+
+--- Feature = t_uword: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -45.83, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -37.85595 -34.74974
+sample estimates:
+mean difference 
+      -36.30284 
+
+--- Feature = t_sent: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -24.258, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.586357 -1.349098
+sample estimates:
+mean difference 
+      -1.467727 
+
+--- Feature = t_char: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -27.741, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -336.3230 -291.9199
+sample estimates:
+mean difference 
+      -314.1214 
+

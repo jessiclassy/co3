@@ -1,0 +1,81 @@
+--- Feature = t_word: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.7448381 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.7949794 -0.6946968 
+
+--- Feature = t_stopword: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.4917386 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.5409542 -0.4425231 
+
+--- Feature = t_punct: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.01543252 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.06392144  0.03305641 
+
+--- Feature = t_syll: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.5702088 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.6196725 -0.5207451 
+
+--- Feature = t_syll2: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.4978997 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.5471335 -0.4486660 
+
+--- Feature = t_syll3: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.4343647 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.4834214 -0.3853081 
+
+--- Feature = t_uword: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -1.061446 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.113236 -1.009656 
+
+--- Feature = t_sent: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.5471047 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.5964917 -0.4977177 
+
+--- Feature = t_char: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.6222052 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.6718527 -0.5725576 
+
