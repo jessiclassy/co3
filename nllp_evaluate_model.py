@@ -548,12 +548,12 @@ def main():
     # Step 10: Compute metrics and save output
     ###########################################################################
     print("Computing metrics in batches...")
-    print("BERTScore...")
-    test_hf = test_hf.map(
-        lambda ex: metrics.get_bertscore_metrics(ex["predicted_summary"], ex["summary"]),
-        batched=True,
-        batch_size=args.batch_size
-    )
+    # print("BERTScore...")
+    # test_hf = test_hf.map(
+    #     lambda ex: metrics.get_bertscore_metrics(ex["predicted_summary"], ex["summary"]),
+    #     batched=True,
+    #     batch_size=args.batch_size
+    # )
     # Evaluate ROUGE, AlignScore, SummaC
     print("AlignScore...")
     test_hf = test_hf.map(
