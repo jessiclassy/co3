@@ -179,10 +179,15 @@ def get_bertscore_metrics(preds, refs):
     """
 
     bertscore_output = bertscore.compute(predictions=preds, references=refs, lang="en")
+    # return {
+    #     "bertscore_p": round(np.mean([v for v in bertscore_output["precision"]]), 4),
+    #     "bertscore_r": round(np.mean([v for v in bertscore_output["recall"]]), 4),
+    #     "bertscore_f1": round(np.mean([v for v in bertscore_output["f1"]]), 4)
+    # }
     return {
-        "bertscore_p": round(np.mean([v for v in bertscore_output["precision"]]), 4),
-        "bertscore_r": round(np.mean([v for v in bertscore_output["recall"]]), 4),
-        "bertscore_f1": round(np.mean([v for v in bertscore_output["f1"]]), 4)
+        "bertscore_p": bertscore_output["precision"],
+        "bertscore_r": bertscore_output["recall"],
+        "bertscore_f1": bertscore_output["f1"]
     }
 
 
