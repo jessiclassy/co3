@@ -13,7 +13,7 @@ from nltk.corpus import stopwords
 from nltk.util import ngrams
 from scipy.stats import entropy
 from sklearn.feature_extraction.text import CountVectorizer
-
+import nltk
 # globals
 
 # load device
@@ -164,7 +164,7 @@ def eval_lftk(text:str, lftk_features:list[str] = ALL_FEATURES, suffix:str = "")
   return {key+suffix:val for key,val in feature_dict.items()}
 
 ################################################################################
-# temporary: copied from Se3 evaluation.py
+# temporary: adapted from Se3 evaluation.py
 ################################################################################
 
 def get_bertscore_metrics(preds, refs):
@@ -180,9 +180,9 @@ def get_bertscore_metrics(preds, refs):
 
     bertscore_output = bertscore.compute(predictions=preds, references=refs, lang="en")
     return {
-        "p": round(np.mean([v for v in bertscore_output["precision"]]), 4),
-        "r": round(np.mean([v for v in bertscore_output["recall"]]), 4),
-        "f1": round(np.mean([v for v in bertscore_output["f1"]]), 4)
+        "bertscore_p": round(np.mean([v for v in bertscore_output["precision"]]), 4),
+        "bertscore_r": round(np.mean([v for v in bertscore_output["recall"]]), 4),
+        "bertscore_f1": round(np.mean([v for v in bertscore_output["f1"]]), 4)
     }
 
 
