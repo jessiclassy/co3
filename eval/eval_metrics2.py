@@ -1,17 +1,18 @@
 import spacy
 import lftk
 from rouge_score import rouge_scorer
-from rouge_score import scoring
 import pandas as pd
-from tqdm import tqdm
-from datasets import load_dataset
 from evaluate import load
-from summac.model_summac import SummaCZS
 from summac.model_summac import SummaCConv
-import argparse
 import torch
 from alignscore import AlignScore
 from summac.model_summac import SummaCConv
+import numpy as np
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+from nltk.util import ngrams
+from scipy.stats import entropy
+from sklearn.feature_extraction.text import CountVectorizer
 
 # globals
 
@@ -20,6 +21,10 @@ curr_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # load a trained pipeline of your choice from spacy
 nlp = spacy.load("en_core_web_sm")
+
+# load NLTK corpora
+nltk.download("stopwords")
+nltk.download("punkt")
 
 # LFTK feature families of interest
 READFORMULA = lftk.search_features(family="readformula", return_format = "list_key")
@@ -157,6 +162,88 @@ def eval_lftk(text:str, lftk_features:list[str] = ALL_FEATURES, suffix:str = "")
   LFTK = lftk.Extractor(docs = nlp(text))
   feature_dict = LFTK.extract(lftk_features)
   return {key+suffix:val for key,val in feature_dict.items()}
+
+################################################################################
+# temporary: copied from Se3 evaluation.py
+################################################################################
+
+def get_bertscore_metrics(preds, refs):
+    """Computes the bertscore metric.
+
+    Args:
+        preds: list. The model predictions.
+        refs: list. The references.
+
+    Returns:
+        The bertscore metrics.
+    """
+
+    bertscore_output = bertscore.compute(predictions=preds, references=refs, lang="en")
+    return {
+        "p": round(np.mean([v for v in bertscore_output["precision"]]), 4),
+        "r": round(np.mean([v for v in bertscore_output["recall"]]), 4),
+        "f1": round(np.mean([v for v in bertscore_output["f1"]]), 4)
+    }
+
+
+def get_redundancy_scores(preds):
+    sum_unigram_ratio = 0
+    sum_bigram_ratio = 0
+    sum_trigram_ratio = 0
+    all_unigram_ratio = []
+    all_bigram_ratio = []
+    all_trigram_ratio = []
+
+    sum_redundancy = 0
+    stop_words = set(stopwords.words("english"))
+    count = CountVectorizer()
+    all_redundancy = []
+
+    number_file = len(preds)
+
+    for p in preds:
+        all_txt = []
+        all_txt.extend(word_tokenize(p.strip()))
+
+        # uniq n-gram ratio
+        all_unigram = list(ngrams(all_txt, 1))
+        uniq_unigram = set(all_unigram)
+        unigram_ratio = len(uniq_unigram) / len(all_unigram)
+        sum_unigram_ratio += unigram_ratio
+
+        all_bigram = list(ngrams(all_txt, 2))
+        uniq_bigram = set(all_bigram)
+        bigram_ratio = len(uniq_bigram) / len(all_bigram)
+        sum_bigram_ratio += bigram_ratio
+
+        all_trigram = list(ngrams(all_txt, 3))
+        uniq_trigram = set(all_trigram)
+        trigram_ratio = len(uniq_trigram) / len(all_trigram)
+        sum_trigram_ratio += trigram_ratio
+
+        all_unigram_ratio.append(unigram_ratio)
+        all_bigram_ratio.append(bigram_ratio)
+        all_trigram_ratio.append(trigram_ratio)
+
+        # NID score
+        num_word = len(all_txt)
+        new_all_txt = [w for w in all_txt if not w in stop_words]
+        new_all_txt = [' '.join(new_all_txt)]
+
+        try:
+            x = count.fit_transform(new_all_txt)
+            bow = x.toarray()[0]
+            max_possible_entropy = np.log(num_word)
+            e = entropy(bow)
+            redundancy = (1 - e / max_possible_entropy)
+            sum_redundancy += redundancy
+            all_redundancy.append(redundancy)
+        except ValueError:
+            continue
+
+    print(f'Number of documents: {number_file}, average unique unigram ratio is {round(sum_unigram_ratio/number_file, 4)}, average unique bigram ratio is {round(sum_bigram_ratio/number_file, 4)}, average unique trigram ratio is {round(sum_trigram_ratio/number_file, 4)}, NID score is {round(sum_redundancy/number_file, 4)}.')
+    return all_unigram_ratio, all_bigram_ratio, all_trigram_ratio, all_redundancy
+
 
 def eval_all(
   gold_text: str, 
