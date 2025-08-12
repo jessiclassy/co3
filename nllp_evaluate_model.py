@@ -548,6 +548,12 @@ def main():
     # Step 10: Compute metrics and save output
     ###########################################################################
     print("Computing metrics in batches...")
+    print("BERTScore...")
+    test_hf = test_hf.map(
+        lambda ex: metrics.get_bertscore_metrics(ex["predicted_summary"], ex["summary"]),
+        batched=True,
+        batch_size=args.batch_size
+    )
     # Evaluate ROUGE, AlignScore, SummaC
     print("AlignScore...")
     test_hf = test_hf.map(
@@ -561,12 +567,12 @@ def main():
         batched=True,
         batch_size=args.batch_size
     )
-    print("SummaC...")
-    test_hf = test_hf.map(
-        metrics.eval_summac_batch,
-        batched=True,
-        batch_size=args.batch_size
-    )
+    # print("SummaC...")
+    # test_hf = test_hf.map(
+    #     metrics.eval_summac_batch,
+    #     batched=True,
+    #     batch_size=args.batch_size
+    # )
 
     print("Computing metrics one at a time...")
     # Evaluate LFTK
@@ -575,13 +581,8 @@ def main():
         lambda ex: metrics.eval_lftk(ex["predicted_summary"], suffix=".GEN"),
         batched=False
     )
-
-    # print("BERTScore...")
-    # test_hf = test_hf.map(
-    #     lambda ex: metrics.eval_bert(ex["summary"], ex["predicted_summary"]),
-    #     batched=False
-    # )
-
+    print("Redundancy scores...")
+    _, _, _, _ = metrics.get_redundancy_scores(test_hf["predicted_summary"])
     print("Saving predictions...")
     test_hf.to_csv(prediction_path)
     return
