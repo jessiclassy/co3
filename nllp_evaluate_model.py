@@ -29,7 +29,7 @@ def reconstruct_by_doc_id(
     grouped_chunks = defaultdict(lambda: {
         "texts": [],
         "references": [],
-        "generated": [],
+        "predictions": [],
         "confidences": []
     })
 
@@ -43,9 +43,12 @@ def reconstruct_by_doc_id(
 
         # Get model confidence if it exists
         conf = row.get("model_confidence", None)
-        doc["generated"].append((idx, row["prediction"], conf))
+        doc["predictions"].append((idx, row["prediction"], conf))
     
+    # Store final summaries
     final_data = []
+    # Store problem outptus
+    empty_results = []
     # Sort and reconstruct final documents
     for doc_id, chunks in grouped_chunks.items():
         # Always sort text and reference summary by index
@@ -53,28 +56,43 @@ def reconstruct_by_doc_id(
         # Only include contentful strings for reconstruction with whitespace
         references = [r for _, r in sorted(chunks["references"], key=lambda x: x[0]) if len(r)]
 
-        # Prepare generated chunks for reconstruction
-        generated_chunks = chunks["generated"]
+        # Prepare generated predictions for reconstruction
+        generated_predictions = chunks["predictions"]
 
         if k_limit is not None and expect_confidence:
             # Sort by confidence
-            generated_chunks = sorted(generated_chunks, key=lambda x: x[2], reverse=True)
+            generated_predictions = sorted(generated_predictions, key=lambda x: x[2], reverse=True)
             # Apply top-k cutoff
-            generated_chunks = generated_chunks[:k_limit]
+            generated_predictions = generated_predictions[:k_limit]
         
         # Always sort by original index in-place
         # Only include contentful strings for reconstruction with whitespace
-        generated = [g for _, g, _ in sorted(generated_chunks, key=lambda x: x[0]) if len (g)]
+        predictions = [g for _, g, _ in sorted(generated_predictions, key=lambda x: x[0]) if len(g)]
         
+        predicted_summary = " ".join(predictions)
+        # Manually remove special tokens that are not [NO_SUMMARY]
+        for special_token in ['<s>', '</s>', '<unk>', '<pad>', '<mask>']:
+            predicted_summary = predicted_summary.replace(special_token, "")
         # Reconstruct with whitespace between
-        final_data.append({
-            "doc_id": doc_id,
-            "text": " ".join(texts),
-            "summary": " ".join(references),
-            "predicted_summary": " ".join(generated)
-        })
+        row = {
+                "doc_id": doc_id,
+                "text": " ".join(texts),
+                "summary": " ".join(references),
+                "predicted_summary": predicted_summary
+            }
+        
+        # Only add contentful predictions to final data for evaluation
+        if len(predictions):
+            final_data.append(row)
+        else: 
+            # Save empty results to a separate dataset 
+            empty_results.append(row)
 
-    return Dataset.from_list(final_data)
+    # Return early if there is no final data -- hopefully unlikely
+    if len(final_data) == 0:
+        sys.exit("No summaries were generated. This setting does not work.")
+
+    return Dataset.from_list(final_data), Dataset.from_list(empty_results)
 
 def generate_blank_targets(
         data_skipped: Dataset,
@@ -160,14 +178,15 @@ def compute_control_token_probability(
         p_limit: float=None
 ):
     """
-    Loop over a pre-tokenized Dataset to compute logits for [NO_SUMMARY] control token
-    and split data into normal vs. skipped partitions
+    Loop over a pre-tokenized Dataset to compute full sequence probability of [NO_SUMMARY]
+    and filter the data by p_limit into normal vs. skipped partitions if p_limit is provided
     """
     # Return early if no p limit is provided
     if p_limit is None:
         return None, data_hf
-    # store prob([NO_SUMMARY])
-    no_summary_probs = []
+    
+    # store cumulative probability of [NO_SUMMARY]
+    control_ranks = []
 
     # Manually loop over data
     for start in tqdm(range(0, len(data_hf), batch_size), total=len(data_hf)//batch_size + 1):
@@ -175,30 +194,44 @@ def compute_control_token_probability(
 
         # Prepare inputs batch with tokenized tensors on device
         inputs = {
-            "input_ids": torch.tensor(batch["input_ids"]).to(device),
-            "attention_mask": torch.tensor(batch["attention_mask"]).to(device),
+            "input_ids": torch.tensor(batch["input_ids"], dtype=torch.long).to(device),
+            "attention_mask": torch.tensor(batch["attention_mask"], dtype=torch.long).to(device),
         }
 
         # Add global attention mask if it exists
         if "global_attention_mask" in batch.keys():
             inputs.update({
-                "global_attention_mask": torch.tensor(batch["global_attention_mask"]).to(device)
+                "global_attention_mask": torch.tensor(batch["global_attention_mask"], dtype=torch.long).to(device)
             })
+
+        # Prepare decoder start token for step 1
+        decoder_input = torch.full(
+            (inputs["input_ids"].size(0), 1),
+            model.config.decoder_start_token_id,
+            dtype=torch.long,
+            device=device,
+        )
 
         # Ensure gradient is not calculated
         with torch.no_grad():
-            logits = model(**inputs).logits[:, 0, :]
-            probs = torch.softmax(logits, dim=-1)[:, control_token_id]
-        
-        # Place probabilities on CPU to store for filtering
-        no_summary_probs.extend(probs.cpu().tolist())
+            # Forward pass, get [batch_size x 1 x vocab_size]
+            logits = model(
+                **inputs, 
+                decoder_input_ids=decoder_input
+            ).logits[:, 0, :]
 
+            # Compute relative rank of control token
+            ranks = torch.argsort(logits, dim=-1, descending=True)
+            control_positions = (ranks == control_token_id).nonzero(as_tuple=True)[1]
+            relative_ranks = control_positions.float() / (logits.size(-1) - 1)
+
+        control_ranks.extend(relative_ranks.cpu().tolist())
     # After loop finishes, add new column
-    data_hf = data_hf.add_column("no_summary_prob", no_summary_probs)
-
-    # Make mask for splitting
-    data_skipped = data_hf.filter(lambda ex: ex["no_summary_prob"] > p_limit)
-    data_normal = data_hf.filter(lambda ex: ex["no_summary_prob"] <= p_limit)
+    data_hf = data_hf.add_column("no_summary_rank", control_ranks)
+    
+    # Filter to split
+    data_skipped = data_hf.filter(lambda ex: ex["no_summary_rank"] > p_limit)
+    data_normal = data_hf.filter(lambda ex: ex["no_summary_rank"] <= p_limit)
 
     return data_skipped, data_normal
 
@@ -235,6 +268,10 @@ def convert_data(test_data:pd.DataFrame):
     Returns:
         the full test data as HF Dataset
     """
+    # Log number of null rows to be dropped
+    print(f"Detected {test_data.isna().sum().sum()} rows with null values, dropping...")
+    # Drop any null rows
+    test_data = test_data.dropna()
     # convert to HF Dataset type
     data_hf = Dataset.from_pandas(test_data)
 
@@ -267,7 +304,7 @@ def update_model_tokenizer(
     print(tokenizer.all_special_tokens)
     return model, tokenizer, tokenizer.convert_tokens_to_ids("[NO_SUMMARY]")
 
-def prepare_output_dir(
+def prepare_output_dirs(
         checkpoint_filepath: str,
         config_id: int
     ):
@@ -286,12 +323,12 @@ def prepare_output_dir(
     prediction_attrs = os.path.dirname(checkpoint_filepath).split("/")
 
     # set up output name
-    prediction_filename = ".".join([str(config_id)] + prediction_attrs[1:]) + ".csv"
+    prediction_filename = ".".join([str(config_id)] + prediction_attrs[-5:]) + ".csv"
     prediction_path = f"output/{prediction_filename}"
-    
+    empty_path = f"output/{str(config_id)}.EMPTY.csv"
     print(f"Test predictions will be saved to {prediction_path}")
 
-    return prediction_path
+    return prediction_path, empty_path
 
 def load_model_tokenizer(
         checkpoint: str, 
@@ -441,7 +478,7 @@ def main():
         base_tokenizer=args.base_tokenizer
     )
     # prepare output directories
-    prediction_path = prepare_output_dir(
+    prediction_path, empty_path = prepare_output_dirs(
         checkpoint_filepath=args.checkpoint,
         config_id=args.config_id
     )
@@ -486,7 +523,7 @@ def main():
     # Step 5: use p-threshold as a filter
     ###########################################################################
     # if p_limit is provided, compute [NO_SUMMARY] probability and split data
-    print("Computing logits for [NO_SUMMARY] control token...")
+    print("Computing relative probability rank for [NO_SUMMARY] control token...")
     test_skipped, test_hf = compute_control_token_probability(
         model=model,
         data_hf=test_hf,
@@ -538,50 +575,52 @@ def main():
     # Step 9: Reconstruct full summaries
     ###########################################################################
     print("Reconstructing full summaries from generated predictions...")
-    test_hf = reconstruct_by_doc_id(
+    test_hf, test_empty = reconstruct_by_doc_id(
         data_hf=test_hf, 
         k_limit=args.k_limit, 
         expect_confidence=return_confidence_scores
     )
     
+    # If there are empty rows, write them to a separate file
+    if len(test_empty):
+        test_empty.to_csv(empty_path)
     ###########################################################################
     # Step 10: Compute metrics and save output
     ###########################################################################
-    print("Computing metrics in batches...")
-    # print("BERTScore...")
-    # test_hf = test_hf.map(
-    #     lambda ex: metrics.get_bertscore_metrics(ex["predicted_summary"], ex["summary"]),
-    #     batched=True,
-    #     batch_size=args.batch_size
-    # )
+    print(f"Computing metrics for {len(test_hf)} generated summaries...")
+    print("BERTScore...")
+    test_hf = test_hf.map(
+        lambda ex: metrics.get_bertscore_metrics(ex["predicted_summary"], ex["summary"]),
+        batched=True,
+        batch_size=args.batch_size
+    )
     # Evaluate ROUGE, AlignScore, SummaC
-    print("AlignScore...")
+    print("Starting AlignScore...")
     test_hf = test_hf.map(
         metrics.eval_alignscore_batch,
         batched=True,
         batch_size=args.batch_size
     )
-    print("ROUGE...")
+    print("Starting ROUGE...")
     test_hf = test_hf.map(
         metrics.eval_rouge_batch,
         batched=True,
         batch_size=args.batch_size
     )
-    # print("SummaC...")
-    # test_hf = test_hf.map(
-    #     metrics.eval_summac_batch,
-    #     batched=True,
-    #     batch_size=args.batch_size
-    # )
+    # # print("SummaC...")
+    # # test_hf = test_hf.map(
+    # #     metrics.eval_summac_batch,
+    # #     batched=True,
+    # #     batch_size=args.batch_size
+    # # )
 
-    print("Computing metrics one at a time...")
     # Evaluate LFTK
-    print("LFTK...")
+    print("Starting LFTK...")
     test_hf = test_hf.map(
         lambda ex: metrics.eval_lftk(ex["predicted_summary"], suffix=".GEN"),
         batched=False
     )
-    print("Redundancy scores...")
+    print("Computing overall redundancy scores...")
     _, _, _, _ = metrics.get_redundancy_scores(test_hf["predicted_summary"])
     print("Saving predictions...")
     test_hf.to_csv(prediction_path)
