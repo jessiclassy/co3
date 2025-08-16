@@ -76,16 +76,21 @@ def convert_data(train_data:pd.DataFrame, blank_target_setting:str):
 
     Arguments:
         train_data: The training data as a pandas.DataFrame
-        blank_target_setting: "keep" or "drop" for inclusion/exclusion of the custom token
+        blank_target_setting: "keep" or "drop" for inclusion/exclusion of the custom token [NO_SUMMARY],
+                              "binary" to add two custom tokens 
     Returns:
         the full training data as HF Dataset
     """
     # Fill null summary examples according to blank_target_setting
-    if blank_target_setting == "keep":
+    if blank_target_setting != "drop":
         # Filter the training data by any null document chunks (if any) as a precaution
         train_data = train_data.loc[train_data.text.notna()]
-        # Add the special token string for null summary targets
+        # Add the special negative token for null summary targets
         train_data.loc[train_data.summary.isna(), 'summary'] = "[NO_SUMMARY]"
+
+        # Add special positive token for non-null targets
+        if blank_target_setting == "binary":
+            train_data.loc[train_data.summary.notna(), 'summary'] = "[SUMMARIZE] " + train_data.loc[train_data.summary.notna(), 'summary']
     else:
         train_data = train_data.dropna() # Drop any row with ANY null values
 
@@ -140,8 +145,8 @@ def tokenize_split_data(
     )
     # use train_test_split function to create a development partition
     data_dict = examples.train_test_split(
-        train_size = 0.9,
-        test_size = 0.1,
+        train_size = 0.98,
+        test_size = 0.02,
         seed= random_seed
     )
     data_dict["dev"] = data_dict["test"]
@@ -150,7 +155,8 @@ def tokenize_split_data(
 
 def update_model_tokenizer(
         model: AutoModelForSeq2SeqLM,
-        tokenizer: AutoTokenizer
+        tokenizer: AutoTokenizer,
+        blank_target_setting: str
     ):
     """Modifies the model vocabulary to include the custom 
     [NO_SUMMARY] token
@@ -165,7 +171,12 @@ def update_model_tokenizer(
     """
     print("Pretrained model special tokens")
     print(tokenizer.all_special_tokens)
-    special_tokens_dict = {'additional_special_tokens': ["[NO_SUMMARY]"]}
+
+    # Add only one token to tokenizer vocab unless using binary token setting
+    if blank_target_setting != "binary":
+        special_tokens_dict = {'additional_special_tokens': ["[NO_SUMMARY]"]}
+    else:
+        special_tokens_dict = {'additional_special_tokens': ["[NO_SUMMARY]", "[SUMMARIZE]"]}
 
     num_added_toks = tokenizer.add_special_tokens(special_tokens_dict)
     print("We have added", num_added_toks, "special tokens")
@@ -333,20 +344,6 @@ def main():
     max_output_len = train_max_output_len
     print(f"Detected input length:{max_input_len} and output length:{max_output_len}")
 
-    # test_max_input_len, test_max_output_len, test_data = load_data(
-    #     sourcefile=args.testfile
-    # )
-
-    # input_mismatch = train_max_input_len != test_max_input_len
-    # output_mismatch = train_max_output_len != test_max_output_len
-
-    # # Here we set input & output lengths
-    # if input_mismatch or output_mismatch:
-    #     print("Train and test file do NOT have compatible input and/or output lengths. Try again.")
-    #     sys.exit(1)
-    # else:
-    #     max_input_len = train_max_input_len
-
     # load model, tokenizer 
     model_name, model, tokenizer, device, has_global_attn = load_model_tokenizer(
         checkpoint=args.checkpoint,
@@ -364,8 +361,9 @@ def main():
     )
 
     # update model + tokenizer vocab
-    model, tokenizer = update_model_tokenizer(model, tokenizer)
+    model, tokenizer = update_model_tokenizer(model, tokenizer, args.blank_targets)
     
+    print("Adding special tokens before converting to Dataset...")
     # update training data with blank-target setting
     # convert to HF Dataset
     train_hf = convert_data(
@@ -373,6 +371,7 @@ def main():
         blank_target_setting=args.blank_targets
     )
 
+    print("Tokenizing data...")
     # Tokenize and split the original train data into new train and dev sets
     train_hf, dev_hf = tokenize_split_data(
         data_hf=train_hf,
@@ -384,6 +383,7 @@ def main():
         has_global_attn=has_global_attn
     )
 
+    print("Finetuning...")
     # train model
     finetune(
         model=model,
