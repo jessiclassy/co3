@@ -20,12 +20,15 @@ def reconstruct_by_doc_id(
         data_hf,
         k_limit: int=None,
         expect_confidence=False,
-        special_tokens=['<s>', '</s>', '<unk>', '<pad>', '<mask>','[SUMMARIZE]', '[NO_SUMMARY]']
+        special_tokens=['<s>', '</s>', '<unk>', '<pad>', '<mask>']
 ):
     """
     Loop over a Dataset and reconstruct the final documents + generated summaries
     using the doc ID, ordered by the chunk index, as a Dataset
     """
+    # Prepare comiled pattern
+    pattern = re.compile(r"|".join(map(re.escape, special_tokens)))
+    
     # Prepare defaultdict for grouped storage
     grouped_chunks = defaultdict(lambda: {
         "texts": [],
@@ -66,16 +69,16 @@ def reconstruct_by_doc_id(
             # Apply top-k cutoff
             generated_predictions = generated_predictions[:k_limit]
         
-        # Manually remove special tokens that are not [NO_SUMMARY]
-        for special_token in special_tokens:
-            predicted_summary = predicted_summary.replace(special_token, "").strip()
+        # Manually remove special tokens since we are examining them before
+        # Loop to preserve only the chunk index and generated text
+        clean_predictions = [(i, pattern.sub("", g).strip()) for i, g, _ in generated_predictions]
         
         # Always sort by original index in-place
         # Only include contentful strings for reconstruction with whitespace
-        predictions = [g for _, g, _ in sorted(generated_predictions, key=lambda x: x[0]) if len(g)]
+        predictions = [g for _, g in sorted(clean_predictions, key=lambda x: x[0]) if len(g)]
         
         predicted_summary = " ".join(predictions)
-        
+
         # Reconstruct with whitespace between
         row = {
                 "doc_id": doc_id,
@@ -586,7 +589,8 @@ def main():
     test_hf, test_empty = reconstruct_by_doc_id(
         data_hf=test_hf, 
         k_limit=args.k_limit, 
-        expect_confidence=return_confidence_scores
+        expect_confidence=return_confidence_scores,
+        special_tokens=tokenizer.all_special_tokens
     )
     
     # If there are empty rows, write them to a separate file
