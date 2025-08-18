@@ -1,0 +1,14 @@
+--- Feature = align_score: 5220 vs Gold Summaries
+model_1 = 5220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 37.255, df = 3265, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.1232275 0.1369188
+sample estimates:
+mean difference 
+      0.1300731 
+

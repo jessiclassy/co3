@@ -1,0 +1,54 @@
+--- Feature = fkre: 5220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.1330672 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.08450308 0.18163133 
+
+--- Feature = fkgl: 5220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1628864 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.2114773 -0.1142956 
+
+--- Feature = fogi: 5220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1697175 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.2183152 -0.1211198 
+
+--- Feature = smog: 5220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.09605536 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.14459380 -0.04751692 
+
+--- Feature = cole: 5220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.05019278 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.098710893 -0.001674673 
+
+--- Feature = auto: 5220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.176261 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.2248656 -0.1276565 
+
