@@ -188,7 +188,7 @@ def get_decision_metrics(
     # Clean up special tokens from text for this process
     for special_token in special_tokens:
       pred = pred.replace(special_token, "").strip()
-      ref = ref.replace(special_token, "").strip()
+      target = target.replace(special_token, "").strip() # shouldn't do anything, but doesn't hurt
 
     # Does prediction contain text? T/F
     pred_pos = bool(len(pred)) 
