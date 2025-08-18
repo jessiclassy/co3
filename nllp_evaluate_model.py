@@ -66,14 +66,16 @@ def reconstruct_by_doc_id(
             # Apply top-k cutoff
             generated_predictions = generated_predictions[:k_limit]
         
+        # Manually remove special tokens that are not [NO_SUMMARY]
+        for special_token in special_tokens:
+            predicted_summary = predicted_summary.replace(special_token, "").strip()
+        
         # Always sort by original index in-place
         # Only include contentful strings for reconstruction with whitespace
         predictions = [g for _, g, _ in sorted(generated_predictions, key=lambda x: x[0]) if len(g)]
         
         predicted_summary = " ".join(predictions)
-        # Manually remove special tokens that are not [NO_SUMMARY]
-        for special_token in special_tokens:
-            predicted_summary = predicted_summary.replace(special_token, "").strip()
+        
         # Reconstruct with whitespace between
         row = {
                 "doc_id": doc_id,
