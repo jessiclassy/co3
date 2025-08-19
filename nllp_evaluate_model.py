@@ -126,16 +126,20 @@ def generate_predictions(
         data_hf,
         batch_size,
         device,
+        tokens_to_suppress=[],
         skip_special_tokens=False
 ):
     """
     Map a pre-tokenized Dataset to generate predictions.
     """
+    if len(tokens_to_suppress):
+        print(f"Suppressing token IDs: {tokens_to_suppress}")
     predict_fn = utils.generate_prediction_factory(
         model=model,
         tokenizer=tokenizer,
         max_output_length=max_output_length,
         device=device,
+        tokens_to_suppress=tokens_to_suppress,
         skip_special_tokens=skip_special_tokens
     )
     data_hf = data_hf.map(
@@ -145,7 +149,7 @@ def generate_predictions(
     )
     return data_hf
 
-def compute_control_token_probability(
+def compute_control_token_likelihood(
         model,
         data_hf,
         control_token_id,
@@ -287,6 +291,7 @@ def update_model_tokenizer(
 
     print("Updated special tokens")
     print(tokenizer.all_special_tokens)
+    print(tokenizer.convert_tokens_to_ids(tokenizer.all_special_tokens))
     return model, tokenizer, tokenizer.convert_tokens_to_ids("[NO_SUMMARY]")
 
 def prepare_output_dirs(
@@ -347,7 +352,10 @@ def load_model_tokenizer(
     blank_target_setting = blank_pattern.search(checkpoint).group(1)
 
     # Model name and settings
-    model_name = '-'.join(checkpoint.split("/")[1].split("-")[0:2])
+    # Model name expects FULL path
+    model_name = '-'.join(checkpoint.split("/")[5].split("-")[0:2])
+    if not checkpoint.startswith("/"):
+        print("WARNING: model_name is not correctly parsed from relative filepath, but proceeding...")
     model = LEDForConditionalGeneration.from_pretrained(checkpoint).to(device)
     model.config.num_beams = 2
     model.config.max_length = max_output_len
@@ -524,7 +532,7 @@ def main():
     ###########################################################################
     # if p_limit is provided, compute [NO_SUMMARY] probability and split data
     print("Computing relative probability rank for [NO_SUMMARY] control token...")
-    test_skipped, test_hf = compute_control_token_probability(
+    test_skipped, test_hf = compute_control_token_likelihood(
         model=model,
         data_hf=test_hf,
         control_token_id=control_token_id,

@@ -49,7 +49,7 @@ def main():
     # Step 3: Add special token to pretrained tokenizer
     ###########################################################################
     # update model + tokenizer vocab
-    model, tokenizer, control_token_id = update_model_tokenizer(
+    model, tokenizer, _ = update_model_tokenizer(
         model, 
         tokenizer, 
         metadata["blank_target_setting"]
@@ -77,10 +77,10 @@ def main():
     ###########################################################################
     # if p_limit is provided, compute [NO_SUMMARY] probability and split data
     print("Computing logits for [NO_SUMMARY] control token...")
-    _, test_hf = compute_control_token_probability(
+    _, test_hf = compute_control_token_likelihood(
         model=model,
         data_hf=test_hf,
-        control_token_id=control_token_id,
+        control_token_id=tokenizer.convert_tokens_to_ids("[SUMMARIZE]"),
         batch_size=args.batch_size,
         device=device,
         p_limit=args.p_limit
@@ -103,11 +103,11 @@ def main():
 
     df.to_csv(f"{str(args.config_id)}_PROBE.csv")
 
-    print("Statistics for [NO_SUMMARY] rank for true cases:")
-    print(df.loc[~df.summary.str.len().astype(bool), "no_summary_rank"].describe())
-
-    print("Statistics for [NO_SUMMARY] rank for false cases:")
+    print("Statistics for [SUMMARIZE] rank for true cases:")
     print(df.loc[df.summary.str.len().astype(bool), "no_summary_rank"].describe())
+
+    print("Statistics for [SUMMARIZE] rank for false cases:")
+    print(df.loc[~df.summary.str.len().astype(bool), "no_summary_rank"].describe())
 
 
 if __name__ == "__main__":
