@@ -2,12 +2,17 @@ import torch
 import sys
 sys.path.insert(0, ".")
 import eval.eval_metrics2 as metrics
-from datasets import Dataset, load_dataset
+from datasets import Dataset
 import pandas as pd
 import argparse
 import warnings
 
-def compute(metric_name: str, is_gold: bool, ds: Dataset, batch_size:int):
+def compute(metric_name: str, 
+            is_gold: bool, 
+            is_baseline: bool,
+            ds: Dataset, 
+            batch_size:int
+        ):
     """
     Args:
         metric_name: metric to generate
@@ -26,20 +31,28 @@ def compute(metric_name: str, is_gold: bool, ds: Dataset, batch_size:int):
     }
     func = metric_fns[metric_name]
 
-    if is_gold:
-        target_column = "summary"
-        data_hf = load_dataset("billsum", split="test")
-        ds = ds.add_column("text", data_hf["text"])
-    else:
+    # NLLP predictions have the column predicted_summary
+    if not is_gold and not is_baseline:
         target_column = "predicted_summary"
+    else:
+        # If using the stored gold or baseline data
+        # TEMPORARY: hard-coded filepath
+        source_data = pd.read_csv("preprocess/nllp_data/billsum_clean_test.csv")
+        ds = ds.add_column("text", source_data["text"].tolist())
+        if is_gold:
+            target_column = "summary"
+        if is_baseline:
+            target_column = "summary_generated"
+            ds = ds.add_column("summary", source_data["summary"].tolist())
     
+    print(f"Targeting column {target_column}")
     # Redundancy is only computed in aggregate
     if metric_name == "redundancy":
         _, _, _, _ = func(ds[target_column])
     # BERTScore always requires preds + refs
     elif metric_name == "bertscore":
         ds = ds.map(
-            lambda ex: func(ex["predicted_summary"], ex["summary"]),
+            lambda ex: func(ex[target_column], ex["summary"]),
             batched=True,
             batch_size=batch_size
         )
@@ -49,7 +62,7 @@ def compute(metric_name: str, is_gold: bool, ds: Dataset, batch_size:int):
             batched=True,
             batch_size=batch_size
         )
-    if is_gold:
+    if is_gold or is_baseline:
         # Remove the mounted text column
         ds = ds.remove_columns(column_names="text")
     return ds
@@ -64,12 +77,20 @@ def load_data(source_file:str, metric_name:str):
     """
     # Check if this is gold or prediction data
     is_gold = "gold" in source_file
+    is_baseline = "pegasus" in source_file
+    if is_gold:
+        print("Detected gold data")
+    if is_baseline:
+        print("Detected baseline data")
+    else:
+        print("Detected NLLP prediction data")
+
     # Read as dataframe
     df = pd.read_csv(source_file)
     if metric_name in df.columns:
         warnings.warn("Metric already exists in source file; this job will overwrite it!")
     # Convert to HF Dataset
-    return Dataset.from_pandas(df), is_gold
+    return Dataset.from_pandas(df), is_gold, is_baseline
 
 def load_args():
     parser = argparse.ArgumentParser()
@@ -87,10 +108,10 @@ def main():
     print("Running on ", device)
 
     # Load input file
-    data, is_gold = load_data(args.file, args.metric)
+    data, is_gold, is_baseline = load_data(args.file, args.metric)
 
     # Compute metric
-    data = compute(args.metric, is_gold, data, args.batch_size)
+    data = compute(args.metric, is_gold, is_baseline, data, args.batch_size)
 
     # Overwrite file
     data.to_csv(args.file)
