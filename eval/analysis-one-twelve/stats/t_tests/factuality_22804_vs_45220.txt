@@ -1,0 +1,14 @@
+--- Feature = align_score: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -86.205, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3800175 -0.3631153
+sample estimates:
+mean difference 
+     -0.3715664 
+

@@ -1,0 +1,99 @@
+--- Feature = rouge1_precision: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.915236 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.9661996 -0.8642725 
+
+--- Feature = rouge2_precision: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.7614492 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.8116637 -0.7112346 
+
+--- Feature = rougeL_precision: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.9113072 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.9622501 -0.8603644 
+
+--- Feature = rouge1_recall: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 1.09645 (large)
+95 percent confidence interval:
+   lower    upper 
+1.044446 1.148454 
+
+--- Feature = rouge2_recall: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 0.7999249 (medium)
+95 percent confidence interval:
+    lower     upper 
+0.7495348 0.8503150 
+
+--- Feature = rougeL_recall: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 0.7827178 (medium)
+95 percent confidence interval:
+    lower     upper 
+0.7324072 0.8330284 
+
+--- Feature = rouge1_fmeasure: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.2824875 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.3312169 -0.2337581 
+
+--- Feature = rouge2_fmeasure: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.2084719 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.2570916 -0.1598522 
+
+--- Feature = rougeL_fmeasure: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.3575739 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.4064480 -0.3086997 
+
+--- Feature = bertscore_p: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.7518614 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.8020335 -0.7016893 
+
+--- Feature = bertscore_r: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 0.5127345 (medium)
+95 percent confidence interval:
+   lower    upper 
+0.463456 0.562013 
+

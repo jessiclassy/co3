@@ -1,0 +1,84 @@
+--- Feature = fkre: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 0.31339, df = 3268, p-value = 0.754
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.7284493  1.0056148
+sample estimates:
+mean difference 
+      0.1385827 
+
+--- Feature = fkgl: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 3.5452, df = 3268, p-value = 0.0003978
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.2356011 0.8186583
+sample estimates:
+mean difference 
+      0.5271297 
+
+--- Feature = fogi: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 6.6114, df = 3268, p-value = 4.429e-11
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.7185119 1.3243428
+sample estimates:
+mean difference 
+       1.021427 
+
+--- Feature = smog: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 9.7413, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.5247454 0.7892130
+sample estimates:
+mean difference 
+      0.6569792 
+
+--- Feature = cole: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -12.891, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.6383486 -0.4698056
+sample estimates:
+mean difference 
+     -0.5540771 
+
+--- Feature = auto: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.8737, df = 3268, p-value = 0.004084
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.1709703 0.9053123
+sample estimates:
+mean difference 
+      0.5381413 
+

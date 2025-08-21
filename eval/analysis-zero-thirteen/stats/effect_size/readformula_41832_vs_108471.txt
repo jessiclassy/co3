@@ -1,0 +1,54 @@
+--- Feature = fkre: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 0.2733282 (small)
+95 percent confidence interval:
+    lower     upper 
+0.2246141 0.3220422 
+
+--- Feature = fkgl: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.0923622 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.14087625 -0.04384815 
+
+--- Feature = fogi: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.0446094 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.093103632  0.003884828 
+
+--- Feature = smog: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.02052019 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.06900967  0.02796928 
+
+--- Feature = cole: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.4401767 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.4892485 -0.3911048 
+
+--- Feature = auto: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: -0.06266746 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.11116755 -0.01416736 
+

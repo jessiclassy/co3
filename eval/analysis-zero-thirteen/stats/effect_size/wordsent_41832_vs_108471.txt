@@ -1,0 +1,81 @@
+--- Feature = t_word: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 1.173361 (large)
+95 percent confidence interval:
+   lower    upper 
+1.120866 1.225856 
+
+--- Feature = t_stopword: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 1.112546 (large)
+95 percent confidence interval:
+   lower    upper 
+1.060442 1.164650 
+
+--- Feature = t_punct: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 0.9574156 (large)
+95 percent confidence interval:
+    lower     upper 
+0.9062248 1.0086064 
+
+--- Feature = t_syll: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 1.084679 (large)
+95 percent confidence interval:
+   lower    upper 
+1.032747 1.136610 
+
+--- Feature = t_syll2: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 0.9979877 (large)
+95 percent confidence interval:
+    lower     upper 
+0.9465697 1.0494057 
+
+--- Feature = t_syll3: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 0.8401802 (large)
+95 percent confidence interval:
+    lower     upper 
+0.7895979 0.8907624 
+
+--- Feature = t_uword: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 1.101078 (large)
+95 percent confidence interval:
+   lower    upper 
+1.049045 1.153110 
+
+--- Feature = t_sent: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 1.250303 (large)
+95 percent confidence interval:
+   lower    upper 
+1.197288 1.303317 
+
+--- Feature = t_char: 41832 vs 108471 Summaries
+
+Cohen's d
+
+d estimate: 1.10605 (large)
+95 percent confidence interval:
+   lower    upper 
+1.053987 1.158114 
+

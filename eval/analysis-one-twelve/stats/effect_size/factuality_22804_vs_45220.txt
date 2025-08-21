@@ -1,0 +1,9 @@
+--- Feature = align_score: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -2.111282 (large)
+95 percent confidence interval:
+    lower     upper 
+-2.171789 -2.050774 
+

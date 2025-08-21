@@ -1,0 +1,81 @@
+--- Feature = t_word: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.4851587 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.5343551 -0.4359624 
+
+--- Feature = t_stopword: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.4968112 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.5460417 -0.4475807 
+
+--- Feature = t_punct: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: 0.2178115 (small)
+95 percent confidence interval:
+    lower     upper 
+0.1691797 0.2664432 
+
+--- Feature = t_syll: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.5011877 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.5504312 -0.4519441 
+
+--- Feature = t_syll2: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.4262767 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.4753125 -0.3772409 
+
+--- Feature = t_syll3: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.4035195 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.4524987 -0.3545404 
+
+--- Feature = t_uword: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.9754152 (large)
+95 percent confidence interval:
+     lower      upper 
+-1.0267058 -0.9241247 
+
+--- Feature = t_sent: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.5623025 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.6117396 -0.5128654 
+
+--- Feature = t_char: 22804 vs 45220 Summaries
+
+Cohen's d
+
+d estimate: -0.5062083 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.5554669 -0.4569496 
+

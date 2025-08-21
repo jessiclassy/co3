@@ -1,0 +1,154 @@
+--- Feature = rouge1_precision: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -74.037, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3232193 -0.3065416
+sample estimates:
+mean difference 
+     -0.3148804 
+
+--- Feature = rouge2_precision: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -108.58, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3918055 -0.3779067
+sample estimates:
+mean difference 
+     -0.3848561 
+
+--- Feature = rougeL_precision: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -77.11, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3034509 -0.2884017
+sample estimates:
+mean difference 
+     -0.2959263 
+
+--- Feature = rouge1_recall: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -101.56, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3727531 -0.3586325
+sample estimates:
+mean difference 
+     -0.3656928 
+
+--- Feature = rouge2_recall: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -124.05, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3785843 -0.3668031
+sample estimates:
+mean difference 
+     -0.3726937 
+
+--- Feature = rougeL_recall: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -97.471, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3179776 -0.3054373
+sample estimates:
+mean difference 
+     -0.3117074 
+
+--- Feature = rouge1_fmeasure: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -117.28, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3282791 -0.3174830
+sample estimates:
+mean difference 
+     -0.3228811 
+
+--- Feature = rouge2_fmeasure: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -136.47, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3532118 -0.3432066
+sample estimates:
+mean difference 
+     -0.3482092 
+
+--- Feature = rougeL_fmeasure: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -110.72, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.2902154 -0.2801155
+sample estimates:
+mean difference 
+     -0.2851654 
+
+--- Feature = bertscore_p: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -100.63, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.07429773 -0.07145782
+sample estimates:
+mean difference 
+    -0.07287777 
+
+--- Feature = bertscore_r: 22804 vs 45220 Summaries
+model_1 = 22804 | model_2 = 45220
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -132.47, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.08489625 -0.08241976
+sample estimates:
+mean difference 
+    -0.08365801 
+

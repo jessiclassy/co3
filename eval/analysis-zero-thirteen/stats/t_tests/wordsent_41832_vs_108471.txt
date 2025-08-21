@@ -1,0 +1,126 @@
+--- Feature = t_word: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 48.483, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 158.9041 172.2981
+sample estimates:
+mean difference 
+       165.6011 
+
+--- Feature = t_stopword: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 45.942, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 65.44293 71.27778
+sample estimates:
+mean difference 
+       68.36035 
+
+--- Feature = t_punct: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 39.742, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 22.72055 25.07878
+sample estimates:
+mean difference 
+       23.89966 
+
+--- Feature = t_syll: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 44.81, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 256.3308 279.7891
+sample estimates:
+mean difference 
+         268.06 
+
+--- Feature = t_syll2: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 41.181, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 37.87645 41.66347
+sample estimates:
+mean difference 
+       39.76996 
+
+--- Feature = t_syll3: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 34.958, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 13.92249 15.57705
+sample estimates:
+mean difference 
+       14.74977 
+
+--- Feature = t_uword: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 45.494, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 50.30368 54.83489
+sample estimates:
+mean difference 
+       52.56929 
+
+--- Feature = t_sent: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 51.053, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 3.931687 4.245738
+sample estimates:
+mean difference 
+       4.088712 
+
+--- Feature = t_char: 41832 vs 108471 Summaries
+model_1 = 41832 | model_2 = 108471
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 45.691, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 795.9986 867.3774
+sample estimates:
+mean difference 
+        831.688 
+
