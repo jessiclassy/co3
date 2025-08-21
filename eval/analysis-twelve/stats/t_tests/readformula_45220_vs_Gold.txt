@@ -1,0 +1,84 @@
+--- Feature = fkre: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 5.7604, df = 3268, p-value = 9.167e-09
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 2.251343 4.574751
+sample estimates:
+mean difference 
+       3.413047 
+
+--- Feature = fkgl: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -6.9845, df = 3268, p-value = 3.448e-12
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.841571 -1.034269
+sample estimates:
+mean difference 
+       -1.43792 
+
+--- Feature = fogi: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -7.2642, df = 3268, p-value = 4.67e-13
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.964100 -1.129187
+sample estimates:
+mean difference 
+      -1.546644 
+
+--- Feature = smog: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -4.224, df = 3268, p-value = 2.466e-05
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.4908982 -0.1796445
+sample estimates:
+mean difference 
+     -0.3352713 
+
+--- Feature = cole: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.2293, df = 3268, p-value = 0.02586
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.20870800 -0.01337949
+sample estimates:
+mean difference 
+     -0.1110437 
+
+--- Feature = auto: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -7.5507, df = 3268, p-value = 5.582e-14
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.483818 -1.459787
+sample estimates:
+mean difference 
+      -1.971803 
+

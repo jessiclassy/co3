@@ -1,0 +1,9 @@
+--- Feature = align_score: 108471 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.9655386 (large)
+95 percent confidence interval:
+   lower    upper 
+0.914303 1.016774 
+

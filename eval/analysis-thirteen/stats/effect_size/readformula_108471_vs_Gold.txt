@@ -1,0 +1,54 @@
+--- Feature = fkre: 108471 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.2127283 (small)
+95 percent confidence interval:
+    lower     upper 
+0.1641031 0.2613534 
+
+--- Feature = fkgl: 108471 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.2478405 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.2965145 -0.1991665 
+
+--- Feature = fogi: 108471 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.2544536 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.3031377 -0.2057696 
+
+--- Feature = smog: 108471 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1537501 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.2023099 -0.1051903 
+
+--- Feature = cole: 108471 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1257384 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.17427449 -0.07720231 
+
+--- Feature = auto: 108471 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.2715931 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.3203043 -0.2228819 
+

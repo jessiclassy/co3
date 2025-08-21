@@ -1,0 +1,84 @@
+--- Feature = fkre: 108471 vs Gold Summaries
+model_1 = 108471 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 8.6134, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 4.025287 6.397973
+sample estimates:
+mean difference 
+        5.21163 
+
+--- Feature = fkgl: 108471 vs Gold Summaries
+model_1 = 108471 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -9.9619, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.435413 -1.634401
+sample estimates:
+mean difference 
+      -2.034907 
+
+--- Feature = fogi: 108471 vs Gold Summaries
+model_1 = 108471 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -10.206, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.576545 -1.746121
+sample estimates:
+mean difference 
+      -2.161333 
+
+--- Feature = smog: 108471 vs Gold Summaries
+model_1 = 108471 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -6.261, df = 3268, p-value = 4.324e-10
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.7053121 -0.3689093
+sample estimates:
+mean difference 
+     -0.5371107 
+
+--- Feature = cole: 108471 vs Gold Summaries
+model_1 = 108471 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -5.1812, df = 3268, p-value = 2.338e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.4006042 -0.1806469
+sample estimates:
+mean difference 
+     -0.2906256 
+
+--- Feature = auto: 108471 vs Gold Summaries
+model_1 = 108471 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -10.905, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -3.325518 -2.311919
+sample estimates:
+mean difference 
+      -2.818719 
+

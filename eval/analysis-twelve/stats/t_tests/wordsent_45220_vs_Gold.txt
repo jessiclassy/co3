@@ -1,0 +1,126 @@
+--- Feature = t_word: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -12.08, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -40.66392 -29.30671
+sample estimates:
+mean difference 
+      -34.98532 
+
+--- Feature = t_stopword: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 0.14043, df = 3268, p-value = 0.8883
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.141167  2.471543
+sample estimates:
+mean difference 
+      0.1651881 
+
+--- Feature = t_punct: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -7.889, df = 3268, p-value = 4.119e-15
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -4.120275 -2.479908
+sample estimates:
+mean difference 
+      -3.300092 
+
+--- Feature = t_syll: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.9754, df = 3268, p-value = 0.002947
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -22.931110  -4.714041
+sample estimates:
+mean difference 
+      -13.82258 
+
+--- Feature = t_syll2: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.9958, df = 3268, p-value = 0.002758
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -3.6414725 -0.7604853
+sample estimates:
+mean difference 
+      -2.200979 
+
+--- Feature = t_syll3: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.4759, df = 3268, p-value = 0.1401
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.0620293  0.1498237
+sample estimates:
+mean difference 
+     -0.4561028 
+
+--- Feature = t_uword: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -3.0689, df = 3268, p-value = 0.002166
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -5.260090 -1.158999
+sample estimates:
+mean difference 
+      -3.209544 
+
+--- Feature = t_sent: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.8615, df = 3268, p-value = 0.004243
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.34281112 -0.06404113
+sample estimates:
+mean difference 
+     -0.2034261 
+
+--- Feature = t_char: 45220 vs Gold Summaries
+model_1 = 45220 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -5.1671, df = 3268, p-value = 2.52e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -102.65958  -46.18104
+sample estimates:
+mean difference 
+      -74.42031 
+

@@ -1,0 +1,81 @@
+--- Feature = t_word: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.2806551 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.3293814 -0.2319288 
+
+--- Feature = t_stopword: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: 0.003277837 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.04521040  0.05176607 
+
+--- Feature = t_punct: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1847053 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.2332968 -0.1361139 
+
+--- Feature = t_syll: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.06887091 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.11737349 -0.02036834 
+
+--- Feature = t_syll2: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.06911384 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.11761651 -0.02061117 
+
+--- Feature = t_syll3: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.03355109 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.08204270  0.01494052 
+
+--- Feature = t_uword: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.07068119 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.11918453 -0.02217785 
+
+--- Feature = t_sent: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.06498281 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.11348381 -0.01648182 
+
+--- Feature = t_char: 45220 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.1196425 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.16817403 -0.07111091 
+
