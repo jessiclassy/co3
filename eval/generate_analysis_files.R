@@ -1,9 +1,9 @@
 # File Arguments:
-MODEL_NAME <- "wugNATSS-pegasus(on-unsimp)" # The name of the Model whose output is being evaluated
-MODEL_OUTPUT_PATH <- "../output/deliverable_4/wugNATSS-pegasus/eval_on_unsimp.csv" # place to look for model output csv
-ALT_NAME <- "Pegasus-Baseline" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
-ALT_PATH <- "../output/deliverable_2/pegasusbillsum_baseline_ALL_metrics.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "analysis-temporary/" # place to write the plots and stats to. Must end with a "/"
+MODEL_NAME <- "41832" # The name of the Model whose output is being evaluated
+MODEL_OUTPUT_PATH <- "output/0.led-base.billsum_clean_train_se3-led-1024-512.drop_blank_targets.1024_512_5_epochs.checkpoint-41832.csv" # place to look for model output csv
+ALT_NAME <- "108471" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
+ALT_PATH <- "output/13.led-base.billsum_clean_train_se3-led-1024-512.binary_blank_targets.1024_512_5_epochs.checkpoint-108471.csv" # place to look for gold data/alternate model data csv
+ANALYSIS_PATH <- "eval/analysis-zero-thirteen/" # place to write the plots and stats to. Must end with a "/"
 HISTOGRAM_BINS <- 60 # number of bins to display in the histograms
 # How to use this script:
 # --- 1. Adjust the File Arguments for the desired comparison between models (or between model and gold summaries)
@@ -27,6 +27,7 @@ library(stringr)
 library(dplyr)
 library(pastecs)
 library(effsize)
+library(readr)
 
 ALT_SUFFIX <- ".GOLD"
 GEN_SUFFIX <- ".GEN"
@@ -43,8 +44,15 @@ SHORT_ALT_NAME <- ifelse(str_detect(ALT_NAME,long), str_extract(ALT_NAME,long,gr
 
 # This list will store 2 dataframes of metrics for 'gen' and 'alt' model output
 metrics <- list()
-metrics[["alt"]] <- read.csv(ALT_PATH)
-metrics[['gen']] <- read.csv(MODEL_OUTPUT_PATH)
+metrics[["alt"]] <- read.csv(ALT_PATH) 
+#%>%
+ # rename(doc_id = X)
+metrics[['gen']] <- read.csv(MODEL_OUTPUT_PATH) 
+
+# common_ids <- intersect(metrics[["alt"]]$doc_id, metrics[["gen"]]$doc_id)
+
+# metrics[['alt']] <- metrics[['alt']][metrics[['alt']]$doc_id %in% common_ids, ]
+# metrics[['gen']] <- metrics[['gen']][metrics[['gen']]$doc_id %in% common_ids, ]
 
 # Remove the redundant '.GOLD' lftk columns if included in file headers at MODEL_OUTPUT_PATH then
 # set column names properly for processing
@@ -94,7 +102,9 @@ family$relevance <- c( # Relevance Metrics
   "rouge1_fmeasure",
   "rouge2_fmeasure",  
   "rougeL_fmeasure",
-  "bert_score"
+  "bertscore_p",
+  "bertscore_r",
+  "bertscore_f1"
 )
 family$factuality <- c( # Factuality Metrics
   "align_score",
@@ -123,7 +133,8 @@ for (feature in colnames(metrics$gen)) {
     
     # Save plots in right place
     path_to_save <- str_c(ANALYSIS_PATH,"plots/",fam,"/")
-    ggsave(str_c(path_to_save,feature,"_distribution_",MODEL_NAME,"_and_",ALT_NAME,"_summaries.png"),plt,create.dir = T)
+    if (!dir.exists(path_to_save)) dir.create(path_to_save, recursive = TRUE)
+    ggsave(filename = file.path(path_to_save, paste0(feature, "_distribution_", MODEL_NAME, "_and_", ALT_NAME, "_summaries.png")), plot = plt)
     
   } # ----- End of Attributes loop
 } # ----- End of lftk features loop
@@ -208,15 +219,15 @@ smps_gen <- c()
 for(i in 1:num_quantiles){
   df_gold <- gold_quantiles %>% filter(quantile == i)
   df_gen <- gen_quantiles %>% filter(quantile == i)
-  smps_gold <- c(smps_gold,sample(df_gold$X,1))
-  smps_gen <- c(smps_gen,sample(df_gen$X,1))
+  smps_gold <- c(smps_gold,sample(df_gold$doc_id,1))
+  smps_gen <- c(smps_gen,sample(df_gen$doc_id,1))
 }
 
-t_gold <- gold_quantiles %>% filter(X %in% smps_gold)
-t2_gold <- t_gold %>% left_join(gen_quantiles,by="X",suffix = c(str_c(".", ALT_NAME),str_c(".", MODEL_NAME)))
+t_gold <- gold_quantiles %>% filter(doc_id %in% smps_gold)
+t2_gold <- t_gold %>% left_join(gen_quantiles,by="doc_id",suffix = c(str_c(".", ALT_NAME),str_c(".", MODEL_NAME)))
 
-t_gen <- gen_quantiles %>% filter(X %in% smps_gen)
-t2_gen <- t_gen %>% left_join(gold_quantiles,by="X",suffix = c(str_c(".",MODEL_NAME),str_c(".",ALT_NAME)))
+t_gen <- gen_quantiles %>% filter(doc_id %in% smps_gen)
+t2_gen <- t_gen %>% left_join(gold_quantiles,by="doc_id",suffix = c(str_c(".",MODEL_NAME),str_c(".",ALT_NAME)))
 
 
 # Prep directories for writing analysis to files
