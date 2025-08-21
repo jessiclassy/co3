@@ -1,0 +1,28 @@
+--- Feature = align_score: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -60.052, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.2494260 -0.2336535
+sample estimates:
+mean difference 
+     -0.2415398 
+
+--- Feature = summac: 22804 vs Gold Summaries
+model_1 = 22804 | model_2 = Gold
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -34.026, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.09164847 -0.08166185
+sample estimates:
+mean difference 
+    -0.08665516 
+

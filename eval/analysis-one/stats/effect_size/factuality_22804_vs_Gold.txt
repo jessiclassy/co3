@@ -1,0 +1,18 @@
+--- Feature = align_score: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -1.501192 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.556087 -1.446298 
+
+--- Feature = summac: 22804 vs Gold Summaries
+
+Cohen's d
+
+d estimate: -0.6269405 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.6766056 -0.5772754 
+
