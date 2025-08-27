@@ -1,0 +1,126 @@
+--- Feature = t_word: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.8448, df = 3268, p-value = 0.06515
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -9.3914123  0.2858754
+sample estimates:
+mean difference 
+      -4.552768 
+
+--- Feature = t_stopword: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.9237, df = 3268, p-value = 0.05448
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -4.34486558  0.04140887
+sample estimates:
+mean difference 
+      -2.151728 
+
+--- Feature = t_punct: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -3.0869, df = 3268, p-value = 0.002039
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.8442409 -0.4114948
+sample estimates:
+mean difference 
+      -1.127868 
+
+--- Feature = t_syll: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.2926, df = 3268, p-value = 0.1962
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -14.068713   2.889148
+sample estimates:
+mean difference 
+      -5.589783 
+
+--- Feature = t_syll2: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.79545, df = 3268, p-value = 0.4264
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.887724  0.798094
+sample estimates:
+mean difference 
+     -0.5448149 
+
+--- Feature = t_syll3: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.064609, df = 3268, p-value = 0.9485
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.5849360  0.5476157
+sample estimates:
+mean difference 
+    -0.01866014 
+
+--- Feature = t_uword: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.2464, df = 3268, p-value = 0.02475
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -4.1535391 -0.2820681
+sample estimates:
+mean difference 
+      -2.217804 
+
+--- Feature = t_sent: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.0462, df = 3268, p-value = 0.04082
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.241406344 -0.005152237
+sample estimates:
+mean difference 
+     -0.1232793 
+
+--- Feature = t_char: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.455, df = 3268, p-value = 0.1458
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -44.946787   6.653731
+sample estimates:
+mean difference 
+      -19.14653 
+

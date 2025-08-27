@@ -1,0 +1,84 @@
+--- Feature = fkre: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -15.483, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -7.519366 -5.828957
+sample estimates:
+mean difference 
+      -6.674162 
+
+--- Feature = fkgl: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 16.756, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1.872778 2.369136
+sample estimates:
+mean difference 
+       2.120957 
+
+--- Feature = fogi: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 15.867, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1.840340 2.359296
+sample estimates:
+mean difference 
+       2.099818 
+
+--- Feature = smog: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 9.707, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.5371880 0.8091265
+sample estimates:
+mean difference 
+      0.6731572 
+
+--- Feature = cole: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 6.1385, df = 3268, p-value = 9.33e-10
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.2174876 0.4216253
+sample estimates:
+mean difference 
+      0.3195564 
+
+--- Feature = auto: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 16.568, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 2.291981 2.907272
+sample estimates:
+mean difference 
+       2.599626 
+

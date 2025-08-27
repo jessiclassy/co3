@@ -1,0 +1,54 @@
+--- Feature = fkre: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.08865608 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.13716809 -0.04014406 
+
+--- Feature = fkgl: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: 0.05416291 (negligible)
+95 percent confidence interval:
+      lower       upper 
+0.005665817 0.102659996 
+
+--- Feature = fogi: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: 0.05144922 (negligible)
+95 percent confidence interval:
+      lower       upper 
+0.002952999 0.099945441 
+
+--- Feature = smog: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: 0.04003264 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.008460418  0.088525694 
+
+--- Feature = cole: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: 0.0998024 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.05128403 0.14832078 
+
+--- Feature = auto: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: 0.0484805 (negligible)
+95 percent confidence interval:
+        lower         upper 
+-1.482376e-05  9.697582e-02 
+

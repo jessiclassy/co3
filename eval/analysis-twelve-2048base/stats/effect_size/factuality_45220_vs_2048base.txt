@@ -1,0 +1,18 @@
+--- Feature = align_score: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: 0.0113761 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.03711249  0.05986470 
+
+--- Feature = summac: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -1.255476 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.308526 -1.202426 
+

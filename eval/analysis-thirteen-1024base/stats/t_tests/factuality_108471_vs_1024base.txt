@@ -1,0 +1,28 @@
+--- Feature = align_score: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 4.3206, df = 3268, p-value = 1.603e-05
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.009264418 0.024658946
+sample estimates:
+mean difference 
+     0.01696168 
+
+--- Feature = summac: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 560.98, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.9385881 0.9451720
+sample estimates:
+mean difference 
+        0.94188 
+

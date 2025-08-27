@@ -1,0 +1,81 @@
+--- Feature = t_word: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.8623256 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.9130173 -0.8116340 
+
+--- Feature = t_stopword: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.8376152 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.8881849 -0.7870455 
+
+--- Feature = t_punct: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.7844937 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.8348124 -0.7341750 
+
+--- Feature = t_syll: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.8276067 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.8781280 -0.7770854 
+
+--- Feature = t_syll2: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.7722549 (medium)
+95 percent confidence interval:
+     lower      upper 
+-0.8225179 -0.7219918 
+
+--- Feature = t_syll3: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.6503695 (medium)
+95 percent confidence interval:
+    lower     upper 
+-0.700123 -0.600616 
+
+--- Feature = t_uword: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.8876019 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.9384216 -0.8367822 
+
+--- Feature = t_sent: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -1.218575 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.271372 -1.165778 
+
+--- Feature = t_char: 108471 vs 1024base Summaries
+
+Cohen's d
+
+d estimate: -0.8425209 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.8931146 -0.7919273 
+

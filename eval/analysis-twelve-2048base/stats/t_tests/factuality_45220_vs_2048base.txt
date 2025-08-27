@@ -1,0 +1,28 @@
+--- Feature = align_score: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 0.49011, df = 3268, p-value = 0.6241
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.006266521  0.010443536
+sample estimates:
+mean difference 
+    0.002088508 
+
+--- Feature = summac: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -55.613, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.09516438 -0.08868272
+sample estimates:
+mean difference 
+    -0.09192355 
+

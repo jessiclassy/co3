@@ -1,0 +1,84 @@
+--- Feature = fkre: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -4.0646, df = 3268, p-value = 4.926e-05
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.8325099 -0.9890429
+sample estimates:
+mean difference 
+      -1.910776 
+
+--- Feature = fkgl: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.4784, df = 3268, p-value = 0.01325
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.08033362 0.68883127
+sample estimates:
+mean difference 
+      0.3845824 
+
+--- Feature = fogi: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.3523, df = 3268, p-value = 0.01872
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.06306909 0.69466967
+sample estimates:
+mean difference 
+      0.3788694 
+
+--- Feature = smog: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 1.8324, df = 3268, p-value = 0.06698
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.008935239  0.264244508
+sample estimates:
+mean difference 
+      0.1276546 
+
+--- Feature = cole: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 4.5908, df = 3268, p-value = 4.582e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.1249082 0.3111426
+sample estimates:
+mean difference 
+      0.2180254 
+
+--- Feature = auto: 45220 vs 2048base Summaries
+model_1 = 45220 | model_2 = 2048base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.2158, df = 3268, p-value = 0.02678
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.0498597 0.8163605
+sample estimates:
+mean difference 
+      0.4331101 
+

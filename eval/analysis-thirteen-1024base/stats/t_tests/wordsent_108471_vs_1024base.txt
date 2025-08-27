@@ -1,0 +1,126 @@
+--- Feature = t_word: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -35.93, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -117.7525 -105.5660
+sample estimates:
+mean difference 
+      -111.6592 
+
+--- Feature = t_stopword: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -34.867, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -50.28366 -44.92955
+sample estimates:
+mean difference 
+      -47.60661 
+
+--- Feature = t_punct: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -32.788, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -18.36153 -16.28943
+sample estimates:
+mean difference 
+      -17.32548 
+
+--- Feature = t_syll: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -34.444, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -200.1883 -178.6248
+sample estimates:
+mean difference 
+      -189.4065 
+
+--- Feature = t_syll2: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -32, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -30.17955 -26.69473
+sample estimates:
+mean difference 
+      -28.43714 
+
+--- Feature = t_syll3: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -27.203, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -11.30025  -9.78081
+sample estimates:
+mean difference 
+      -10.54053 
+
+--- Feature = t_uword: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -36.873, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -43.01391 -38.67039
+sample estimates:
+mean difference 
+      -40.84215 
+
+--- Feature = t_sent: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -49.957, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -4.101038 -3.791283
+sample estimates:
+mean difference 
+      -3.946161 
+
+--- Feature = t_char: 108471 vs 1024base Summaries
+model_1 = 108471 | model_2 = 1024base
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -35.062, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -618.3372 -552.8448
+sample estimates:
+mean difference 
+       -585.591 
+

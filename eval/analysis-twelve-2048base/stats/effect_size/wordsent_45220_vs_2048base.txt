@@ -1,0 +1,81 @@
+--- Feature = t_word: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.0414402 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.089933603  0.007053204 
+
+--- Feature = t_stopword: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.043472 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.091965931  0.005021923 
+
+--- Feature = t_punct: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.06900227 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.11750490 -0.02049964 
+
+--- Feature = t_syll: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.0289735 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.07746425  0.01951724 
+
+--- Feature = t_syll2: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.01778202 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.06627117  0.03070714 
+
+--- Feature = t_syll3: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.001428034 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.04991624  0.04706017 
+
+--- Feature = t_uword: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.05013946 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.098635274 -0.001643639 
+
+--- Feature = t_sent: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.04568189 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.094176413  0.002812634 
+
+--- Feature = t_char: 45220 vs 2048base Summaries
+
+Cohen's d
+
+d estimate: -0.03262 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.08111142  0.01587143 
+
