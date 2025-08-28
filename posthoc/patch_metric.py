@@ -27,7 +27,8 @@ def compute(metric_name: str,
         "bertscore": metrics.get_bertscore_metrics,
         "redundancy": metrics.get_redundancy_scores,
         "alignscore": metrics.eval_alignscore_tmp,
-        "summac": metrics.eval_summac_batch
+        "summac": metrics.eval_summac_batch,
+        "lftk": metrics.eval_lftk
     }
     func = metric_fns[metric_name]
 
@@ -43,7 +44,10 @@ def compute(metric_name: str,
             target_column = "summary"
         if is_pilot:
             target_column = "summary_generated"
-            ds = ds.add_column("summary", source_data["summary"].tolist())
+            # If reference summary is not in existing columns, add it
+            if "summary" not in ds.column_names:
+                print("Adding reference summary column...")
+                ds = ds.add_column("summary", source_data["summary"].tolist())
     
     print(f"Targeting column {target_column}")
     # Redundancy is only computed in aggregate
@@ -56,6 +60,11 @@ def compute(metric_name: str,
             batched=True,
             batch_size=batch_size
         )
+    elif metric_name == "lftk":
+        ds = ds.map(
+        lambda ex: func(ex[target_column], suffix=".GEN"),
+        batched=False
+    )
     else: 
         torch.cuda.empty_cache()  # Clear any leftover memory usage just in case
         ds = ds.map(
@@ -78,7 +87,7 @@ def load_data(source_file:str, metric_name:str):
     """
     # Check if this is gold, spring deliverable or prediction data
     is_gold = "gold" in source_file
-    is_pilot = "deliverable" in source_file
+    is_pilot = "deliverable" in source_file or "baseline" in source_file
     if is_gold:
         print(f"Preparing to patch {metric_name} onto gold data")
     if is_pilot:
