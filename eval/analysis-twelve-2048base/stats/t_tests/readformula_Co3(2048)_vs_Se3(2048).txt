@@ -1,5 +1,5 @@
---- Feature = fkre: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = fkre: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -12,8 +12,8 @@ sample estimates:
 mean difference 
       -1.910776 
 
---- Feature = fkgl: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = fkgl: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -26,8 +26,8 @@ sample estimates:
 mean difference 
       0.3845824 
 
---- Feature = fogi: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = fogi: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -40,8 +40,8 @@ sample estimates:
 mean difference 
       0.3788694 
 
---- Feature = smog: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = smog: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -54,8 +54,8 @@ sample estimates:
 mean difference 
       0.1276546 
 
---- Feature = cole: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = cole: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -68,8 +68,8 @@ sample estimates:
 mean difference 
       0.2180254 
 
---- Feature = auto: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = auto: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 

@@ -2,17 +2,17 @@
 
 Cohen's d
 
-d estimate: 0.2125097 (small)
+d estimate: 0.1062048 (negligible)
 95 percent confidence interval:
-    lower     upper 
-0.1638849 0.2611346 
+     lower      upper 
+0.05768239 0.15472713 
 
 --- Feature = summac: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 14.6016 (large)
+d estimate: 14.09984 (large)
 95 percent confidence interval:
    lower    upper 
-14.34663 14.85657 
+13.85331 14.34637 
 

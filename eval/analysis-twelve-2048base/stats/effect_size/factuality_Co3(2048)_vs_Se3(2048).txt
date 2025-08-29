@@ -1,4 +1,4 @@
---- Feature = align_score: 45220 vs 2048base Summaries
+--- Feature = align_score: Co3(2048) vs Se3(2048) Summaries
 
 Cohen's d
 
@@ -7,7 +7,7 @@ d estimate: 0.0113761 (negligible)
       lower       upper 
 -0.03711249  0.05986470 
 
---- Feature = summac: 45220 vs 2048base Summaries
+--- Feature = summac: Co3(2048) vs Se3(2048) Summaries
 
 Cohen's d
 

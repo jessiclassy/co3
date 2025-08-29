@@ -1,5 +1,5 @@
---- Feature = align_score: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = align_score: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -12,8 +12,8 @@ sample estimates:
 mean difference 
     0.002088508 
 
---- Feature = summac: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = summac: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 

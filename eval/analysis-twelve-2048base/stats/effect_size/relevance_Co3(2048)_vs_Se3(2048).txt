@@ -1,0 +1,108 @@
+--- Feature = rouge1_precision: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.1084137 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.05988993 0.15693754 
+
+--- Feature = rouge2_precision: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.1213398 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.07280705 0.16987264 
+
+--- Feature = rougeL_precision: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.1262522 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.07771575 0.17478871 
+
+--- Feature = rouge1_recall: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: -0.0540561 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.102553150 -0.005559042 
+
+--- Feature = rouge2_recall: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: -0.01384034 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.06232912  0.03464844 
+
+--- Feature = rougeL_recall: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: -0.02185744 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.07034709  0.02663220 
+
+--- Feature = rouge1_fmeasure: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.03123571 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.01725545  0.07972686 
+
+--- Feature = rouge2_fmeasure: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.05933423 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.01083536 0.10783310 
+
+--- Feature = rougeL_fmeasure: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.06062473 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.01212539 0.10912406 
+
+--- Feature = bertscore_p: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.1550043 (negligible)
+95 percent confidence interval:
+    lower     upper 
+0.1064434 0.2035653 
+
+--- Feature = bertscore_r: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.0675204 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.01901839 0.11602242 
+
+--- Feature = bertscore_f1: Co3(2048) vs Se3(2048) Summaries
+
+Cohen's d
+
+d estimate: 0.1440752 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.09552416 0.19262629 
+

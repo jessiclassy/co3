@@ -1,9 +1,9 @@
 # File Arguments:
-MODEL_NAME <- "Co3(1024)" # The name of the Model whose output is being evaluated
-MODEL_OUTPUT_PATH <- "../output/13.led-base.billsum_clean_train_se3-led-1024-512.binary_blank_targets.1024_512_5_epochs.checkpoint-108471.csv" # place to look for model output csv
-ALT_NAME <- "Se3(1024)" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
-ALT_PATH <- "../output/0.led-base.billsum_clean_train_se3-led-1024-512.drop_blank_targets.1024_512_5_epochs.checkpoint-41832.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "analysis-thirteen-1024base/" # place to write the plots and stats to. Must end with a "/"
+MODEL_NAME <- "Co3(2048)" # The name of the Model whose output is being evaluated
+MODEL_OUTPUT_PATH <- "../output/12.led-base.billsum_clean_train_se3-led-2048-512.binary_blank_targets.2048_512_5_epochs.checkpoint-45220.csv" # place to look for model output csv
+ALT_NAME <- "Se3(2048)" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
+ALT_PATH <- "se3-2048_baseline_metrics.csv" # place to look for gold data/alternate model data csv
+ANALYSIS_PATH <- "analysis-twelve-2048base/" # place to write the plots and stats to. Must end with a "/"
 HISTOGRAM_BINS <- 60 # number of bins to display in the histograms
 # How to use this script:
 # --- 1. Adjust the File Arguments for the desired comparison between models (or between model and gold summaries)

@@ -2,107 +2,107 @@
 
 Cohen's d
 
-d estimate: 0.915236 (large)
+d estimate: 0.7500747 (medium)
 95 percent confidence interval:
     lower     upper 
-0.8642725 0.9661996 
+0.6999105 0.8002390 
 
 --- Feature = rouge2_precision: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.7614492 (medium)
+d estimate: 0.6637203 (medium)
 95 percent confidence interval:
     lower     upper 
-0.7112346 0.8116637 
+0.6139150 0.7135256 
 
 --- Feature = rougeL_precision: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.9113072 (large)
+d estimate: 0.7834941 (medium)
 95 percent confidence interval:
     lower     upper 
-0.8603644 0.9622501 
+0.7331800 0.8338083 
 
 --- Feature = rouge1_recall: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: -1.09645 (large)
+d estimate: -0.8633193 (large)
 95 percent confidence interval:
-    lower     upper 
--1.148454 -1.044446 
+     lower      upper 
+-0.9140159 -0.8126227 
 
 --- Feature = rouge2_recall: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: -0.7999249 (medium)
+d estimate: -0.5851685 (medium)
 95 percent confidence interval:
      lower      upper 
--0.8503150 -0.7495348 
+-0.6346836 -0.5356535 
 
 --- Feature = rougeL_recall: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: -0.7827178 (medium)
+d estimate: -0.586894 (medium)
 95 percent confidence interval:
      lower      upper 
--0.8330284 -0.7324072 
+-0.6364151 -0.5373730 
 
 --- Feature = rouge1_fmeasure: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.2824875 (small)
+d estimate: 0.1748666 (negligible)
 95 percent confidence interval:
     lower     upper 
-0.2337581 0.3312169 
+0.1262858 0.2234473 
 
 --- Feature = rouge2_fmeasure: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.2084719 (small)
+d estimate: 0.1787628 (negligible)
 95 percent confidence interval:
     lower     upper 
-0.1598522 0.2570916 
+0.1301778 0.2273477 
 
 --- Feature = rougeL_fmeasure: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.3575739 (small)
+d estimate: 0.2904646 (small)
 95 percent confidence interval:
     lower     upper 
-0.3086997 0.4064480 
+0.2417214 0.3392078 
 
 --- Feature = bertscore_p: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.7518614 (medium)
+d estimate: 0.7199071 (medium)
 95 percent confidence interval:
     lower     upper 
-0.7016893 0.8020335 
+0.6698729 0.7699413 
 
 --- Feature = bertscore_r: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: -0.5127345 (medium)
+d estimate: -0.3040254 (small)
 95 percent confidence interval:
-    lower     upper 
--0.562013 -0.463456 
+     lower      upper 
+-0.3527929 -0.2552579 
 
 --- Feature = bertscore_f1: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.2544596 (small)
+d estimate: 0.3338514 (small)
 95 percent confidence interval:
     lower     upper 
-0.2057755 0.3031436 
+0.2850266 0.3826762 
 

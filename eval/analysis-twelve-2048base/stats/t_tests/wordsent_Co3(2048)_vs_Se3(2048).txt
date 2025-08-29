@@ -1,5 +1,5 @@
---- Feature = t_word: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_word: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -12,8 +12,8 @@ sample estimates:
 mean difference 
       -4.552768 
 
---- Feature = t_stopword: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_stopword: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -26,8 +26,8 @@ sample estimates:
 mean difference 
       -2.151728 
 
---- Feature = t_punct: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_punct: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -40,8 +40,8 @@ sample estimates:
 mean difference 
       -1.127868 
 
---- Feature = t_syll: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_syll: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -54,8 +54,8 @@ sample estimates:
 mean difference 
       -5.589783 
 
---- Feature = t_syll2: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_syll2: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -68,8 +68,8 @@ sample estimates:
 mean difference 
      -0.5448149 
 
---- Feature = t_syll3: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_syll3: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -82,8 +82,8 @@ sample estimates:
 mean difference 
     -0.01866014 
 
---- Feature = t_uword: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_uword: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -96,8 +96,8 @@ sample estimates:
 mean difference 
       -2.217804 
 
---- Feature = t_sent: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_sent: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 
@@ -110,8 +110,8 @@ sample estimates:
 mean difference 
      -0.1232793 
 
---- Feature = t_char: 45220 vs 2048base Summaries
-model_1 = 45220 | model_2 = 2048base
+--- Feature = t_char: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
 
 	Paired t-test
 

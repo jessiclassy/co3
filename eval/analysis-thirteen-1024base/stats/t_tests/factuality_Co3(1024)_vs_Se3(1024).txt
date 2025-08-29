@@ -4,13 +4,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 8.7473, df = 3268, p-value < 2.2e-16
+t = 4.3206, df = 3268, p-value = 1.603e-05
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.02648110 0.04178223
+ 0.009264418 0.024658946
 sample estimates:
 mean difference 
-     0.03413167 
+     0.01696168 
 
 --- Feature = summac: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -18,11 +18,11 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 582.01, df = 3268, p-value < 2.2e-16
+t = 560.98, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.7239764 0.7288707
+ 0.9385881 0.9451720
 sample estimates:
 mean difference 
-      0.7264236 
+        0.94188 
 

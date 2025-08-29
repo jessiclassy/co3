@@ -4,13 +4,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 37.56, df = 3268, p-value < 2.2e-16
+t = 30.82, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.1856746 0.2061272
+ 0.150386 0.170820
 sample estimates:
 mean difference 
-      0.1959009 
+       0.160603 
 
 --- Feature = rouge2_precision: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -18,13 +18,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 31.246, df = 3268, p-value < 2.2e-16
+t = 27.233, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.1257104 0.1425432
+ 0.1089479 0.1258531
 sample estimates:
 mean difference 
-      0.1341268 
+      0.1174005 
 
 --- Feature = rougeL_precision: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -32,13 +32,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 37.306, df = 3268, p-value < 2.2e-16
+t = 32.127, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.1586173 0.1762152
+ 0.1357806 0.1534311
 sample estimates:
 mean difference 
-      0.1674162 
+      0.1446059 
 
 --- Feature = rouge1_recall: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -46,13 +46,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = -44.74, df = 3268, p-value < 2.2e-16
+t = -35.588, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -0.1900570 -0.1740982
+ -0.1572647 -0.1408410
 sample estimates:
 mean difference 
-     -0.1820776 
+     -0.1490529 
 
 --- Feature = rouge2_recall: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -60,13 +60,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = -33.198, df = 3268, p-value < 2.2e-16
+t = -24.42, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -0.1344354 -0.1194413
+ -0.1023459 -0.0871328
 sample estimates:
 mean difference 
-     -0.1269384 
+    -0.09473933 
 
 --- Feature = rougeL_recall: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -74,13 +74,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = -32.366, df = 3268, p-value < 2.2e-16
+t = -24.537, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -0.1359071 -0.1203813
+ -0.10572625 -0.09008012
 sample estimates:
 mean difference 
-     -0.1281442 
+    -0.09790318 
 
 --- Feature = rouge1_fmeasure: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -88,13 +88,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 11.607, df = 3268, p-value < 2.2e-16
+t = 7.2288, df = 3268, p-value = 6.039e-13
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.03551444 0.04995222
+ 0.01850836 0.03228530
 sample estimates:
 mean difference 
-     0.04273333 
+     0.02539683 
 
 --- Feature = rouge2_fmeasure: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -102,13 +102,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 8.5932, df = 3268, p-value < 2.2e-16
+t = 7.4266, df = 3268, p-value = 1.414e-13
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.02112614 0.03361661
+ 0.01704798 0.02927865
 sample estimates:
 mean difference 
-     0.02737137 
+     0.02316331 
 
 --- Feature = rougeL_fmeasure: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -116,13 +116,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 14.716, df = 3268, p-value < 2.2e-16
+t = 12.073, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.04015659 0.05250166
+ 0.03094358 0.04294339
 sample estimates:
 mean difference 
-     0.04632912 
+     0.03694348 
 
 --- Feature = bertscore_p: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -130,13 +130,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 31.027, df = 3268, p-value < 2.2e-16
+t = 29.766, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.02530956 0.02872405
+ 0.02338899 0.02668755
 sample estimates:
 mean difference 
-     0.02701681 
+     0.02503827 
 
 --- Feature = bertscore_r: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -144,13 +144,13 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = -21.166, df = 3268, p-value < 2.2e-16
+t = -12.597, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -0.01603273 -0.01331415
+ -0.010253714 -0.007491608
 sample estimates:
 mean difference 
-    -0.01467344 
+   -0.008872661 
 
 --- Feature = bertscore_f1: Co3(1024) vs Se3(1024) Summaries
 model_1 = Co3(1024) | model_2 = Se3(1024)
@@ -158,11 +158,11 @@ model_1 = Co3(1024) | model_2 = Se3(1024)
 	Paired t-test
 
 data:  model_1 and model_2
-t = 10.595, df = 3268, p-value < 2.2e-16
+t = 13.976, df = 3268, p-value < 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.005140192 0.007474562
+ 0.006948598 0.009216295
 sample estimates:
 mean difference 
-    0.006307377 
+    0.008082446 
 

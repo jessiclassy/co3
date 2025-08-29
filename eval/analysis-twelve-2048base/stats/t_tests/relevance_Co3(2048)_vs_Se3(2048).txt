@@ -1,0 +1,168 @@
+--- Feature = rouge1_precision: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 4.9247, df = 3268, p-value = 8.867e-07
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.01377384 0.03199645
+sample estimates:
+mean difference 
+     0.02288514 
+
+--- Feature = rouge2_precision: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 5.4045, df = 3268, p-value = 6.964e-08
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.01492565 0.03192093
+sample estimates:
+mean difference 
+     0.02342329 
+
+--- Feature = rougeL_precision: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 5.6372, df = 3268, p-value = 1.875e-08
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.01659993 0.03430561
+sample estimates:
+mean difference 
+     0.02545277 
+
+--- Feature = rouge1_recall: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -2.4479, df = 3268, p-value = 0.01442
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.018877704 -0.002086079
+sample estimates:
+mean difference 
+    -0.01048189 
+
+--- Feature = rouge2_recall: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -0.62835, df = 3268, p-value = 0.5298
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.009782181  0.005033968
+sample estimates:
+mean difference 
+   -0.002374106 
+
+--- Feature = rougeL_recall: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = -1.0051, df = 3268, p-value = 0.3149
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.011550362  0.003721757
+sample estimates:
+mean difference 
+   -0.003914303 
+
+--- Feature = rouge1_fmeasure: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 1.3925, df = 3268, p-value = 0.1639
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.001792715  0.010580521
+sample estimates:
+mean difference 
+    0.004393903 
+
+--- Feature = rouge2_fmeasure: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.6601, df = 3268, p-value = 0.00785
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.002214435 0.014630258
+sample estimates:
+mean difference 
+    0.008422346 
+
+--- Feature = rougeL_fmeasure: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 2.7304, df = 3268, p-value = 0.00636
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.002412047 0.014700664
+sample estimates:
+mean difference 
+    0.008556356 
+
+--- Feature = bertscore_p: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 6.9349, df = 3268, p-value = 4.878e-12
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.004002509 0.007157839
+sample estimates:
+mean difference 
+    0.005580174 
+
+--- Feature = bertscore_r: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 3.11, df = 3268, p-value = 0.001887
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.0008452842 0.0037293361
+sample estimates:
+mean difference 
+     0.00228731 
+
+--- Feature = bertscore_f1: Co3(2048) vs Se3(2048) Summaries
+model_1 = Co3(2048) | model_2 = Se3(2048)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 6.5235, df = 3268, p-value = 7.93e-11
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.002716252 0.005050658
+sample estimates:
+mean difference 
+    0.003883455 
+

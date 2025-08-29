@@ -2,53 +2,53 @@
 
 Cohen's d
 
-d estimate: -0.2733282 (small)
+d estimate: -0.3797037 (small)
 95 percent confidence interval:
      lower      upper 
--0.3220422 -0.2246141 
+-0.4286269 -0.3307806 
 
 --- Feature = fkgl: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.0923622 (negligible)
+d estimate: 0.4104517 (small)
 95 percent confidence interval:
-     lower      upper 
-0.04384815 0.14087625 
+    lower     upper 
+0.3614556 0.4594478 
 
 --- Feature = fogi: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.0446094 (negligible)
+d estimate: 0.3889296 (small)
 95 percent confidence interval:
-       lower        upper 
--0.003884828  0.093103632 
+    lower     upper 
+0.3399851 0.4378740 
 
 --- Feature = smog: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.02052019 (negligible)
+d estimate: 0.2366629 (small)
 95 percent confidence interval:
-      lower       upper 
--0.02796928  0.06900967 
+    lower     upper 
+0.1880053 0.2853206 
 
 --- Feature = cole: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.4401767 (small)
+d estimate: 0.1493197 (negligible)
 95 percent confidence interval:
     lower     upper 
-0.3911048 0.4892485 
+0.1007640 0.1978755 
 
 --- Feature = auto: Co3(1024) vs Se3(1024) Summaries
 
 Cohen's d
 
-d estimate: 0.06266746 (negligible)
+d estimate: 0.4063598 (small)
 95 percent confidence interval:
-     lower      upper 
-0.01416736 0.11116755 
+    lower     upper 
+0.3573738 0.4553459 
 

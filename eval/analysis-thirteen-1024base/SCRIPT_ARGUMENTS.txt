@@ -5,3 +5,10 @@ ALT_NAME: Se3(1024)
 ALT_OUTPUT_PATH: ../output/0.led-base.billsum_clean_train_se3-led-1024-512.drop_blank_targets.1024_512_5_epochs.checkpoint-41832.csv
 ANALYSIS_PATH: analysis-thirteen-1024base/
 HISTOGRAM_BINS: 60
+--- The following arguments were used to generate the contents of this directory ---
+MODEL_NAME: Co3(1024)
+MODEL_OUTPUT_PATH: ../output/13.led-base.billsum_clean_train_se3-led-1024-512.binary_blank_targets.1024_512_5_epochs.checkpoint-108471.csv
+ALT_NAME: Se3(1024)
+ALT_OUTPUT_PATH: se3-1024_baseline_metrics.csv
+ANALYSIS_PATH: analysis-thirteen-1024base/
+HISTOGRAM_BINS: 60
