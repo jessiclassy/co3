@@ -1,0 +1,54 @@
+--- Feature = fkre: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -0.2733282 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.3220422 -0.2246141 
+
+--- Feature = fkgl: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: 0.0923622 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.04384815 0.14087625 
+
+--- Feature = fogi: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: 0.0446094 (negligible)
+95 percent confidence interval:
+       lower        upper 
+-0.003884828  0.093103632 
+
+--- Feature = smog: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: 0.02052019 (negligible)
+95 percent confidence interval:
+      lower       upper 
+-0.02796928  0.06900967 
+
+--- Feature = cole: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: 0.4401767 (small)
+95 percent confidence interval:
+    lower     upper 
+0.3911048 0.4892485 
+
+--- Feature = auto: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: 0.06266746 (negligible)
+95 percent confidence interval:
+     lower      upper 
+0.01416736 0.11116755 
+

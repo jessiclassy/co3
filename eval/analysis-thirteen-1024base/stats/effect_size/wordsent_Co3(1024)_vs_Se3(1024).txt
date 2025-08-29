@@ -1,0 +1,81 @@
+--- Feature = t_word: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -1.173361 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.225856 -1.120866 
+
+--- Feature = t_stopword: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -1.112546 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.164650 -1.060442 
+
+--- Feature = t_punct: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -0.9574156 (large)
+95 percent confidence interval:
+     lower      upper 
+-1.0086064 -0.9062248 
+
+--- Feature = t_syll: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -1.084679 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.136610 -1.032747 
+
+--- Feature = t_syll2: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -0.9979877 (large)
+95 percent confidence interval:
+     lower      upper 
+-1.0494057 -0.9465697 
+
+--- Feature = t_syll3: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -0.8401802 (large)
+95 percent confidence interval:
+     lower      upper 
+-0.8907624 -0.7895979 
+
+--- Feature = t_uword: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -1.101078 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.153110 -1.049045 
+
+--- Feature = t_sent: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -1.250303 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.303317 -1.197288 
+
+--- Feature = t_char: Co3(1024) vs Se3(1024) Summaries
+
+Cohen's d
+
+d estimate: -1.10605 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.158114 -1.053987 
+

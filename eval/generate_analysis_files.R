@@ -1,9 +1,9 @@
 # File Arguments:
-MODEL_NAME <- "41832" # The name of the Model whose output is being evaluated
-MODEL_OUTPUT_PATH <- "output/0.led-base.billsum_clean_train_se3-led-1024-512.drop_blank_targets.1024_512_5_epochs.checkpoint-41832.csv" # place to look for model output csv
-ALT_NAME <- "108471" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
-ALT_PATH <- "output/13.led-base.billsum_clean_train_se3-led-1024-512.binary_blank_targets.1024_512_5_epochs.checkpoint-108471.csv" # place to look for gold data/alternate model data csv
-ANALYSIS_PATH <- "eval/analysis-zero-thirteen/" # place to write the plots and stats to. Must end with a "/"
+MODEL_NAME <- "Co3(1024)" # The name of the Model whose output is being evaluated
+MODEL_OUTPUT_PATH <- "../output/13.led-base.billsum_clean_train_se3-led-1024-512.binary_blank_targets.1024_512_5_epochs.checkpoint-108471.csv" # place to look for model output csv
+ALT_NAME <- "Se3(1024)" # The name of the Alternate Model to evaluate against (or just "Gold" if comparing to gold data)
+ALT_PATH <- "../output/0.led-base.billsum_clean_train_se3-led-1024-512.drop_blank_targets.1024_512_5_epochs.checkpoint-41832.csv" # place to look for gold data/alternate model data csv
+ANALYSIS_PATH <- "analysis-thirteen-1024base/" # place to write the plots and stats to. Must end with a "/"
 HISTOGRAM_BINS <- 60 # number of bins to display in the histograms
 # How to use this script:
 # --- 1. Adjust the File Arguments for the desired comparison between models (or between model and gold summaries)
@@ -122,13 +122,13 @@ for (feature in colnames(metrics$gen)) {
     }
     plt <- 
     ggplot() + 
-      geom_histogram(aes(x=metrics$gen[[feature]], fill=SHORT_MODEL_NAME), alpha=0.95,bins=HISTOGRAM_BINS) +
-      geom_histogram(aes(x=metrics$alt[[feature]],fill=SHORT_ALT_NAME),alpha=0.55,bins=HISTOGRAM_BINS) +
+      geom_histogram(aes(x=metrics$gen[[feature]], fill=MODEL_NAME), alpha=0.95,bins=HISTOGRAM_BINS) +
+      geom_histogram(aes(x=metrics$alt[[feature]],fill=ALT_NAME),alpha=0.55,bins=HISTOGRAM_BINS) +
       # scale_x_continuous(breaks = seq(0,30,5)) +
       labs(
         x = 'Value', 
         y = "Count", 
-        title= str_c(feature," for ",SHORT_MODEL_NAME," and ",SHORT_ALT_NAME," Summaries")
+        title= str_c(feature," for ",MODEL_NAME," and ",ALT_NAME," Summaries")
       ) #+
     
     # Save plots in right place

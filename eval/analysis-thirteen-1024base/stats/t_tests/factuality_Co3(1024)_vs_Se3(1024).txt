@@ -1,0 +1,28 @@
+--- Feature = align_score: Co3(1024) vs Se3(1024) Summaries
+model_1 = Co3(1024) | model_2 = Se3(1024)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 8.7473, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.02648110 0.04178223
+sample estimates:
+mean difference 
+     0.03413167 
+
+--- Feature = summac: Co3(1024) vs Se3(1024) Summaries
+model_1 = Co3(1024) | model_2 = Se3(1024)
+
+	Paired t-test
+
+data:  model_1 and model_2
+t = 582.01, df = 3268, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.7239764 0.7288707
+sample estimates:
+mean difference 
+      0.7264236 
+
