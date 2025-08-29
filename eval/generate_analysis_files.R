@@ -29,6 +29,21 @@ library(pastecs)
 library(effsize)
 library(readr)
 
+# Log file arguments:
+write(
+  c(
+    "--- The following arguments were used to generate the contents of this directory ---",
+    str_c("MODEL_NAME: ", MODEL_NAME), 
+    str_c("MODEL_OUTPUT_PATH: ", MODEL_OUTPUT_PATH), 
+    str_c("ALT_NAME: ", ALT_NAME), 
+    str_c("ALT_OUTPUT_PATH: ", ALT_PATH), 
+    str_c("ANALYSIS_PATH: ", ANALYSIS_PATH), 
+    str_c("HISTOGRAM_BINS: ", HISTOGRAM_BINS)
+  ),
+  file = str_c(ANALYSIS_PATH,"SCRIPT_ARGUMENTS.txt"),
+  append = T
+)
+
 ALT_SUFFIX <- ".GOLD"
 GEN_SUFFIX <- ".GEN"
 
