@@ -41,7 +41,7 @@ write(
     str_c("HISTOGRAM_BINS: ", HISTOGRAM_BINS)
   ),
   file = str_c(ANALYSIS_PATH,"SCRIPT_ARGUMENTS.txt"),
-  append = T
+  append = F
 )
 
 ALT_SUFFIX <- ".GOLD"
