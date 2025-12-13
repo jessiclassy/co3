@@ -5,4 +5,4 @@ echo "Cluster $CLUSTER_ID, Process $PROCESS_ID"
 echo ""
 
 # Source config file
-/home2/jcmw614/miniconda3/envs/573-env/bin/python nllp_evaluate_model.py $@
+/home2/jcmw614/miniconda3/envs/573-env/bin/python finetune_model.py $@

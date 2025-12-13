@@ -6,7 +6,7 @@ import re
 import sys
 import os
 from eval import eval_metrics2 as metrics
-from nllp_evaluate_model import *
+from evaluate_model import *
 from glob import glob
 from rouge_score import rouge_scorer
 
