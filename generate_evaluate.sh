@@ -6,7 +6,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-CONFIG_FILE="configs/nllp_evaluate/$1.config"
+CONFIG_FILE="configs/evaluate/$1.config"
 
 # Check if config file exists
 if [ ! -f "$CONFIG_FILE" ]; then
