@@ -1,7 +1,7 @@
 ############
 # LED-base, 2048 input (-ATS, + binary blanks) using min [NO_SUMMARY] likelihood
 ############
-executable = nllp_postprocess_evaluate.sh
+executable = postprocess_evaluate.sh
 getenv = true
 environment = "CLUSTER_ID=$(Cluster); PROCESS_ID=$(Process);"
 arguments = --config_id 5 --new_config_id 12 --base_tokenizer allenai/led-base-16384 \
@@ -20,7 +20,7 @@ queue
 ############
 # LED-base, 1024 input (-ATS, + binary blanks) using min [NO_SUMMARY] likelihood
 ############
-executable = nllp_postprocess_evaluate.sh
+executable = postprocess_evaluate.sh
 getenv = true
 environment = "CLUSTER_ID=$(Cluster); PROCESS_ID=$(Process);"
 arguments = --config_id 4 --new_config_id 13 --base_tokenizer allenai/led-base-16384 \

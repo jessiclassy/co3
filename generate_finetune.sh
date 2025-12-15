@@ -50,16 +50,16 @@ case "$PLATFORM" in
     patas)
         echo "Preparing to run finetuning on Patas..."
         # Generate Condor .cmd file
-        output_file="nllp_finetune_model.$1.cmd"
+        output_file="finetune_model.$1.cmd"
         
         cat > "$output_file" <<EOF
-executable = nllp_finetune_model.sh
+executable = finetune_model.sh
 getenv = true
 arguments = --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --batch_size $BATCH_SIZE --blank_targets $BLANKTARGETS
 transfer_executable = false
-output = nllp_finetune_model.\$(Cluster).out
-error = nllp_finetune_model.\$(Cluster).err
-log = nllp_finetune_model.\$(Cluster).log
+output = finetune_model.\$(Cluster).out
+error = finetune_model.\$(Cluster).err
+log = finetune_model.\$(Cluster).log
 request_GPUs = 1
 Requirements = (Machine == "patas-gn3.ling.washington.edu")
 request_memory = 3000

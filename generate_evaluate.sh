@@ -58,13 +58,13 @@ case "$PLATFORM" in
         output_file="evaluate.$1.cmd"
         
         cat > "$output_file" <<EOF
-executable = nllp_evaluate_model.sh
+executable = evaluate_model.sh
 getenv = true
 arguments = --base_model $BASE_MODEL --checkpoint $CHECKPOINT --mode $MODE --trainfile $TRAINFILE --testfile $TESTFILE --batch_size $BATCH_SIZE --blank_targets $BLANKTARGETS
 transfer_executable = false
-output = nllp_evaluate_model.\$(Cluster).out
-error = nllp_evaluate_model.\$(Cluster).err
-log = nllp_evaluate_model.\$(Cluster).log
+output = evaluate_model.sh.\$(Cluster).out
+error = evaluate_model.sh.\$(Cluster).err
+log = evaluate_model.sh.\$(Cluster).log
 request_GPUs = 1
 Requirements = (Machine == "patas-gn3.ling.washington.edu")
 request_memory = 3000
@@ -79,11 +79,11 @@ EOF
         
     hyak)
         # Generate Slurm .sbatch file
-        output_file="nllp_evaluate_model.slurm"
+        output_file="evaluate_model.sh.slurm"
         
         cat > "$output_file" <<EOF
 #!/bin/bash
-#SBATCH --job-name=nllp_evaluate_model
+#SBATCH --job-name=evaluate_model.sh
 #SBATCH --output=out/%x/%j.out
 #SBATCH --error=error/%x/%j.err
 #SBATCH --partition=ckpt
