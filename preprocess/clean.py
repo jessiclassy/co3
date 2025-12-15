@@ -15,6 +15,18 @@ def clean_text(example):
     example["text"] = STRIP_RE.sub(' ', example["text"]).strip()
     return example
 
+def clean_dataset(ds, outname, toy_data_size=0):
+    for split, dataset in ds.items():
+        curr_name = outname.split(".")[0] + f"_{split}.csv"
+        # Toy experiment setting
+        if toy_data_size:
+            curr_name = curr_name.split(".")[0] + "_toy.csv"
+            dataset = dataset.select(range(toy_data_size))
+        dataset = dataset.map(clean_text)
+        df = dataset.to_pandas()
+        df.to_csv(curr_name, index=None, columns=["text", "summary"], escapechar="\\")
+    return
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="billsum", help="specify HuggingFace dataset")
@@ -30,15 +42,7 @@ def main():
 
     ds = load_dataset(args.dataset)
     
-    for split, dataset in ds.items():
-        curr_name = outname.split(".")[0] + f"_{split}.csv"
-        # Toy experiment setting
-        if args.toy:
-            curr_name = curr_name.split(".")[0] + "_toy.csv"
-            dataset = dataset.select(range(args.toy))
-        dataset = dataset.map(clean_text)
-        df = dataset.to_pandas()
-        df.to_csv(curr_name, index=None, columns=["text", "summary"], escapechar="\\")
+    clean_dataset(ds, outname, args.toy)
 
 if __name__ == "__main__":
     main()

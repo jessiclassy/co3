@@ -40,7 +40,7 @@ def compute(metric_name: str,
         # If using the stored gold or baseline data
         # TEMPORARY: hard-coded filepath
         if metric_name == "summac" or metric_name == "alignscore":
-            source_data = pd.read_csv("preprocess/nllp_data/billsum_clean_test.csv")
+            source_data = pd.read_csv("preprocess/data/billsum_clean_test.csv")
             ds = ds.add_column("text", source_data["text"].tolist())
         if is_gold:
             target_column = "summary"
