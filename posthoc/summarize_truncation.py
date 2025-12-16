@@ -87,7 +87,7 @@ def main():
             filter_output(baseline_file, truncated_doc_ids, args.input_size)
         return
     
-    for output_file in glob(f"../output/*.led-base.*{args.input_size}-512.*.csv"):
+    for output_file in glob(f"../output/*.led-base.*{args.input_size}-512*.csv"):
         print(f"Filtering {output_file}...")
         filter_output(output_file, truncated_doc_ids, args.input_size)
     return
