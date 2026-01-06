@@ -31,9 +31,14 @@ def verify_truncation(clean_partition, input_size):
     num_documents = len(df)
     print(f"Total documents: {num_documents}")
     print(f"Truncated documents: {num_truncated}, {num_truncated/num_documents * 100:.2f}%")
-    print(f"Average token count: {df.token_count.mean():.2f}")
-    print(f"Max token count: {df.token_count.max():.2f}")
-    print(f"Min token count: {df.token_count.min():.2f}")
+    print("Token count statistics:")
+    print(
+        df.token_count.describe().apply('{:.2f}'.format)
+    )
+    print()
+    # print(f"Average token count: {df.token_count.mean():.2f}")
+    # print(f"Max token count: {df.token_count.max():.2f}")
+    # print(f"Min token count: {df.token_count.min():.2f}")
 
     # Get document IDs that will be truncated, assuming the index can act as ID
     truncated_doc_ids = df[df.will_truncate].index.tolist()
@@ -47,6 +52,7 @@ def verify_truncation(clean_partition, input_size):
 def load_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_size", type=int, help="Check for truncation with input size X")
+    parser.add_argument("--glob", default=None, type=str, help="Specify glob path")
     args = parser.parse_args()
     return args
 
@@ -58,11 +64,13 @@ def main():
     print("Running on ", device)
 
     # Load + clean data partitions
-    if len(glob("data/billsum_*.csv")) == 0:
+    if args.glob == None or len(glob("data/billsum_*.csv")) == 0:
         data = load_dataset("FiscalNote/billsum")
         clean.clean_dataset(data, "data/billsum.csv")
         return
-    for clean_partition in glob("data/billsum_*.csv"):
+    
+    glob_path = args.glob if args.glob != None else "data/billsum_*.csv"
+    for clean_partition in glob(glob_path):
         verify_truncation(clean_partition, args.input_size)
 
     return
